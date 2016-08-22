@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.goodthinking.younglod.EventRegisterationActivity">
+
+    <LinearLayout
+        android:id="@+id/regviewlinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/rgviewmessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Registration_headline"
+            android:textColor="#1a13e7"
+            android:textSize="15dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/rgviewEventHeadline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_event_name"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/rgviewEventSynopsys"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_event_synopsis"
+            android:textSize="15dp" />
+
+        <RelativeLayout
+            android:id="@+id/rgdaterelative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true">
+
+            <TextView
+                android:id="@+id/rgviewEventdatetxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/rgviewEventdate"
+                android:layout_alignParentLeft="true"
+                android:text="@string/date_text"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/rgviewEventdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/rgviewEventdatetxt"
+                android:hint="@string/date_format"
+                android:textSize="15dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rgtimerelative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true">
+
+            <TextView
+                android:id="@+id/rgviewEventtimetxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/rgviewEventtime"
+                android:layout_alignParentLeft="true"
+                android:text="@string/time_text"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/rgviewEventtime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/rgviewEventtimetxt"
+                android:hint="@string/time_format"
+                android:textSize="15dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rgusernamerelative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true">
+
+            <TextView
+                android:id="@+id/rgviewusernametxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/rgviewUsername"
+                android:layout_alignParentLeft="true"
+                android:text="@string/User_name"
+                android:textSize="15dp" />
+
+
+            <TextView
+                android:id="@+id/rgviewUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/rgviewusernametxt"
+                android:hint="@string/User_name"
+                android:textSize="15dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rguserphonerelative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true">
+
+            <TextView
+                android:id="@+id/rgviewuserphonetxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/rgviewUserphone"
+                android:layout_alignParentLeft="true"
+                android:text="@string/User_phone"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/rgviewUserphone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/rgviewuserphonetxt"
+                android:text="@string/User_phone"
+                android:textSize="15dp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rguseremailrelative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true">
+            <TextView
+                android:id="@+id/rgviewuseremailtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/rgviewUseremail"
+                android:layout_alignParentLeft="true"
+                android:text="@string/email_field"
+                android:textSize="15dp" />
+
+
+        <TextView
+            android:id="@+id/rgviewUseremail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/rgviewuseremailtxt"
+            android:hint="@string/email_field"
+            android:textSize="15dp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Registeractivitybutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+
+        <Button
+            android:id="@+id/rgviewregtoeventtbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="25"
+            android:enabled="true"
+            android:onClick="RegisterEventbtn"
+            android:text="@string/register_event_btn" />
+
+        <Button
+            android:id="@+id/rggotologintbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="25"
+            android:enabled="true"
+            android:onClick="RegisterEventbtn"
+            android:text="@string/Login_btn" />
+
+        <Button
+            android:id="@+id/rggotosignuptbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="25"
+            android:enabled="true"
+            android:onClick="RegisterEventbtn"
+            android:text="@string/SignUP_btn" />
+
+        <Button
+            android:id="@+id/fbviewCancelAddEventbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="25"
+            android:onClick="CancelAddEventbtn"
+            android:text="@string/Cancel_btn" />
+    </LinearLayout>
+</RelativeLayout>
