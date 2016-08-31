@@ -1,4 +1,4 @@
-package com.goodthinking.younglod.user;
+package com.goodthinking.younglod.user.model;
 
 /**
  * Created by Owner on 23/07/2016.

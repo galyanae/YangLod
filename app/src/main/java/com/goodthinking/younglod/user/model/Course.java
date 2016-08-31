@@ -1,4 +1,4 @@
-package com.goodthinking.younglod.user;
+package com.goodthinking.younglod.user.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

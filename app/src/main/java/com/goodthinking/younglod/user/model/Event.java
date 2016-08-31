@@ -1,4 +1,4 @@
-package com.goodthinking.younglod.user;
+package com.goodthinking.younglod.user.model;
 
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
@@ -21,7 +21,15 @@ public class Event implements Serializable {
     private int EventParticipatorsno;
     private Boolean EventIsClosed;
     private String StatusIsValidDate;
+    private String Image;
 
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        Image = image;
+    }
 
     @Exclude
     String Key;
@@ -42,7 +50,7 @@ public class Event implements Serializable {
                  String eventTime, String eventSynopsys,
                  String eventInformation, String eventHost,
                  Boolean eventIsNotValid, int eventParticipatorsno,
-                 Boolean eventIsClosed, String statusIsValidDate) {
+                 Boolean eventIsClosed, String statusIsValidDate, String image) {
         EventName = eventName;
         EventDate = eventDate;
         EventTime = eventTime;
@@ -53,6 +61,7 @@ public class Event implements Serializable {
         EventParticipatorsno = eventParticipatorsno;
         EventIsClosed = eventIsClosed;
         StatusIsValidDate = statusIsValidDate;
+        Image = image;
     }
 
     public Event() {
@@ -152,6 +161,7 @@ public class Event implements Serializable {
         event.put("EventParticipatorsno",EventParticipatorsno);
         event.put("EventIsClosed",EventIsClosed);
         event.put("StatusIsValidDate",StatusIsValidDate);
+        event.put("Image", Image);
         return event;
 
     }

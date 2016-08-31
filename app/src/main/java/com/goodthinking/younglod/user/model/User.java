@@ -1,4 +1,4 @@
-package com.goodthinking.younglod.user;
+package com.goodthinking.younglod.user.model;
 
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;

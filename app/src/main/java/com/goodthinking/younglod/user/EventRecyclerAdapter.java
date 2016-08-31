@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.goodthinking.younglod.user.model.Event;
+
 /**
  * Created by user on 11/08/2016.
  */

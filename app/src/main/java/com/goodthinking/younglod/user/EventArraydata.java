@@ -1,5 +1,7 @@
 package com.goodthinking.younglod.user;
 
+import com.goodthinking.younglod.user.model.Event;
+
 import java.util.ArrayList;
 
 /**

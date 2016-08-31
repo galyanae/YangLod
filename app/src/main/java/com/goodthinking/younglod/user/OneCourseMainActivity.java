@@ -1,26 +1,16 @@
 package com.goodthinking.younglod.user;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.provider.Settings;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.goodthinking.younglod.user.model.Course;
+import com.goodthinking.younglod.user.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import static android.util.Log.*;
 
 public class OneCourseMainActivity extends BaseActivity {
     private FirebaseDatabase root;

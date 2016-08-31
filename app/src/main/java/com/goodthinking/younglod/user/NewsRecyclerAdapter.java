@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.goodthinking.younglod.user.model.Yedia;
+
 import java.util.TreeMap;
 
 /**

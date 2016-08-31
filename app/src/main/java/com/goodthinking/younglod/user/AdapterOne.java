@@ -7,7 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.goodthinking.younglod.user.R;
+import com.goodthinking.younglod.user.model.Icon;
 
 import java.util.ArrayList;
 

@@ -4,25 +4,34 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.goodthinking.younglod.user.model.Event;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Calendar;
 
 public class EventAddNew_Firebase extends AppCompatActivity {
 
+    private static final int PICK_IMAGE_REQUEST =1 ;
     private EditText AddEventHeadline, AddEventSynopsys, AddEventInfo, AddEventParticipatorsno, AddEventHostName;
     private TextView AddEventdate, AddEventtime;
     private Button AddEventbtn,EditEventbtn;
@@ -36,6 +45,8 @@ public class EventAddNew_Firebase extends AppCompatActivity {
     private String dateEvent;
     private CheckBox eventIsNotValid;
     private CheckBox eventIsClosed;
+    private String imageName;
+    private Bitmap bitmap;
 
 
     @Override
@@ -170,8 +181,9 @@ public class EventAddNew_Firebase extends AppCompatActivity {
             StatusIsValidDate = "1-"+dateEvent.trim();
         }
 
+        String image = "";
         Event event = new Event(EventHeadLine, Eventdate, Eventtime,
-                EventSynopsys, EventInfo, EventHost, EventIsNotValid, MaxNoOfParticipetors, EventIsClosed, StatusIsValidDate);
+                EventSynopsys, EventInfo, EventHost, EventIsNotValid, MaxNoOfParticipetors, EventIsClosed, StatusIsValidDate, image);
         event.setKey(key);
         //Map<String, Object> eventnew = new HashMap<>();
         //eventnew.put(key, event.Objecttofirebase());
@@ -196,10 +208,53 @@ public class EventAddNew_Firebase extends AppCompatActivity {
 
     public void CancelAddEventbtn(View view) {
         Intent intent=new Intent(getApplicationContext(),EventRecyclerview_Firebase.class);
+        // Create a storage reference from our app
+     /*
+        StorageReference storageRef = storage.getReferenceFromUrl("gs://<eventImages>");
+
+// Create a reference to "mountains.jpg"
+        StorageReference mountainsRef = storageRef.child("mountains.jpg");
+
+// Create a reference to 'images/mountains.jpg'
+        StorageReference mountainImagesRef = storageRef.child("images/mountains.jpg");
+
+// While the file names are the same, the references point to different files
+        mountainsRef.getName().equals(mountainImagesRef.getName());    // true
+        mountainsRef.getPath().equals(mountainImagesRef.getPath());    // false*/
         startActivity(intent);
         finish();
     }
 
 
+    public void addNewImage(View view) {
+        Intent intent = new Intent();
+// Show only images, no videos or anything else
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+// Always show the chooser (if there are multiple options available)
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            Uri uri = data.getData();
+            imageName = uri.getPathSegments().get(uri.getPathSegments().size() - 1) + ".jpg";
+
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                // Log.d(TAG, String.valueOf(bitmap));
+
+                ImageView imageView = (ImageView) findViewById(R.id.imageViewNewImage);
+                imageView.setImageBitmap(bitmap);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
