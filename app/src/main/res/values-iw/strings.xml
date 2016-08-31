@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Amutot_Events_Tikva</string>
+    <string name="app_name">YangLod</string>
     <string name="hint_event_name">Event Headline</string>
     <string name="date_text">Event Date</string>
     <string name="date_format">DD/MM/YY</string>
@@ -46,5 +46,4 @@
     <string name="Registration_toEvent_message">"You need to registred or login first... "</string>
     <string name="Registration_headline">You are going to be registered to the following Event, Please review registration details before approving</string>
     <string name="Thanks_note">Thank you for your interest in the event, Our representative will contact you as soon as possible. This registration does not constitute approval of your participation</string>
-
 </resources>

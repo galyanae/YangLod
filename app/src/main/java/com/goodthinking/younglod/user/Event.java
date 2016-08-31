@@ -1,6 +1,7 @@
 package com.goodthinking.younglod.user;
 
 import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.HashMap;
 /**
  * Created by user on 19/07/2016.
  */
+@IgnoreExtraProperties
 public class Event implements Serializable {
     private String EventName;
     private String EventDate;
@@ -17,6 +19,8 @@ public class Event implements Serializable {
     private String EventHost;
     private Boolean EventIsNotValid;
     private int EventParticipatorsno;
+    private Boolean EventIsClosed;
+    private String StatusIsValidDate;
 
 
     @Exclude
@@ -37,7 +41,8 @@ public class Event implements Serializable {
     public Event(String eventName, String eventDate,
                  String eventTime, String eventSynopsys,
                  String eventInformation, String eventHost,
-                 Boolean eventIsNotValid, int eventParticipatorsno) {
+                 Boolean eventIsNotValid, int eventParticipatorsno,
+                 Boolean eventIsClosed, String statusIsValidDate) {
         EventName = eventName;
         EventDate = eventDate;
         EventTime = eventTime;
@@ -46,6 +51,8 @@ public class Event implements Serializable {
         EventHost = eventHost;
         EventIsNotValid = eventIsNotValid;
         EventParticipatorsno = eventParticipatorsno;
+        EventIsClosed = eventIsClosed;
+        StatusIsValidDate = statusIsValidDate;
     }
 
     public Event() {
@@ -115,6 +122,23 @@ public class Event implements Serializable {
     public void setEventParticipatorsno(int eventParticipatorsno) {
         EventParticipatorsno = eventParticipatorsno;
     }
+
+    public Boolean getEventIsClosed() {
+        return EventIsClosed;
+    }
+
+    public void setEventIsClosed(Boolean eventIsClosed) {
+        EventIsClosed = eventIsClosed;
+    }
+
+    public String getStatusIsValidDate() {
+        return StatusIsValidDate;
+    }
+
+    public void setStatusIsValidDate(String statusIsValidDate) {
+        StatusIsValidDate = statusIsValidDate;
+    }
+
     @Exclude
     public HashMap<String,Object> Objecttofirebase(){
         HashMap<String,Object> event = new HashMap<>();
@@ -126,6 +150,8 @@ public class Event implements Serializable {
         event.put("EventHost",EventHost);
         event.put("EventIsNotValid",EventIsNotValid);
         event.put("EventParticipatorsno",EventParticipatorsno);
+        event.put("EventIsClosed",EventIsClosed);
+        event.put("StatusIsValidDate",StatusIsValidDate);
         return event;
 
     }

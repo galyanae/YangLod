@@ -48,7 +48,7 @@ public class LoginActivity_Firebase extends AppCompatActivity {
     }
 
     private void loadUser(String userID) {
-        Userdatabase.child("Amuta").child("users").child(userID)
+        Userdatabase.child("users").child(userID)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -86,7 +86,7 @@ public class LoginActivity_Firebase extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), getString(R.string.login_faild_message) + task.getException(),
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    //startActivity(new Intent(getApplicationContext(), Main_menu_activity.class));
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     loadUser(task.getResult().getUser().getUid());
                 }
                 progressDialog.dismiss();
@@ -120,7 +120,7 @@ public class LoginActivity_Firebase extends AppCompatActivity {
     }
 
     public void gotomainmenu(View view) {
-        //auth.signInAnonymously()
+        auth.signInAnonymously();
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ellipsize="marquee"
+    android:paddingBottom="2dp"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp"
+    android:paddingTop="2dp"
+    android:gravity="start"
+    android:layout_gravity="start"
+    android:textAlignment="textStart"
+    android:singleLine="true" />
+
+    <!--
+     The following 4 attributes controls the alignment of the text inside the drop list
+     android:gravity="start"
+    android:layout_gravity="start"
+    android:textAlignment="textStart"
+    android:textDirection="rtl"
+     special attention to android:textDirection attribute it gets its value from strings.xml
+     -->
