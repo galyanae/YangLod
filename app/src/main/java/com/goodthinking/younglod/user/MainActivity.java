@@ -71,19 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
                     startActivity(intent);
 
-<<<<<<< HEAD
 
-                } else if (adapterOne.getItems().get(position).getName().equals("hayalim")) {
-                    Intent intent = new Intent(MainActivity.this, EditActivity.class);
-                    intent.putExtra("Role", role);
-
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(MainActivity.this, ComingSoon.class);
-                    intent.putExtra("Role", role);
-
-                    startActivity(intent);
-=======
                 } else if (adapterOne.getItems().get(position).getName().equals("business")) {
                     Intent intent = new Intent(MainActivity.this, EventAddNew_Firebase.class);
                     intent.putExtra("Role", role);
@@ -99,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("Role", role);
 
                     startActivity(intent);
->>>>>>> origin/master
                 }
             }
 
@@ -145,11 +132,7 @@ public class MainActivity extends AppCompatActivity {
     public void logout() {
 
         FirebaseAuth.getInstance().signOut();
-<<<<<<< HEAD
-//        intent.putExtra("Role", "user");
-=======
-        intent.putExtra("Role", "user");
->>>>>>> origin/master
+
 
         startActivity(new Intent(getApplicationContext(), LoginActivity_Firebase.class));
         finish();
