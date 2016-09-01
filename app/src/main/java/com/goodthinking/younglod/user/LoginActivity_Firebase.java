@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.goodthinking.younglod.user.R;
+import com.goodthinking.younglod.user.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -22,8 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity_Firebase extends AppCompatActivity {
-    private EditText userEmail,userPassword;
-    String userPswtext,userEmailtext;
+    private EditText userEmail, userPassword;
+    String userPswtext, userEmailtext;
     private FirebaseAuth auth;
     private DatabaseReference Userdatabase;
     private ProgressDialog progressDialog;
@@ -31,8 +31,7 @@ public class LoginActivity_Firebase extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_activity__firebase);
-        auth=FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
         Userdatabase = FirebaseDatabase.getInstance().getReference();
         progressDialog = new ProgressDialog(this);
 
@@ -41,10 +40,11 @@ public class LoginActivity_Firebase extends AppCompatActivity {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String UserID = user.getUid();
             loadUser(UserID);
+        } else {
+            setContentView(R.layout.activity_login_activity__firebase);
+            userEmail = (EditText) findViewById(R.id.Login_email);
+            userPassword = (EditText) findViewById(R.id.Login_password);
         }
-
-        userEmail= (EditText) findViewById(R.id.Login_email);
-        userPassword= (EditText)findViewById(R.id.Login_password);
     }
 
     private void loadUser(String userID) {
@@ -55,10 +55,11 @@ public class LoginActivity_Firebase extends AppCompatActivity {
                         User newUser = dataSnapshot.getValue(User.class);
                         String name = newUser.getUserName();
                         String role = newUser.getRole();
-                        if (role == null || role.length()==0 || !role.equals("manager")) role="user";
-                        Intent intent=new Intent(getApplicationContext(), MainActivity.class);
-                        intent.putExtra("UserName",name);
-                        intent.putExtra("Role",role);
+                        if (role == null || role.length() == 0 || !role.equals("manager"))
+                            role = "user";
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.putExtra("UserName", name);
+                        intent.putExtra("Role", role);
                         startActivity(intent);
                         finish();
                     }
@@ -71,10 +72,10 @@ public class LoginActivity_Firebase extends AppCompatActivity {
     }
 
     public void login(View view) {
-        userEmailtext=userEmail.getText().toString();
-        userPswtext=userPassword.getText().toString();
+        userEmailtext = userEmail.getText().toString();
+        userPswtext = userPassword.getText().toString();
 
-        if (userPswtext.equals("")||userEmailtext.equals("")){
+        if (userPswtext.equals("") || userEmailtext.equals("")) {
 
             Toast.makeText(getApplicationContext(), R.string.Signup_message_fill_fields, Toast.LENGTH_LONG).show();
             return;
@@ -99,14 +100,14 @@ public class LoginActivity_Firebase extends AppCompatActivity {
     }
 
     public void resetpassword(View view) {
-        userEmailtext=userEmail.getText().toString();
+        userEmailtext = userEmail.getText().toString();
         if (userEmailtext.equals("")) {
 
             Toast.makeText(getApplicationContext(), R.string.Forget_password, Toast.LENGTH_LONG).show();
             return;
         }
 
-        
+
         auth.sendPasswordResetEmail(userEmailtext)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -124,10 +125,10 @@ public class LoginActivity_Firebase extends AppCompatActivity {
 
     public void gotomainmenu(View view) {
         auth.signInAnonymously();
-        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 
     public void gotoregisteration(View view) {
-        startActivity(new Intent(getApplicationContext(),SignUpActivity_Firebase.class));
+        startActivity(new Intent(getApplicationContext(), SignUpActivity_Firebase.class));
     }
 }

@@ -17,9 +17,7 @@ public class User implements Serializable {
     private String UserEmail;
     private String UserPassword;
     private int UserNoOfParticipators;
-
-
-
+    private String Role; // if manager than
     @Exclude
     private String UserID;
 
@@ -48,6 +46,14 @@ public class User implements Serializable {
     @Exclude
     public void setUserID(String userID) {
         UserID = userID;
+    }
+
+    public String getRole() {
+        return Role;
+    }
+
+    public void setRole(String role) {
+        Role = role;
     }
 
     public String getUserName() {

@@ -33,14 +33,14 @@ public class MainActivity extends AppCompatActivity {
     private AdapterOne adapterOne;
     Intent intent;
     private DatabaseReference root;
-    boolean isManager = false;
     private TreeMap<String, Yedia> newsArray = new TreeMap();
+    String role = "user";
+    boolean isManager = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String role = "user";
         try {
             role = getIntent().getExtras().getString("Role");
         } catch (Exception e) {
@@ -56,24 +56,35 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (adapterOne.getItems().get(position).getName().equals("news")) {
                     intent = new Intent(MainActivity.this, NewsActivity.class);
+                    intent.putExtra("Role", role);
                     startActivity(intent);
                 } else if (adapterOne.getItems().get(position).getName().equals("events")) {
 
                     Intent intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
+                    intent.putExtra("Role", role);
+
                     startActivity(intent);
                 } else if (adapterOne.getItems().get(position).getName().equals("courses")) {
 
                     Intent intent = new Intent(MainActivity.this, UserMainActivity.class);
+                    intent.putExtra("Role", role);
+
                     startActivity(intent);
 
                 } else if (adapterOne.getItems().get(position).getName().equals("business")) {
                     Intent intent = new Intent(MainActivity.this, EventAddNew_Firebase.class);
+                    intent.putExtra("Role", role);
+
                     startActivity(intent);
                 } else if (adapterOne.getItems().get(position).getName().equals("hayalim")) {
                     Intent intent = new Intent(MainActivity.this, EditActivity.class);
+                    intent.putExtra("Role", role);
+
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(MainActivity.this, ComingSoon.class);
+                    intent.putExtra("Role", role);
+
                     startActivity(intent);
                 }
             }
@@ -120,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
     public void logout() {
 
         FirebaseAuth.getInstance().signOut();
+        intent.putExtra("Role", "user");
+
         startActivity(new Intent(getApplicationContext(), LoginActivity_Firebase.class));
         finish();
 

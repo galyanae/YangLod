@@ -72,7 +72,7 @@ public class CourseRegistrationActivity extends AppCompatActivity {
                     position = intent.getIntExtra("position", 0);
                     //   if (key != "") {
                     if (!key.equals("")) {
-                        rgviewCourseHeadline.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseHeadLine());
+                        rgviewCourseHeadline.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseName());
                         rgviewCoursedate.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseStartdate());
                         rgviewCoursetime.setText(CourseArrayData.getInstance().getCourses().get(position).getCoursetime());
                         rgviewCourseSynopsys.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseSynopsys());

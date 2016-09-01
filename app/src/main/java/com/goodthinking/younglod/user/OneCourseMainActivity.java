@@ -34,12 +34,11 @@ public class OneCourseMainActivity extends BaseActivity {
 
 
         courseHeadLine = (TextView) findViewById(R.id.courseHeadLine);
-        courseHeadLine.setText(course.getCourseHeadLine());
+        courseHeadLine.setText(course.getCourseName());
         courseHeadLine.setTextSize(30);
 
         courseGide = (TextView) findViewById(R.id.courseGide);
         courseGide.setText(course.getCourseGide());
-
         courseSynopsys = (TextView) findViewById(R.id.courseSynopsys);
         courseSynopsys.setText(course.getCourseSynopsys());
 

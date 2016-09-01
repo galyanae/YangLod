@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.goodthinking.younglod.user.model.Course;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -124,7 +125,7 @@ public class EditActivity extends AppCompatActivity {
                 courseName, description, lang, CourseStartdate,
                 courseSynopsys, (String) bTime.getText(),ParticipantsNum,
                 0, statusIsValidDate);
-        myRef.child("hogim").push().setValue(course,
+        myRef.child("Courses").push().setValue(course,
                 new DatabaseReference.CompletionListener() {
                     //on complete-  check if there is a error whene setting values
 
@@ -144,8 +145,8 @@ public class EditActivity extends AppCompatActivity {
     public void Delete(View view) {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Tables").child("hogim");
-        myRef.child("hogim").removeValue();
+        DatabaseReference myRef = database.getReference("Tables").child("Courses");
+        myRef.child("Courses").removeValue();
 
     }
 
