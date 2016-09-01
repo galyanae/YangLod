@@ -32,7 +32,6 @@ public class EditActivity extends AppCompatActivity {
     private DatabaseReference newItem;
     private String CourseHeadLine;
     private String CourseStartdate;
-    private String CourseEndate;
     private String Coursetime;
     private String CourseGide;
     private String CourseSynopsys;
@@ -88,7 +87,6 @@ public class EditActivity extends AppCompatActivity {
 
     public void showTimePickerDialog(View v) {
         bTime = (Button) findViewById(R.id.bTime);
-        //bEndTime = (Button) findViewById(R.id.bEndDate);
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
@@ -107,8 +105,8 @@ public class EditActivity extends AppCompatActivity {
         String hogCost = ((EditText) findViewById(R.id.editCost)).getText().toString();
 
 
-        CourseStartdate = (String) bStartDate.getText();
-        CourseEndate = (String) bEndDate.getText();
+        CourseStartdate = bStartDate.getText().toString();
+        CourseEndDate = bEndDate.getText().toString();
         Boolean show = true;
         int img = R.drawable.hide;
 
@@ -209,7 +207,7 @@ public class EditActivity extends AppCompatActivity {
                 String YEAR = endDate.substring(0, 4);
                 String MONTH = endDate.substring(5, 7);
                 String DAY = endDate.substring(8);
-                System.out.println("Year" + YEAR + " month" + MONTH + " day" + DAY);
+                System.out.println("end date: Year" + YEAR + " month" + MONTH + " day" + DAY);
                 bEndDate.setText(endDate);
             }
         }

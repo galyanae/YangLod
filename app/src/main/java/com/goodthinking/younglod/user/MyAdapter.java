@@ -10,9 +10,6 @@ import android.widget.TextView;
 
 import com.goodthinking.younglod.user.model.Course;
 
-/**
- * Created by elit on 14/07/16.
- */
 public class MyAdapter extends RecyclerView.Adapter {
     private Context context;
 
@@ -33,8 +30,10 @@ public class MyAdapter extends RecyclerView.Adapter {
         Course course = CourseArrayData.getInstance().getCourses().get(position);
         ((SimpleItemViewHolder) holder).ItemCourseHeadLine.setText(course.getCourseName());
         ((SimpleItemViewHolder) holder).ItemCourseSynopsys.setText(course.getCourseSynopsys());
-        ((SimpleItemViewHolder) holder).ItemCourseStartDate.setText("FROM: " + course.getCourseStartdate()+ " AT: "+course.getCoursetime());
-        ((SimpleItemViewHolder) holder).ItemCoursesEndDate.setText("TILL: " + course.getCourseEndDate());
+        ((SimpleItemViewHolder) holder).ItemCourseStartDate.setText(context.getString(R.string.fromdate) + course.getCourseStartdate()+ " AT: "+course.getCoursetime());
+
+        ((SimpleItemViewHolder) holder).ItemCoursesEndDate.setText(context.getString(R.string.todate) 
+                + course.getCourseEndDate());
     }
 
     @Override
@@ -61,8 +60,9 @@ public class MyAdapter extends RecyclerView.Adapter {
             Intent intent=new Intent(context,OneCourseMainActivity.class);
             System.out.println("position=" + position);
             System.out.println(CourseArrayData.getInstance().getCourses().get(position).getKey());
-            intent.putExtra("CourseKey", CourseArrayData.getInstance().getCourses().get(position).getKey());
-            intent.putExtra("position",position );
+            //
+            intent.putExtra("oneCourse", CourseArrayData.getInstance().getCourses().get(position)); // using the (String name, Parcelable value) overload!
+
             context.startActivity(intent);
 
         }

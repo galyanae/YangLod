@@ -9,9 +9,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 import java.io.Serializable;
 import java.util.HashMap;
 
-/**
- * Created by elit on 17/07/16.
- */
+
 @IgnoreExtraProperties
 public class Course implements Parcelable {
 
@@ -59,7 +57,7 @@ public class Course implements Parcelable {
     }
 
     public void setCourseAduience(String courseAduience) {
-        CourseAduience = courseAduience;
+        this.CourseAduience = courseAduience;
     }
 
     public String getCourseCost() {
@@ -67,7 +65,7 @@ public class Course implements Parcelable {
     }
 
     public void setCourseCost(String courseCost) {
-        CourseCost = courseCost;
+        this.CourseCost = courseCost;
     }
 
     public String getCourseEndDate() {
@@ -75,7 +73,7 @@ public class Course implements Parcelable {
     }
 
     public void setCourseEndDate(String courseEndDate) {
-        CourseEndDate = courseEndDate;
+        this.CourseEndDate = courseEndDate;
     }
 
     public String getCourseGide() {
@@ -83,7 +81,7 @@ public class Course implements Parcelable {
     }
 
     public void setCourseGide(String courseGide) {
-        CourseGide = courseGide;
+        this.CourseGide = courseGide;
     }
 
     public String getCourseName() {
@@ -99,7 +97,7 @@ public class Course implements Parcelable {
     }
 
     public void setCourseInfo(String courseInfo) {
-        CourseInfo = courseInfo;
+        this.CourseInfo = courseInfo;
     }
 
     public String getCourseLang() {
@@ -107,7 +105,7 @@ public class Course implements Parcelable {
     }
 
     public void setCourseLang(String courseLang) {
-        CourseLang = courseLang;
+        this.CourseLang = courseLang;
     }
 
     public String getCourseStartdate() {
@@ -115,15 +113,15 @@ public class Course implements Parcelable {
     }
 
     public void setCourseStartdate(String courseStartdate) {
-        CourseStartdate = courseStartdate;
+        this.CourseStartdate = courseStartdate;
     }
 
     public String getCourseSynopsys() {
-        return CourseSynopsys;
+        return CourseSynopsys == null ? "": CourseSynopsys;
     }
 
     public void setCourseSynopsys(String courseSynopsys) {
-        CourseSynopsys = courseSynopsys;
+        this.CourseSynopsys = courseSynopsys;
     }
 
     public String getCoursetime() {
@@ -131,7 +129,7 @@ public class Course implements Parcelable {
     }
 
     public void setCoursetime(String coursetime) {
-        Coursetime = coursetime;
+        this.Coursetime = coursetime;
     }
 
     public String getMaxNoOfParticipetors() {
@@ -139,7 +137,7 @@ public class Course implements Parcelable {
     }
 
     public void setMaxNoOfParticipetors(String maxNoOfParticipetors) {
-        MaxNoOfParticipetors = maxNoOfParticipetors;
+        this.MaxNoOfParticipetors = maxNoOfParticipetors;
     }
 
     public int getNumberPrticipate() {
@@ -155,46 +153,18 @@ public class Course implements Parcelable {
     }
 
     public void setStatusIsValidDate(String statusIsValidDate) {
-        StatusIsValidDate = statusIsValidDate;
+        this.StatusIsValidDate = statusIsValidDate;
     }
 
-    @Exclude
-    String Key;
 
-    @Exclude
+
     public String getKey() {
-        return Key;
+        return key;
     }
 
-    @Exclude
     public void setKey(String key) {
-        Key = key;
+        this.key = key;
     }
-
-
-
-
-    @Exclude
-    public HashMap<String,Object> Objecttofirebase(){
-        HashMap<String,Object> course = new HashMap<>();
-
-        course.put("CourseName", CourseName);
-        course.put("CourseStartdate",CourseStartdate);
-        course.put("Coursetime",Coursetime);
-        course.put("CourseSynopsys",CourseSynopsys);
-        course.put("CourseInfod",CourseInfo);
-        course.put("CourseEndDate",CourseEndDate);
-        course.put("MaxNoOfParticipetors",MaxNoOfParticipetors);
-        course.put("numberPrticipate",numberPrticipate);
-        course.put("CourseCost",CourseCost);
-        course.put("CourseAduience",CourseAduience);
-        course.put("CourseLang",CourseLang);
-        course.put("StatusIsValidDate", StatusIsValidDate);
-
-        return course;
-
-    }
-
 
     @Override
     public int describeContents() {
@@ -217,7 +187,6 @@ public class Course implements Parcelable {
         dest.writeString(this.CourseLang);
         dest.writeString(this.StatusIsValidDate);
         dest.writeString(this.key);
-        dest.writeString(this.Key);
     }
 
     protected Course(Parcel in) {
@@ -235,7 +204,6 @@ public class Course implements Parcelable {
         this.CourseLang = in.readString();
         this.StatusIsValidDate = in.readString();
         this.key = in.readString();
-        this.Key = in.readString();
     }
 
     public static final Parcelable.Creator<Course> CREATOR = new Parcelable.Creator<Course>() {
