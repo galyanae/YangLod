@@ -1,7 +1,6 @@
 package com.goodthinking.younglod.user;
 
 import android.content.Intent;
-import android.graphics.drawable.Icon;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -33,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private GridView gridView;
     private AdapterOne adapterOne;
     Intent intent;
-    Icon icon;
     private DatabaseReference root;
     boolean isManager = false;
     private TreeMap<String, Yedia> newsArray = new TreeMap();
