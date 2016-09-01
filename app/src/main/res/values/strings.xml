@@ -134,6 +134,9 @@
         </string-array>
         <string name="title_activity_fab">fab</string>
     <string name="course_info">Course info</string>
+    <string name="upload_files">upload files</string>
+    <string name="upload">upload</string>
+    <string name="getit">get it</string>
 
 
 </resources>

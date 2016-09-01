@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 else if (adapterOne.getItems().get(position).getName().equals("hayalim")){
-                    Intent intent=new Intent(MainActivity.this,ComingSoon.class);
+                    Intent intent=new Intent(MainActivity.this,EditActivity.class);
                     startActivity(intent);
                 }
             else {
