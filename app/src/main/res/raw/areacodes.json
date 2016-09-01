@@ -1,0 +1,76 @@
+{
+  "AreaCodes": [
+    {
+      "area": "02",
+      "Description": "ירושלים"
+    },
+    {
+      "area": "03",
+      "Description": "תל-אביב והמרכז"
+    },
+    {
+      "area": "04",
+      "Description": "חיפה והצפון"
+    },
+    {
+      "area": "050",
+      "Description": "פלאפון"
+    },
+    {
+      "area": "052",
+      "Description": "סלקום"
+    },
+    {
+      "area": "053",
+      "Description": "הוט"
+    },
+    {
+      "area": "054",
+      "Description": "פרטנר"
+    },
+    {
+      "area": "055",
+      "Description": "פלאפון, הום סלולר, רמי לוי, סלקט, טלזר"
+    },
+    {
+      "area": "056",
+      "Description": "וואטניה"
+    },
+    {
+      "area": "058",
+      "Description": "גולן טלקום"
+    },
+    {
+      "area": "059",
+      "Description": "ג'אוול"
+    },
+    {
+      "area": "072",
+      "Description": "סמייל (פרטנר)"
+    },
+    {
+      "area": "073",
+      "Description": "סלקום, ויידן, פרטנר"
+    },
+    {
+      "area": "076",
+      "Description": "בזק, בזק בינלאומי"
+    },
+    {
+      "area": "077",
+      "Description": "הוט"
+    },
+    {
+      "area": "079",
+      "Description": "סלקט, טלזר"
+    },
+    {
+      "area": "08",
+      "Description": "השפלה והדרום"
+    },
+    {
+      "area": "09",
+      "Description": "אזור השרון"
+    }
+  ]
+}

@@ -21,18 +21,28 @@ public class Course implements Serializable {
     private String CourseInfo;
     private String CourseEndDate;
     private String MaxNoOfParticipetors;
-    private String numberPrticipate;
+    private int numberPrticipate;
     private String CourseCost;
     private String CourseAduience;
     private String CourseLang;
     private String StatusIsValidDate;
 
-    public Course(String courseAduience, String courseCost, String courseEndDate, String courseGide, String courseHeadLine, String courseInfo, String courseLang, String courseStartdate, String courseSynopsys, String coursetime, String maxNoOfParticipetors, String numberPrticipate, String statusIsValidDate) {
+
+
+    public Course(String statusIsValidDate, String courseAduience,
+                  String courseCost, String courseEndDate,
+                  String courseGide, String courseHeadLine,
+                  String courseInfo, String courseLang,
+                  String courseStartdate, String courseSynopsys,
+                  String coursetime,
+                  String maxNoOfParticipetors,  int numberPrticipate,
+                  Boolean show) {
+        StatusIsValidDate = statusIsValidDate;
         CourseAduience = courseAduience;
         CourseCost = courseCost;
         CourseEndDate = courseEndDate;
         CourseGide = courseGide;
-        CourseHeadLine = courseHeadLine;
+        this.CourseHeadLine = courseHeadLine;
         CourseInfo = courseInfo;
         CourseLang = courseLang;
         CourseStartdate = courseStartdate;
@@ -40,8 +50,9 @@ public class Course implements Serializable {
         Coursetime = coursetime;
         MaxNoOfParticipetors = maxNoOfParticipetors;
         this.numberPrticipate = numberPrticipate;
-        StatusIsValidDate = statusIsValidDate;
+
     }
+
 
 
     public String getCourseAduience() {
@@ -132,11 +143,11 @@ public class Course implements Serializable {
         MaxNoOfParticipetors = maxNoOfParticipetors;
     }
 
-    public String getNumberPrticipate() {
+    public int getNumberPrticipate() {
         return numberPrticipate;
     }
 
-    public void setNumberPrticipate(String numberPrticipate) {
+    public void setNumberPrticipate(int numberPrticipate) {
         this.numberPrticipate = numberPrticipate;
     }
 

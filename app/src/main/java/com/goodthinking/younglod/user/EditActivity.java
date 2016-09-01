@@ -28,22 +28,19 @@ import java.util.Calendar;
 public class EditActivity extends AppCompatActivity {
 
                 private DatabaseReference root;//point on a specific place in the db
-        private String result;
-        private DatabaseReference newItem;
-        private String CourseHeadLine;
-        private String CourseStartdate;
-        private String CourseEndate;
-        private String Coursetime;
-        private String CourseGide;
-        private String CourseSynopsys;
-        private String CourseInfo;
-        private String CourseEndDate;
-        private String MaxNoOfParticipetors;
-        private String numberPrticipate;
-        private String CourseCost;
-        private String CourseAduience;
-        private String CourseLang;
-        private String StatusIsValidDate;
+    private String CourseHeadLine;
+    private String CourseStartdate;
+    private String Coursetime;
+    private String CourseGide;
+    private String CourseSynopsys;
+    private String CourseInfo;
+    private String CourseEndDate;
+    private String MaxNoOfParticipetors;
+    private int numberPrticipate;
+    private String CourseCost;
+    private String CourseAduience;
+    private String CourseLang;
+    private String StatusIsValidDate;
 
                 protected static Button bTime;
         protected static Button bStartDate;
@@ -107,7 +104,7 @@ public class EditActivity extends AppCompatActivity {
 
 
                                CourseStartdate = (String) bStartDate.getText();
-                CourseEndate = (String) bEndDate.getText();
+                CourseEndDate = (String) bEndDate.getText();
                 Boolean show = true;
                 int img = R.drawable.hide;
 
@@ -120,10 +117,15 @@ public class EditActivity extends AppCompatActivity {
  +                  String numberPrticipate, String statusIsValidDate)
  + */
                         String statusIsValidDate = "1"+CourseStartdate;
-                Course course = new Course(CourseAduience, CourseCost, CourseEndDate, CourseGide,
-                                CourseHeadLine, CourseInfo, lang, CourseStartdate,
-                                CourseSynopsys, (String) bTime.getText(), numberPrticipate,
-                                "0", statusIsValidDate);
+                Course course = new Course(statusIsValidDate, CourseAduience,
+                         CourseCost,  CourseEndDate,
+                        CourseGide, CourseHeadLine,
+                        CourseInfo, CourseLang,
+                        CourseStartdate, CourseSynopsys,
+                        Coursetime,
+                        MaxNoOfParticipetors,
+                        0,
+                        true);
                 myRef.child("hogim").push().setValue(course,
                                 new DatabaseReference.CompletionListener() {
                                         //on complete-  check if there is a error whene setting values

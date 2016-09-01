@@ -1,0 +1,24 @@
+{
+  "words": [
+    {
+      "word": "תפוח",
+      "nword": "תפוחַ",
+      "img": "@drawable/apple"
+    },
+    {
+      "word": "בננה",
+      "nword": "בננה",
+      "img": "@drawable/banana"
+    },
+    {
+      "word": "תמר",
+      "nword": "תמר",
+      "img": "@drawable/date"
+    },
+    {
+      "word": "ליצ'י",
+      "nword": "ליצ'י",
+      "img": "@drawable/lici"
+    }
+  ]
+}
