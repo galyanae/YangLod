@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -20,11 +21,16 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.goodthinking.younglod.user.model.Event;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Calendar;
@@ -206,21 +212,40 @@ public class EventAddNew_Firebase extends AppCompatActivity {
 
     }
 
-    public void CancelAddEventbtn(View view) {
-        Intent intent=new Intent(getApplicationContext(),EventRecyclerview_Firebase.class);
+    private void saveImage() {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        // https://firebase.google.com/docs/storage/android/create-reference
         // Create a storage reference from our app
-     /*
         StorageReference storageRef = storage.getReferenceFromUrl("gs://<eventImages>");
 
-// Create a reference to "mountains.jpg"
-        StorageReference mountainsRef = storageRef.child("mountains.jpg");
+        // Create a reference to "mountains.jpg"
+        StorageReference mountainsRef = storageRef.child("images/"+imageName);
 
-// Create a reference to 'images/mountains.jpg'
-        StorageReference mountainImagesRef = storageRef.child("images/mountains.jpg");
 
-// While the file names are the same, the references point to different files
-        mountainsRef.getName().equals(mountainImagesRef.getName());    // true
-        mountainsRef.getPath().equals(mountainImagesRef.getPath());    // false*/
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = mountainsRef.putBytes(data);
+
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+            }
+        });
+
+    }
+
+    public void CancelAddEventbtn(View view) {
+        Intent intent=new Intent(getApplicationContext(),EventRecyclerview_Firebase.class);
+
         startActivity(intent);
         finish();
     }
