@@ -36,6 +36,7 @@ public class NewsActivity extends AppCompatActivity {
     protected RecyclerView NewsRecyclerView;
     protected NewsRecyclerAdapter newsRecyclerAdapter;
     LinearLayoutManager linearLayoutManager;
+    String role = "user";
     boolean isManager = false;
 
     @Override
@@ -43,6 +44,18 @@ public class NewsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        try {
+            role = getIntent().getExtras().getString("Role");
+        } catch (Exception e) {
+            role = "user";
+        }
+        if (role.equals("manager")) {isManager = true;
+            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.setVisibility(View.VISIBLE);}
+
+        System.out.println("Am I a manager? " + isManager);
+
         //setSupportActionBar(toolbar);
 /*
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -81,8 +94,7 @@ public class NewsActivity extends AppCompatActivity {
 */
         NewsRecyclerView = (RecyclerView) findViewById(R.id.rvYedias);
         linearLayoutManager = new LinearLayoutManager(this);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setVisibility(View.INVISIBLE);  // remove this line when activating manager
+
 
         root = FirebaseDatabase.getInstance().getReference();
         newsRef = root.child("Tables").child("news");
@@ -165,4 +177,6 @@ public class NewsActivity extends AppCompatActivity {
     }
 
 
+    public void addNewNews(View view) {
+    }
 }

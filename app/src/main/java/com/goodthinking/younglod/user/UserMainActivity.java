@@ -1,9 +1,11 @@
 package com.goodthinking.younglod.user;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.goodthinking.younglod.user.model.Course;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,7 +23,8 @@ public class UserMainActivity extends AppCompatActivity {
         private FirebaseAuth auth;
         private DatabaseReference Coursedatabase,  MyCoursetabase ;
         private String flag_to_myCourses;
-
+        boolean isManager = false;
+        String role = "user";
         private Query queryRef;
 
 
@@ -30,6 +33,18 @@ public class UserMainActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_user_main);
             CourseRecyclerView = (RecyclerView) findViewById(R.id.CourseRecyclerView);
+
+            try {
+                role = getIntent().getExtras().getString("Role");
+            } catch (Exception e) {
+                role = "user";
+            }
+            if (role.equals("manager")) {isManager = true;
+                FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+                fab.setVisibility(View.VISIBLE);}
+
+            System.out.println("Am I a manager? " + isManager);
+
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
             CourseRecyclerView.setLayoutManager(linearLayoutManager);
             MyAdapter = new MyAdapter(getApplicationContext());

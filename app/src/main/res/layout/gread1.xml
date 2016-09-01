@@ -5,11 +5,11 @@
     android:id="@+id/gread3">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="123dp"
+        android:layout_width="wrap_content"
+        android:layout_height="115dp"
         android:id="@+id/iconImage"
-        android:scaleType="centerCrop"
-         android:layout_margin="2dp"
+        android:scaleType="fitXY"
+         android:layout_margin="3dp"
 
          />
 
