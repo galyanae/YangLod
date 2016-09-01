@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.goodthinking.younglod.user.model.Event;
 import com.google.firebase.auth.FirebaseAuth;
@@ -102,4 +103,6 @@ public class MyEvent_Activity extends AppCompatActivity {
         super.onResume();
         //EventArraydata.getInstance().getEvents().clear();
     }
+
+
 }

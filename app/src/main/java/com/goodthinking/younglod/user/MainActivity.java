@@ -61,10 +61,6 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
 
                 }
-                else if (adapterOne.getItems().get(position).getName().equals("business")){
-                    Intent intent=new Intent(MainActivity.this,EventAddNew_Firebase.class);
-                    startActivity(intent);
-                }
 
                 else if (adapterOne.getItems().get(position).getName().equals("hayalim")){
                     Intent intent=new Intent(MainActivity.this,EditActivity.class);
@@ -82,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         final String userid;
         if (user == null) {
             userid = "Anonimus";
+            role = "user";
             System.out.println("User is Anonimus");
 
 

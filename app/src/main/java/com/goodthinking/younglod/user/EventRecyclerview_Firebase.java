@@ -1,11 +1,15 @@
 package com.goodthinking.younglod.user;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.goodthinking.younglod.user.model.Event;
+import com.goodthinking.younglod.user.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,10 +24,11 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference Eventdatabase,  MyEventdatabase ;
     private String flag_to_myEvents;
+    FloatingActionButton fab;
 
     private Query queryRef;
 
-
+    private DatabaseReference Userdatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,8 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
         EventRecyclerAdapter = new EventRecyclerAdapter(getApplicationContext());
         EventRecyclerView.setAdapter(EventRecyclerAdapter);
         EventRecyclerAdapter.notifyDataSetChanged();
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
 
 
     }
@@ -74,5 +81,33 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
 
     }
 
+    private void loadUser(String userID) {
+        Userdatabase.child("users").child(userID)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User newUser = dataSnapshot.getValue(User.class);
 
-}
+                        String name = newUser.getUserName();
+                        String role = newUser.getRole();
+                        if (role.equals("manager")){
+                            fab.setVisibility(View.VISIBLE) ;
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
+    }
+
+    public void addNewEvent(View view) {
+        Intent intent=new Intent(EventRecyclerview_Firebase.this,EventAddNew_Firebase.class);
+        startActivity(intent);
+
+    }}
