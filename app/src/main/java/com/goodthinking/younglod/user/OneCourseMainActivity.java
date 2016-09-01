@@ -40,7 +40,9 @@ public class OneCourseMainActivity extends BaseActivity {
         courseGide = (TextView) findViewById(R.id.courseGide);
         courseGide.setText(course.getCourseGide());
         courseSynopsys = (TextView) findViewById(R.id.courseSynopsys);
-        courseSynopsys.setText(course.getCourseSynopsys());
+        String str = course.getCourseSynopsys();
+        System.out.println("course.getCourseSynopsys() "+ str);
+        courseSynopsys.setText(str);
 
         courseStartdate = (TextView) findViewById(R.id.courseStartdate);
         courseStartdate.setText(course.getCourseStartdate());
@@ -58,7 +60,7 @@ public class OneCourseMainActivity extends BaseActivity {
         maxNoOfParticipetors.setText(course.getMaxNoOfParticipetors());
 
         numberPrticipate = (TextView) findViewById(R.id.numberPrticipate);
-        numberPrticipate.setText(course.getNumberPrticipate());
+        numberPrticipate.setText(""+course.getNumberPrticipate());
 
         courseCost = (TextView) findViewById(R.id.courseCost);
         courseCost.setText(course.getCourseCost());
