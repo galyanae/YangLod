@@ -117,7 +117,9 @@
         <string name="deleteBtn">מחיקה</string>
         <string name="viewNirshamimBtn">צפיה בנרשמים</string>
         <string name="startDateTitle">תאריך תחילה</string>
-        <string name="endDateTitle">תאריך סיום</string>
+    <string name="endDateTitle">תאריך סיום</string>
+    <string name="coursedesc">תאור הקורס/חוג</string>
+
         <string-array name="languages_array">
             <item>עברית</item>
             <item>ערבית</item>
