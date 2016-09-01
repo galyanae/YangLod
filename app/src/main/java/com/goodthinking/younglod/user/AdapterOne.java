@@ -7,7 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.goodthinking.younglod.user.model.Icon;
+import com.goodthinking.younglod.user.model.MenuIcon;
 
 import java.util.ArrayList;
 
@@ -16,30 +16,30 @@ import java.util.ArrayList;
  */
 public class AdapterOne  extends BaseAdapter {
 
-    public ArrayList<Icon> icons;
-    public ArrayList<Icon> getItems() { return icons;    }
+    public ArrayList<MenuIcon> menuIcons;
+    public ArrayList<MenuIcon> getItems() { return menuIcons;    }
     private Context context;
 
     public AdapterOne (Context context){
 
         this.context = context;
-        icons=new ArrayList<>();
-        icons.add(new Icon(1, R.drawable.newstext,"news"));
-        icons.add(new Icon(2,R.drawable.eventstext,"events"));
-        icons.add(new Icon(3, R.drawable.coursestext,"courses"));
-        icons.add(new Icon(4, R.drawable.career,"career"));
-        icons.add(new Icon(5, R.drawable.hayalim,"soldiers"));
-        icons.add(new Icon(6, R.drawable.itnadvit,"itnadvut"));
-        icons.add(new Icon(7, R.drawable.business,"business"));
-        icons.add(new Icon(8, R.drawable.parents,"parents"));
-        icons.add(new Icon(9, R.drawable.milgottext,"scholarship"));
-        icons.add(new Icon(10,R.drawable.contactustext,"contacts"));
+        menuIcons=new ArrayList<>();
+        menuIcons.add(new MenuIcon(1, R.drawable.newstext,"news"));
+        menuIcons.add(new MenuIcon(2,R.drawable.eventstext,"events"));
+        menuIcons.add(new MenuIcon(3, R.drawable.coursestext,"courses"));
+        menuIcons.add(new MenuIcon(4, R.drawable.career,"career"));
+        menuIcons.add(new MenuIcon(5, R.drawable.hayalim,"soldiers"));
+        menuIcons.add(new MenuIcon(6, R.drawable.itnadvit,"itnadvut"));
+        menuIcons.add(new MenuIcon(7, R.drawable.business,"business"));
+        menuIcons.add(new MenuIcon(8, R.drawable.parents,"parents"));
+        menuIcons.add(new MenuIcon(9, R.drawable.milgottext,"scholarship"));
+        menuIcons.add(new MenuIcon(10,R.drawable.contactustext,"contacts"));
 
     }
 
     @Override
     public int getCount() {
-        return icons.size();
+        return menuIcons.size();
     }
 
     @Override
@@ -56,7 +56,7 @@ public class AdapterOne  extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
             LinearLayout linearLayout = (LinearLayout) View.inflate(context, R.layout.gread1, null);
             ImageView imageView = (ImageView) linearLayout.findViewById(R.id.iconImage);
-           imageView.setBackgroundResource(icons.get(position).getImage());
+           imageView.setBackgroundResource(menuIcons.get(position).getImage());
             return linearLayout;
 
     }}

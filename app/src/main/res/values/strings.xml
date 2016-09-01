@@ -117,9 +117,7 @@
         <string name="deleteBtn">מחיקה</string>
         <string name="viewNirshamimBtn">צפיה בנרשמים</string>
         <string name="startDateTitle">תאריך תחילה</string>
-    <string name="endDateTitle">תאריך סיום</string>
-    <string name="coursedesc">תאור הקורס/חוג</string>
-
+        <string name="endDateTitle">תאריך סיום</string>
         <string-array name="languages_array">
             <item>עברית</item>
             <item>ערבית</item>
@@ -135,9 +133,10 @@
 
         </string-array>
         <string name="title_activity_fab">fab</string>
-    <string name="getit">getit</string>
-    <string name="upload">Upload</string>
-    <string name="upload_files">Upload files</string>
+    <string name="course_info">Course info</string>
+    <string name="upload_files">upload files</string>
+    <string name="upload">upload</string>
+    <string name="getit">get it</string>
 
 
 </resources>

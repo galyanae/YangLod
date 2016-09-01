@@ -97,6 +97,8 @@ public class NewsActivity extends AppCompatActivity {
                     yedia = snap.getValue(Yedia.class); // load the news details
                     yedia.setKey(snap.getKey());
                     System.out.println("inserting newsArray=" + yedia.toString());
+
+
                     if (yedia.getImage() != null && yedia.getImage().length() > 0) {
                         byte[] decodedString = Base64.decode(yedia.getImage(), Base64.DEFAULT);
                         Bitmap bmp = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
