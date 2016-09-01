@@ -1,0 +1,140 @@
+{
+  "amutot": [
+    {
+      "NGOnumber": "1111111",
+      "name": "MachshavaTova",
+      "ename": "englishName",
+      "site": "ATAR",
+      "email": "email",
+      "telephones": [
+        {
+          "type": "landline",
+          "areacode": "076",
+          "telephone": "0000000"
+        },
+        {
+          "type": "fax",
+          "areacode": "08",
+          "telephone": "0000000"
+        },
+        {
+          "type": "mobile",
+          "areacode": "054",
+          "telephone": "0000000"
+        }
+      ],
+      "addresses": [
+        {
+          "type": "street",
+          "address": "shderot David Hamelech",
+          "houseNum": "20",
+          "city": "Lod",
+          "zipcode": "4335214"
+        },
+        {
+          "type": "POB",
+          "pobNum": "736",
+          "city": "Lod",
+          "zipcode": "99876"
+        }
+      ],
+      "nirshamim": {
+        "id": "5659848",
+        "name": "roshAshana",
+        "ename": "englishName",
+        "firsname": "reret",
+        "efirstname": "englishFirstname",
+        "data_birth": "10/10/88",
+        "email": "email",
+        "phone": "0532641879",
+        "addresses": [
+          {
+            "type": "street",
+            "address": "shderot David ",
+            "houseNum": "30",
+            "city": "Lod",
+            "zipcode": "4338814"
+          },
+          {
+            "type": "POB",
+            "pobNum": "736",
+            "city": "Lod",
+            "zipcode": "99876"
+          }
+        ],
+        "irua": {
+          "id": "325987",
+          "name": "roshAshana",
+          "ename": "englishName",
+          "data": "10/10/98",
+          "addresses": [
+            {
+              "type": "street",
+              "address": "shderot David Hamelech",
+              "houseNum": "20",
+              "city": "Lod",
+              "zipcode": "4335214"
+            },
+            {
+              "type": "POB",
+              "pobNum": "736",
+              "city": "Lod",
+              "zipcode": "99876"
+            }
+          ],
+          "time": {
+            "time_athala": "14:25",
+            "time_sof": "16:25"
+          },
+          "madrih": {
+            "id": "333658954",
+            "email": "mail",
+            "phone": "2155896",
+            "name": "roshAshana",
+            "ename": "englishName",
+            "firsname": "reret",
+            "efirstname": "englishFirstname",
+            "data_birth": "10/10/88",
+            "maskoret": "12000"
+          }
+        },
+        "hug": {
+          "id": "659876",
+          "name": "roshAshana",
+          "ename": "englishName",
+          "data": "10/10/98",
+          "addresses": [
+            {
+              "type": "street",
+              "address": "shderot David Hamelech",
+              "houseNum": "20",
+              "city": "Lod",
+              "zipcode": "4335214"
+            },
+            {
+              "type": "POB",
+              "pobNum": "736",
+              "city": "Lod",
+              "zipcode": "99876"
+            }
+          ],
+          "time": {
+            "time_athala": "14:25",
+            "time_sof": "16:25"
+          },
+          "marzim": {
+            "id": "22",
+            "email": "mail",
+            "name": "sriga",
+            "phone": "2564789546",
+            "ename": "englishName",
+            "firsname": "keret",
+            "efirstname": "englishFirstname",
+            "data_birth": "10/10/88",
+            "maskoret l shaa": "50"
+          }
+        }
+      }
+    }
+  ]
+}

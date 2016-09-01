@@ -135,8 +135,11 @@
 
         </string-array>
         <string name="title_activity_fab">fab</string>
+    <string name="getit">getit</string>
+    <string name="upload">Upload</string>
+    <string name="upload_files">Upload files</string>
 
 
-    </resources>
+</resources>
 
 
