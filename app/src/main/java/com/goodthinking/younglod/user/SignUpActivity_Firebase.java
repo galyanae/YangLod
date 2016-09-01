@@ -9,8 +9,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 
 import com.goodthinking.younglod.user.model.User;
+=======
+>>>>>>> origin/master
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -143,6 +146,9 @@ public class SignUpActivity_Firebase extends AppCompatActivity {
 //                    }
 //                });
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/master
 }

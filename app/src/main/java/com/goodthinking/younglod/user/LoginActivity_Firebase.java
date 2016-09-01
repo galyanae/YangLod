@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.goodthinking.younglod.user.model.User;
+import com.goodthinking.younglod.user.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -53,11 +53,17 @@ public class LoginActivity_Firebase extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User newUser = dataSnapshot.getValue(User.class);
+<<<<<<< HEAD
 
                         String name = newUser.getUserName();
                                                 String role = newUser.getRole();
                                                 if (role == null || role.length()==0 || !role.equals("manager")) role="user";
 
+=======
+                        String name = newUser.getUserName();
+                        String role = newUser.getRole();
+                        if (role == null || role.length()==0 || !role.equals("manager")) role="user";
+>>>>>>> origin/master
                         Intent intent=new Intent(getApplicationContext(), MainActivity.class);
                         intent.putExtra("UserName",name);
                         intent.putExtra("Role",role);
@@ -92,6 +98,7 @@ public class LoginActivity_Firebase extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 } else {
                     loadUser(task.getResult().getUser().getUid());
+
                 }
                 progressDialog.dismiss();
             }

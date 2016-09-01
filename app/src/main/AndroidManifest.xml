@@ -39,7 +39,6 @@
         <activity android:name=".CourseRegistrationActivity" />
         <activity android:name=".CourseThanksActivity" />
         <activity android:name=".MyCoursesActivity" />
-        <activity android:name=".ActivityMainCoursesManager" />
         <activity android:name=".EditActivity" />
     </application>
 

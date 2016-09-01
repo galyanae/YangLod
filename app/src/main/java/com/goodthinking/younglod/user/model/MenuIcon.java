@@ -3,13 +3,13 @@ package com.goodthinking.younglod.user.model;
 /**
  * Created by Owner on 23/07/2016.
  */
-public class Icon {
+public class MenuIcon {
 
     private int Image;
     private String name;
     private int id;
 
-    public Icon(int id, int image, String name) {
+    public MenuIcon(int id, int image, String name) {
         this.id = id;
         Image = image;
         this.name = name;

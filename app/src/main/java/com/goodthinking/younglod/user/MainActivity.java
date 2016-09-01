@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.goodthinking.younglod.user.model.Icon;
+import com.goodthinking.younglod.user.model.MenuIcon;
 import com.goodthinking.younglod.user.model.Yedia;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private GridView gridView;
     private AdapterOne adapterOne;
     Intent intent;
-    Icon icon;
+    MenuIcon menuIcon;
     private DatabaseReference root;
     boolean isManager = false;
     private TreeMap<String, Yedia> newsArray = new TreeMap();
