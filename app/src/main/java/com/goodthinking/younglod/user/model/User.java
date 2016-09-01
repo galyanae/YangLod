@@ -12,101 +12,106 @@ import java.util.HashMap;
 @IgnoreExtraProperties
 public class User implements Serializable {
 
-    private String UserName;
-    private String UserPhone;
-    private String UserEmail;
-    private String UserPassword;
-    private int UserNoOfParticipators;
+        private String UserName;
+        private String UserPhone;
+        private String UserEmail;
+        private String UserPassword;
+        private int UserNoOfParticipators;
+        private String Role; // if manager than
+           @Exclude
+            private String UserID;
 
+        public User(String userName, String userPhone, String userEmail, String userPassword) {
+                   UserName = userName;
+                    UserPhone = userPhone;
+                    UserEmail = userEmail;
+                    UserPassword = userPassword;
+                }
 
+                    public User() {
+                }
 
-    @Exclude
-    private String UserID;
+                   public User(String userName, String userPhone, String userEmail, int userNoOfParticipators) {
+                    UserName = userName;
+                    UserPhone = userPhone;
+                    UserEmail = userEmail;
+                    UserNoOfParticipators = userNoOfParticipators;
+                }
 
-    public User(String userName, String userPhone, String userEmail, String userPassword) {
-        UserName = userName;
-        UserPhone = userPhone;
-        UserEmail = userEmail;
-        UserPassword = userPassword;
-    }
+                    @Exclude
+            public String getUserID() {
+                    return UserID;
+                }
 
-    public User() {
-    }
+                    @Exclude
+           public void setUserID(String userID) {
+                    UserID = userID;
+                }
 
-     public User(String userName, String userPhone, String userEmail, int userNoOfParticipators) {
-        UserName = userName;
-        UserPhone = userPhone;
-        UserEmail = userEmail;
-        UserNoOfParticipators = userNoOfParticipators;
-    }
+                    public String getRole() {
+                    return Role;
+                }
 
-    @Exclude
-    public String getUserID() {
-        return UserID;
-    }
+                    public void setRole(String role) {
+                    Role = role;
+               }
+            public String getUserName() {
+                    return UserName;
+                }
 
-    @Exclude
-    public void setUserID(String userID) {
-        UserID = userID;
-    }
+                    public void setUserName(String userName) {
+                    UserName = userName;
+                }
 
-    public String getUserName() {
-        return UserName;
-    }
+                    public String getUserPhone() {
+                    return UserPhone;
+                }
 
-    public void setUserName(String userName) {
-        UserName = userName;
-    }
+                    public void setUserPhone(String userPhone) {
+                    UserPhone = userPhone;
+                }
 
-    public String getUserPhone() {
-        return UserPhone;
-    }
+                    public String getUserEmail() {
+                    return UserEmail;
+                }
 
-    public void setUserPhone(String userPhone) {
-        UserPhone = userPhone;
-    }
+                    public void setUserEmail(String userEmail) {
+                    UserEmail = userEmail;
+               }
 
-    public String getUserEmail() {
-        return UserEmail;
-    }
+                    public String getUserPassword() {
+                    return UserPassword;
+                }
 
-    public void setUserEmail(String userEmail) {
-        UserEmail = userEmail;
-    }
+                    public void setUserPassword(String userPassword) {
+                    UserPassword = userPassword;
+                }
+            public int getUserNoOfParticipators() {
+                    return UserNoOfParticipators;    }
 
-    public String getUserPassword() {
-        return UserPassword;
-    }
+                    public void setUserNoOfParticipators(int userNoOfParticipators) {
+                    UserNoOfParticipators = userNoOfParticipators;
+                }
 
-    public void setUserPassword(String userPassword) {
-        UserPassword = userPassword;
-    }
-    public int getUserNoOfParticipators() {
-        return UserNoOfParticipators;    }
+                    @Exclude
+            public HashMap<String, Object> UsertoMap() {
+                    HashMap<String, Object> userresult = new HashMap<>();
+                    userresult.put("UserName", UserName);
+                    userresult.put("UserPhone", UserPhone);
+                    userresult.put("UserEmail", UserEmail);
+                    userresult.put("UserPassword", UserPassword);
 
-    public void setUserNoOfParticipators(int userNoOfParticipators) {
-        UserNoOfParticipators = userNoOfParticipators;
-    }
+                            return userresult;
+                }
+            @Exclude
+           public HashMap<String, Object> ApplicanttoMap() {
+                   HashMap<String, Object> userresult = new HashMap<>();
+                    userresult.put("UserName", UserName);
+                    userresult.put("UserPhone", UserPhone);
+                    userresult.put("UserEmail", UserEmail);
+                    userresult.put("UserNoOfParticipators",UserNoOfParticipators);
 
-    @Exclude
-    public HashMap<String, Object> UsertoMap() {
-        HashMap<String, Object> userresult = new HashMap<>();
-        userresult.put("UserName", UserName);
-        userresult.put("UserPhone", UserPhone);
-        userresult.put("UserEmail", UserEmail);
-        userresult.put("UserPassword", UserPassword);
+                            return userresult;
+                }
 
-        return userresult;
-    }
-    @Exclude
-    public HashMap<String, Object> ApplicanttoMap() {
-        HashMap<String, Object> userresult = new HashMap<>();
-        userresult.put("UserName", UserName);
-        userresult.put("UserPhone", UserPhone);
-        userresult.put("UserEmail", UserEmail);
-        userresult.put("UserNoOfParticipators",UserNoOfParticipators);
-
-        return userresult;
-    }
-
-}
+                }

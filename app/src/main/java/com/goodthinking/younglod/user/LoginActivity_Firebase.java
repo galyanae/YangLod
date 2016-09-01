@@ -54,13 +54,13 @@ public class LoginActivity_Firebase extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User newUser = dataSnapshot.getValue(User.class);
 
-                        String name = "";
+                        String name = newUser.getUserName();
+                                                String role = newUser.getRole();
+                                                if (role == null || role.length()==0 || !role.equals("manager")) role="user";
 
-                        if (newUser != null ) {
-                            name = newUser.getUserName();
-                        }
                         Intent intent=new Intent(getApplicationContext(), MainActivity.class);
                         intent.putExtra("UserName",name);
+                        intent.putExtra("Role",role);
                         startActivity(intent);
                         finish();
                     }
@@ -91,7 +91,6 @@ public class LoginActivity_Firebase extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), getString(R.string.login_faild_message) + task.getException(),
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     loadUser(task.getResult().getUser().getUid());
                 }
                 progressDialog.dismiss();

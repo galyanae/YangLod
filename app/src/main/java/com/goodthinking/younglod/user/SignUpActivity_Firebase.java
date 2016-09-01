@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
 import com.goodthinking.younglod.user.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -90,6 +91,7 @@ public class SignUpActivity_Firebase extends AppCompatActivity {
                             creatNewUser();
                             Intent intent=new Intent(getApplicationContext(),MainActivity.class);
                             intent.putExtra("UserName", UserNamestr);
+                            intent.putExtra("Role", "user");
                             startActivity(intent);
                             finish();
                         }
@@ -143,15 +145,4 @@ public class SignUpActivity_Firebase extends AppCompatActivity {
 
 
 
-
-    public void gotoLoginActivity(View view) {
-        startActivity(new Intent(getApplicationContext(), LoginActivity_Firebase.class));
-        finish();
-
-    }
-
-    public void gotomainActivity(View view) {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        finish();
-    }
 }
