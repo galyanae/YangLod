@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -11,9 +12,10 @@ import java.util.HashMap;
 /**
  * Created by elit on 17/07/16.
  */
-public class Course implements Serializable {
+@IgnoreExtraProperties
+public class Course implements Parcelable {
 
-    private String CourseHeadLine;
+    private String CourseName;
     private String CourseStartdate;
     private String Coursetime;
     private String CourseGide;
@@ -26,33 +28,30 @@ public class Course implements Serializable {
     private String CourseAduience;
     private String CourseLang;
     private String StatusIsValidDate;
+    @Exclude
+    private String key;
 
-
-
-    public Course(String statusIsValidDate, String courseAduience,
-                  String courseCost, String courseEndDate,
-                  String courseGide, String courseHeadLine,
-                  String courseInfo, String courseLang,
-                  String courseStartdate, String courseSynopsys,
-                  String coursetime,
-                  String maxNoOfParticipetors,  int numberPrticipate,
-                  Boolean show) {
-        StatusIsValidDate = statusIsValidDate;
-        CourseAduience = courseAduience;
-        CourseCost = courseCost;
-        CourseEndDate = courseEndDate;
-        CourseGide = courseGide;
-        this.CourseHeadLine = courseHeadLine;
-        CourseInfo = courseInfo;
-        CourseLang = courseLang;
-        CourseStartdate = courseStartdate;
-        CourseSynopsys = courseSynopsys;
-        Coursetime = coursetime;
-        MaxNoOfParticipetors = maxNoOfParticipetors;
-        this.numberPrticipate = numberPrticipate;
-
+    public Course() {
     }
 
+    public Course(String courseAduience, String courseCost, String courseEndDate, String courseGide,
+                  String CourseName, String courseInfo, String courseLang, String courseStartdate,
+                  String courseSynopsys, String coursetime, String maxNoOfParticipetors,
+                  int numberPrticipate, String statusIsValidDate) {
+        this.CourseAduience = courseAduience;
+        this.CourseCost = courseCost;
+        this.CourseEndDate = courseEndDate;
+        this.CourseGide = courseGide;
+        this.CourseName = CourseName;
+        this.CourseInfo = courseInfo;
+        this.CourseLang = courseLang;
+        this.CourseStartdate = courseStartdate;
+        this.CourseSynopsys = courseSynopsys;
+        this.Coursetime = coursetime;
+        this.MaxNoOfParticipetors = maxNoOfParticipetors;
+        this.numberPrticipate = numberPrticipate;
+        this.StatusIsValidDate = statusIsValidDate;
+    }
 
 
     public String getCourseAduience() {
@@ -87,12 +86,12 @@ public class Course implements Serializable {
         CourseGide = courseGide;
     }
 
-    public String getCourseHeadLine() {
-        return CourseHeadLine;
+    public String getCourseName() {
+        return CourseName;
     }
 
-    public void setCourseHeadLine(String courseHeadLine) {
-        CourseHeadLine = courseHeadLine;
+    public void setCourseName(String CourseName) {
+        this.CourseName = CourseName;
     }
 
     public String getCourseInfo() {
@@ -179,7 +178,7 @@ public class Course implements Serializable {
     public HashMap<String,Object> Objecttofirebase(){
         HashMap<String,Object> course = new HashMap<>();
 
-        course.put("CourseHeadLine",CourseHeadLine);
+        course.put("CourseName", CourseName);
         course.put("CourseStartdate",CourseStartdate);
         course.put("Coursetime",Coursetime);
         course.put("CourseSynopsys",CourseSynopsys);
@@ -197,4 +196,57 @@ public class Course implements Serializable {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.CourseName);
+        dest.writeString(this.CourseStartdate);
+        dest.writeString(this.Coursetime);
+        dest.writeString(this.CourseGide);
+        dest.writeString(this.CourseSynopsys);
+        dest.writeString(this.CourseInfo);
+        dest.writeString(this.CourseEndDate);
+        dest.writeString(this.MaxNoOfParticipetors);
+        dest.writeInt(this.numberPrticipate);
+        dest.writeString(this.CourseCost);
+        dest.writeString(this.CourseAduience);
+        dest.writeString(this.CourseLang);
+        dest.writeString(this.StatusIsValidDate);
+        dest.writeString(this.key);
+        dest.writeString(this.Key);
+    }
+
+    protected Course(Parcel in) {
+        this.CourseName = in.readString();
+        this.CourseStartdate = in.readString();
+        this.Coursetime = in.readString();
+        this.CourseGide = in.readString();
+        this.CourseSynopsys = in.readString();
+        this.CourseInfo = in.readString();
+        this.CourseEndDate = in.readString();
+        this.MaxNoOfParticipetors = in.readString();
+        this.numberPrticipate = in.readInt();
+        this.CourseCost = in.readString();
+        this.CourseAduience = in.readString();
+        this.CourseLang = in.readString();
+        this.StatusIsValidDate = in.readString();
+        this.key = in.readString();
+        this.Key = in.readString();
+    }
+
+    public static final Parcelable.Creator<Course> CREATOR = new Parcelable.Creator<Course>() {
+        @Override
+        public Course createFromParcel(Parcel source) {
+            return new Course(source);
+        }
+
+        @Override
+        public Course[] newArray(int size) {
+            return new Course[size];
+        }
+    };
 }

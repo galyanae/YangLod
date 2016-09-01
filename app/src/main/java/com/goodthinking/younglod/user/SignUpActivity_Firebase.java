@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 import com.goodthinking.younglod.user.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -142,7 +141,5 @@ public class SignUpActivity_Firebase extends AppCompatActivity {
         // ...
 //                    }
 //                });
-
-
 
 }

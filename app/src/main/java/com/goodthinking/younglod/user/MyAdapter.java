@@ -23,8 +23,7 @@ public class MyAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.courses_gread_view_adapter, parent, false);
-        SimpleItemViewHolder pvh = new SimpleItemViewHolder(v);
-        return pvh;
+        return new SimpleItemViewHolder(v);
     }
 
     @Override
@@ -32,7 +31,7 @@ public class MyAdapter extends RecyclerView.Adapter {
         SimpleItemViewHolder viewHolder = (SimpleItemViewHolder) holder;
         viewHolder.position = position;
         Course course = CourseArrayData.getInstance().getCourses().get(position);
-        ((SimpleItemViewHolder) holder).ItemCourseHeadLine.setText(course.getCourseHeadLine());
+        ((SimpleItemViewHolder) holder).ItemCourseHeadLine.setText(course.getCourseName());
         ((SimpleItemViewHolder) holder).ItemCourseSynopsys.setText(course.getCourseSynopsys());
         ((SimpleItemViewHolder) holder).ItemCourseStartDate.setText("FROM: " + course.getCourseStartdate()+ " AT: "+course.getCoursetime());
         ((SimpleItemViewHolder) holder).ItemCoursesEndDate.setText("TILL: " + course.getCourseEndDate());
@@ -60,7 +59,9 @@ public class MyAdapter extends RecyclerView.Adapter {
         @Override
         public void onClick(View v) {
             Intent intent=new Intent(context,OneCourseMainActivity.class);
-            intent.putExtra("CourseKey",EventArraydata.getInstance().getEvents().get(position).getKey());
+            System.out.println("position=" + position);
+            System.out.println(CourseArrayData.getInstance().getCourses().get(position).getKey());
+            intent.putExtra("CourseKey", CourseArrayData.getInstance().getCourses().get(position).getKey());
             intent.putExtra("position",position );
             context.startActivity(intent);
 

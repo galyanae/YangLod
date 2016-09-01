@@ -18,7 +18,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/HogName"
+            android:id="@+id/CourseName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -28,12 +28,21 @@
             android:hint="@string/enterHogName" />
 
         <EditText
-            android:id="@+id/editDetails2"
+            android:id="@+id/courseSynopsys"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:hint="@string/enterDescriptionDetails"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:hint="@string/enterDescriptionDetails" />
+            android:hint="@string/coursedesc" />
     </LinearLayout>
 
     <LinearLayout
@@ -41,9 +50,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/llButtons"
-        android:layout_below="@+id/ll1"
         android:background="@drawable/frame"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_below="@+id/ll1">
 
         <LinearLayout
             android:id="@+id/llDate"
@@ -100,7 +109,7 @@
                 android:inputType="number" />
 
             <TextView
-                android:id="@+id/editDetailscost"
+                android:id="@+id/editDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/costTitle" />
@@ -145,12 +154,6 @@
             android:layout_height="wrap_content"
             android:hint="@string/lecturerNameHint"
             android:inputType="textPersonName" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editDetails"
-            android:hint="@string/course_info"/>
 
 
     </LinearLayout>
