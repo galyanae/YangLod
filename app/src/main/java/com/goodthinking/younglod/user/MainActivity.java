@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if (adapterOne.getItems().get(position).getName().equals("courses")){
 
-                    intent = new Intent(MainActivity.this, UserMainActivity.class);
+                    intent = new Intent(MainActivity.this, CourseMainActivity.class);
 
 
                 } else if (adapterOne.getItems().get(position).getName().equals("business")) {

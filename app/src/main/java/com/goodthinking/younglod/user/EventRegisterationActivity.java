@@ -30,7 +30,11 @@ public class EventRegisterationActivity extends AppCompatActivity {
             EventSynopsys, UserName, Userphone, Usermail, Rgviewmessage;
     private EditText NoOfParticipatorsField;
     private Button loginbtn, signupbtn, registerbtn, cancelRegisterbtn;
-    private String userID, Usernamestr, UserPhonestr, UserEmailstr;
+    private String userID;
+
+    private String Usernamestr = "anonymous";
+    private String UserPhonestr = "";
+    private String UserEmailstr = "";
     private FirebaseAuth auth;
     private DatabaseReference Userdatabase;
     private ProgressDialog progressDialog;
@@ -103,9 +107,11 @@ public class EventRegisterationActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User newUser = dataSnapshot.getValue(User.class);
-                        Usernamestr = newUser.getUserName();
-                        UserPhonestr = newUser.getUserPhone();
-                        UserEmailstr = newUser.getUserEmail();
+                        if (newUser != null) {
+                            Usernamestr = newUser.getUserName();
+                            UserPhonestr = newUser.getUserPhone();
+                            UserEmailstr = newUser.getUserEmail();
+                        }
 
                         UserName.setText(Usernamestr);
                         Userphone.setText(UserPhonestr);
