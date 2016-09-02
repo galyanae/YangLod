@@ -87,16 +87,17 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
                 getMenuInflater().inflate(R.menu.user_option, menu);
 
-    if (!"manager".equals(role)) {
-        menu.removeItem(4);
-    }
+        // Only manager can send message to users
+        if (!"manager".equals(role)) {
+            menu.getItem(4).setVisible(false);
+        }
 
-                return true;
-            }
+        return true;
+    }
 @Override
     public boolean onOptionsItemSelected(MenuItem item) {
                 int id = item.getItemId();
