@@ -38,6 +38,7 @@ import java.util.Calendar;
 public class EventAddNew_Firebase extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST =1 ;
+    private static final String IMAGES_BUCKET = "gs://hadashot-9bbf1.appspot.com";
     private EditText AddEventHeadline, AddEventSynopsys, AddEventInfo, AddEventParticipatorsno, AddEventHostName;
     private TextView AddEventdate, AddEventtime;
     private Button AddEventbtn,EditEventbtn;
@@ -216,7 +217,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         // https://firebase.google.com/docs/storage/android/create-reference
         // Create a storage reference from our app
-        StorageReference storageRef = storage.getReferenceFromUrl("gs://<eventImages>");
+        StorageReference storageRef = storage.getReferenceFromUrl(IMAGES_BUCKET);
 
         // Create a reference to "mountains.jpg"
         StorageReference mountainsRef = storageRef.child("images/"+imageName);
@@ -261,11 +262,18 @@ public class EventAddNew_Firebase extends AppCompatActivity {
 
     }
 
+    /**
+     * Activity result is image upload
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+        if (requestCode == PICK_IMAGE_REQUEST &&
+                resultCode == RESULT_OK && data != null && data.getData() != null) {
 
             Uri uri = data.getData();
             imageName = uri.getPathSegments().get(uri.getPathSegments().size() - 1) + ".jpg";

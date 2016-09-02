@@ -198,14 +198,12 @@ public class EventRegisterationActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), getString(R.string.register_faild_message), Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getApplicationContext(), getString(R.string.Registration_successful), Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getApplicationContext(), EventRegisterationActivity.class));
-                    finish();
+                    Intent intent = new Intent(getApplicationContext(), EventThanksActivity.class);
+                    intent.putExtra("eventID", key);
+                    startActivity(intent);
                 }
                 progressDialog.dismiss();
                 // startActivity(new Intent(getApplicationContext(), EventThanksActivity.class));
-                Intent intent = new Intent(getApplicationContext(), EventThanksActivity.class);
-                intent.putExtra("eventID", key);
-                startActivity(intent);
                 finish();
 
             }
