@@ -15,6 +15,7 @@ import com.goodthinking.younglod.user.model.Yedia;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.TreeMap;
 
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         role = "user";
         try {
                         role = getIntent().getExtras().getString("Role");
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 if ("manager".equals(role)) {
                     isManager = true;
+                    FirebaseMessaging.getInstance().subscribeToTopic("/topics/manager");
                 }
                 System.out.println("Am I a manager? " + isManager);
                 gridView = (GridView) findViewById(R.id.tableLayout);
@@ -87,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
                 getMenuInflater().inflate(R.menu.user_option, menu);
 
+    if (!"manager".equals(role)) {
+        menu.removeItem(4);
+    }
+
                 return true;
             }
 @Override
@@ -104,6 +112,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if (id==R.id.send_email_to_manager){
                     sendEmailToManager();
+                    return true;
+                }
+                else if (id==R.id.send_message_to_users){
+                    intent=new Intent(MainActivity.this,NewMessageToUsers.class);
+                    startActivity(intent);
                     return true;
                 }
                 return super.onOptionsItemSelected(item);

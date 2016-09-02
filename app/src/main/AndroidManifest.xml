@@ -51,16 +51,15 @@
 
         <activity android:name=".NewsAddNewActivity" />
         <activity android:name=".AboutUsActivity" />
-        <activity android:name=".SendEmailToManager"></activity>
-        <service
-            android:name=".MyService">
+        <activity android:name=".SendEmailToManager" />
+
+        <service android:name=".MyService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
+        <activity android:name=".NewMessageToUsers"></activity>
     </application>
-
-
 
 </manifest>
