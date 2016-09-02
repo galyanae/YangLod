@@ -103,7 +103,7 @@ public class EventRegisterationActivity extends AppCompatActivity {
 
 
     private void loadUser(String userID) {
-        Userdatabase.child("Tables").child("users").child(userID)
+        Userdatabase.child("users").child(userID)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -189,7 +189,7 @@ public class EventRegisterationActivity extends AppCompatActivity {
         Map<String, Object> childUpdates = new HashMap<>();
 
         childUpdates.put("/Events/" + key + "/Applicants/" + userID, Newuser.ApplicanttoMap());
-        childUpdates.put("/users/" + userID + "/MyEvents/" + key, "true");
+        childUpdates.put(  "/"+userID + "/MyEvents/" + key, "true");
         //newD.updateChildren(childUpdates);
         //progressDialog.dismiss();
         newD.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
@@ -246,7 +246,7 @@ public class EventRegisterationActivity extends AppCompatActivity {
                         Map<String, Object> childUpdates = new HashMap<>();
 
                         childUpdates.put("/Events/" + key + "/Applicants/" + userID, null);
-                        childUpdates.put("/users/" + userID + "/MyEvents/" + key, null);
+                        childUpdates.put("/" + userID + "/MyEvents/" + key, null);
 
                         newD.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
                             @Override
