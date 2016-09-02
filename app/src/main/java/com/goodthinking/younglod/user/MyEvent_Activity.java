@@ -49,7 +49,7 @@ public class MyEvent_Activity extends AppCompatActivity {
         //System.out.println(UserID);
 
         Eventdatabase = FirebaseDatabase.getInstance().getReference();
-        MyEventdatabase = Eventdatabase.child("Amuta").child("users").child(UserID).child("MyEvents");
+        MyEventdatabase = Eventdatabase.child("users").child(UserID).child("MyEvents");
         MyEventdatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -64,7 +64,7 @@ public class MyEvent_Activity extends AppCompatActivity {
                     final String Eventkey = filter.get(i);
                     System.out.println("key is" + Eventkey);
                     Eventdatabase = FirebaseDatabase.getInstance().getReference();
-                    Eventdatabase.child("Amuta").child("Events").child(Eventkey).addValueEventListener(new ValueEventListener() {
+                    Eventdatabase.child("Tables").child("Events").child(Eventkey).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Event event = dataSnapshot.getValue(Event.class);
