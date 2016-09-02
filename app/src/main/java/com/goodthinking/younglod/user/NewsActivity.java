@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.goodthinking.younglod.user.model.Yedia;
 import com.google.firebase.auth.FirebaseAuth;
@@ -52,20 +53,18 @@ public class NewsActivity extends AppCompatActivity {
         }
         if (role.equals("manager")) {
             isManager = true;
-            fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setVisibility(View.VISIBLE);
-            fab.setOnClickListener(new View.OnClickListener() {
+       /*     fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
        //             startActivity(new Intent(MainActivity.this, NewNewsActivity.class));
                 }
-            });
+            });*/
+        } else {
+            fab.setVisibility(View.GONE);
         }
-
-
-    }
-
         System.out.println("Am I a manager? " + isManager);
+
 
         //setSupportActionBar(toolbar);
 /*
@@ -188,6 +187,7 @@ public class NewsActivity extends AppCompatActivity {
     }
 
 
-    public void addNewNews(View view) {
+    public void addNews(View view) {
+        Toast.makeText(NewsActivity.this, "fab clicked", Toast.LENGTH_SHORT).show();
     }
 }
