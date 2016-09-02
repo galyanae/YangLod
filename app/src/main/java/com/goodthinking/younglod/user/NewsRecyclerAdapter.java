@@ -45,8 +45,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_yedia_item, parent, false);
-        SimpleItemViewHolder pvh = new SimpleItemViewHolder(v);
-        return pvh;
+        return new SimpleItemViewHolder(v);
     }
 
     @Override

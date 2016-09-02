@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.TreeMap;
+
 public class NewsActivity extends AppCompatActivity {
 
     FloatingActionButton fab;
@@ -43,15 +44,26 @@ public class NewsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         try {
             role = getIntent().getExtras().getString("Role");
         } catch (Exception e) {
             role = "user";
         }
-        if (role.equals("manager")) {isManager = true;
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.setVisibility(View.VISIBLE);}
+        if (role.equals("manager")) {
+            isManager = true;
+            fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.setVisibility(View.VISIBLE);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+       //             startActivity(new Intent(MainActivity.this, NewNewsActivity.class));
+                }
+            });
+        }
+
+
+    }
 
         System.out.println("Am I a manager? " + isManager);
 
