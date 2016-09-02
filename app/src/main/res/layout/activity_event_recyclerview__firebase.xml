@@ -22,7 +22,7 @@
     android:layout_gravity="bottom|end"
     android:layout_margin="@dimen/fab_margin"
     android:visibility="gone"
-    android:src="@drawable/ic_action_name"
+    android:src="@drawable/new_item"
     android:onClick="addNewEvent"
     android:background="#ebffffff" />
 
