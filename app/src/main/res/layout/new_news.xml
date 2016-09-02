@@ -129,7 +129,7 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:onClick="save"
-            android:src="@drawable/ic_save" />
+            android:src="@drawable/ic_save_24dp" />
 
         <Space
             android:layout_width="0dp"
@@ -157,7 +157,7 @@
             android:layout_gravity="center"
             android:onClick="picture"
             android:hint="@string/taking_pictures"
-            android:src="@drawable/ic_picture" />
+            android:src="@drawable/ic_camera_36" />
 
         <Space
             android:layout_width="0dp"
