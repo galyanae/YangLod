@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -202,7 +203,9 @@ public class EventRegisterationActivity extends AppCompatActivity {
                     intent.putExtra("eventID", key);
                     startActivity(intent);
                 }
+                FirebaseMessaging.getInstance().subscribeToTopic(key);
                 progressDialog.dismiss();
+
                 // startActivity(new Intent(getApplicationContext(), EventThanksActivity.class));
                 finish();
 
@@ -255,6 +258,7 @@ public class EventRegisterationActivity extends AppCompatActivity {
                                     startActivity(new Intent(getApplicationContext(), EventRegisterationActivity.class));
                                     finish();
                                 }
+                                FirebaseMessaging.getInstance().unsubscribeFromTopic(key);
                                 progressDialog.dismiss();
                                 Intent intent = new Intent(getApplicationContext(), EventThanksActivity.class);
                                 intent.putExtra("eventID", key);
