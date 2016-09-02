@@ -62,6 +62,8 @@ public class CourseAdapter extends RecyclerView.Adapter {
             System.out.println(CourseArrayData.getInstance().getCourses().get(position).getKey());
             //
             intent.putExtra("oneCourse", CourseArrayData.getInstance().getCourses().get(position)); // using the (String name, Parcelable value) overload!
+            intent.putExtra("CourseKey", CourseArrayData.getInstance().getCourses().get(position).getKey());
+            intent.putExtra("position", position);
 
             context.startActivity(intent);
 

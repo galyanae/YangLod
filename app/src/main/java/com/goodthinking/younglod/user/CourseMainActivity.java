@@ -59,13 +59,14 @@ public class CourseMainActivity extends AppCompatActivity {
         CourseRecyclerView.setLayoutManager(linearLayoutManager);
         CourseAdapter = new CourseAdapter(getApplicationContext());
         CourseRecyclerView.setAdapter(CourseAdapter);
-        RefreshallCourses();
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        RefreshallCourses();
+
 
     }
 

@@ -3,6 +3,7 @@ package com.goodthinking.younglod.user;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.goodthinking.younglod.user.model.Course;
@@ -20,10 +21,11 @@ public class OneCourseMainActivity extends BaseActivity {
     FirebaseUser fUser;
     String UID;
     Course course;
+    int position;
     TextView  courseHeadLine, courseStartdate, coursetime, courseGide,
               courseSynopsys,courseInfo,courseEndDate, maxNoOfParticipetors,
               numberPrticipate, courseCost, courseAduience, courseLang;
-
+Button registereButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +33,11 @@ public class OneCourseMainActivity extends BaseActivity {
         setContentView(R.layout.activity_one_course_main);
         mAuth = FirebaseAuth.getInstance();
         course = getIntent().getParcelableExtra("oneCourse");
-
-
+        position = getIntent().getIntExtra("position",-1);
+        registereButton = (Button) findViewById(R.id.registereButton);
+        System.out.println(getClass().getName()+" position="+position);
         courseHeadLine = (TextView) findViewById(R.id.courseHeadLine);
         courseHeadLine.setText(course.getCourseName());
-        courseHeadLine.setTextSize(30);
 
         courseGide = (TextView) findViewById(R.id.courseGide);
         courseGide.setText(course.getCourseGide());
@@ -90,6 +92,10 @@ public class OneCourseMainActivity extends BaseActivity {
 
     public void registere(View view) {
         Intent intent=new Intent(OneCourseMainActivity.this,CourseRegistrationActivity.class);
+        intent.putExtra("oneCourse", course); // using the (String name, Parcelable value) overload!
+        intent.putExtra("CourseKey", course.getKey());
+        intent.putExtra("position", position);
+
         startActivity(intent);
 
     }
