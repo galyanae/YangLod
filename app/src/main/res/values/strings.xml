@@ -141,6 +141,7 @@
     <string name="getit">get it</string>
     <string name="fromdate">"FROM: "</string>
     <string name="todate">"TILL: "</string>
+    <string name="taking_pictures">taking pictures</string>
 
 
 </resources>

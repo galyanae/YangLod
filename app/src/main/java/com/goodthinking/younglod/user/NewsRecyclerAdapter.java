@@ -15,9 +15,6 @@ import com.goodthinking.younglod.user.model.Yedia;
 
 import java.util.TreeMap;
 
-/**
- * Created by user on 20/08/2016.
- */
 public class NewsRecyclerAdapter extends RecyclerView.Adapter {
     private TreeMap<String, Yedia> newsArray;
     private Context context;
@@ -33,7 +30,6 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
     ImageView tvImg;
     ImageView ivBackward;
     ImageView ivForward;
-
 
     public NewsRecyclerAdapter(TreeMap<String, Yedia> newsArray) {
         this.newsArray = newsArray;
