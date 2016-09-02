@@ -97,44 +97,44 @@
     <string name="Till">Until:</string>
     <string name="Registration_Userparticipators_no_course">Please enter number of course participants</string>
     <string name="Thanks_note_course">Thank you for your interest in the course! Our representative will contact you as soon as possible. This registration does not constitute approval of your participation </string>
-        <string name="hogimTitle">חוגים</string>
-        <string name="enterHogName">שם החוג</string>
-        <string name="hogDetailsTitle">פרטי החוג</string>
-        <string name="enterDescriptionDetails">תאור קצר של החוג</string>
-        <string name="extraDetailsTitle">פרטים נוספים</string>
-        <string name="DateTitle"></string>
-        <string name="DateHint">dd/mm/yyyy</string>
-        <string name="lecturerNameHint">שם המרצה</string>
-        <string name="nirshamimMaxNumber">מקסימום משתתפים</string>
-        <string name="languageTitle">שפה</string>
-        <string name="languageHint">עברית/אנגלית/ערבית</string>
-        <string name="audienceTitle">קהל יעד</string>
-        <string name="audienceHint">ילדים/מבוגרים</string>
-        <string name="costTitle">עלות</string>
-        <string name="costHint">בשח</string>
-        <string name="saveBtn">שמירה</string>
-        <string name="editBtn">עריכה</string>
-        <string name="deleteBtn">מחיקה</string>
-        <string name="viewNirshamimBtn">צפיה בנרשמים</string>
-        <string name="startDateTitle">תאריך תחילה</string>
+    <string name="hogimTitle">חוגים</string>
+    <string name="enterHogName">שם החוג</string>
+    <string name="hogDetailsTitle">פרטי החוג</string>
+    <string name="enterDescriptionDetails">תאור קצר של החוג</string>
+    <string name="extraDetailsTitle">פרטים נוספים</string>
+    <string name="DateTitle"></string>
+    <string name="DateHint">dd/mm/yyyy</string>
+    <string name="lecturerNameHint">שם המרצה</string>
+    <string name="nirshamimMaxNumber">מקסימום משתתפים</string>
+    <string name="languageTitle">שפה</string>
+    <string name="languageHint">עברית/אנגלית/ערבית</string>
+    <string name="audienceTitle">קהל יעד</string>
+    <string name="audienceHint">ילדים/מבוגרים</string>
+    <string name="costTitle">עלות</string>
+    <string name="costHint">בשח</string>
+    <string name="saveBtn">שמירה</string>
+    <string name="editBtn">עריכה</string>
+    <string name="deleteBtn">מחיקה</string>
+    <string name="viewNirshamimBtn">צפיה בנרשמים</string>
+    <string name="startDateTitle">תאריך תחילה</string>
     <string name="endDateTitle">תאריך סיום</string>
     <string name="coursedesc">תאור הקורס/חוג</string>
 
-        <string-array name="languages_array">
-            <item>עברית</item>
-            <item>ערבית</item>
-            <item>אנגלית</item>
-            <item>רוסית</item>
-            <item>אמהרית</item>
-        </string-array>
+    <string-array name="languages_array">
+        <item>עברית</item>
+        <item>ערבית</item>
+        <item>אנגלית</item>
+        <item>רוסית</item>
+        <item>אמהרית</item>
+    </string-array>
 
-        <string-array name="poplulations_array">
-            <item>ילדים</item>
-            <item>מבוגרים</item>
-            <item>גיל השלישי</item>
+    <string-array name="poplulations_array">
+        <item>ילדים</item>
+        <item>מבוגרים</item>
+        <item>גיל השלישי</item>
 
-        </string-array>
-        <string name="title_activity_fab">fab</string>
+    </string-array>
+    <string name="title_activity_fab">fab</string>
     <string name="course_info">Course info</string>
     <string name="upload_files">upload files</string>
     <string name="upload">upload</string>

@@ -34,6 +34,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EventAddNew_Firebase extends AppCompatActivity {
 
@@ -166,7 +168,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
     public void SaveNewEventbtn(View view) {
         DatabaseReference newEvent = Eventdatabase.child("Tables").child("Events");
         key = newEvent.push().getKey();
-
+        saveImage();
         String EventHeadLine = AddEventHeadline.getText().toString().trim();
         String Eventdate = AddEventdate.getText().toString().trim();
         String Eventtime = AddEventtime.getText().toString().trim();
@@ -205,7 +207,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Creation failed" + databaseError.getMessage(), Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "successfully created", Toast.LENGTH_LONG).show();
-                    finish();
+
                 }
                 progressDialog.dismiss();
             }
@@ -224,7 +226,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
 
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
         byte[] data = baos.toByteArray();
 
         UploadTask uploadTask = mountainsRef.putBytes(data);
@@ -239,6 +241,10 @@ public class EventAddNew_Firebase extends AppCompatActivity {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                Map<String, Object> children = new HashMap<String, Object>();
+                children.put("image", downloadUrl.getPath());
+                Eventdatabase.child("Tables").child("Events").child(key).updateChildren(children);
+                finish();
             }
         });
 

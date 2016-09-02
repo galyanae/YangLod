@@ -22,7 +22,8 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:weightSum="1">
 
             <TextView
                 android:id="@+id/fbviewEventHeadlineview"
@@ -135,6 +136,12 @@
                 android:hint="@string/host_name"
                 android:textSize="15dp" />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2"
+                android:layout_gravity="center_horizontal" />
+
             <TextView
                 android:id="@+id/fbRegistrationIsClosed"
                 android:layout_width="match_parent"
@@ -142,13 +149,8 @@
                 android:text="@string/registration_is_closed"
                 android:textColor="#ff0004"
                 android:visibility="invisible"
-                android:textSize="15dp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView2"
-                android:layout_gravity="center_horizontal" />
+                android:textSize="15dp"
+                android:layout_weight="0.52" />
         </LinearLayout>
 
 

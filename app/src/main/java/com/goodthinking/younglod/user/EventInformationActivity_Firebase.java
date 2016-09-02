@@ -1,13 +1,21 @@
 package com.goodthinking.younglod.user;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.goodthinking.younglod.user.model.Event;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,19 +23,23 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class EventInformationActivity_Firebase extends AppCompatActivity {
+    private static final String IMAGES_BUCKET ="gs://hadashot-9bbf1.appspot.com";
     private TextView ViewEventHeadline, ViewEventdate, ViewEventtime,
             ViewEventSynopsys, ViewEventInfo, ViewEventParticipatorsno, ViewEventHostName, RegistrationIsClosed;
     private DatabaseReference Eventdatabase,  MyEventdatabase ;
     private int position;
     Button Register;
     String key;
-
+    ImageView imageView;
     private DatabaseReference root;
     private FirebaseAuth mAuth;
     private String keyUserId;
     private Boolean EventIsClosed;
+    private FirebaseStorage storage;
 
 
     @Override
@@ -37,7 +49,7 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
 
         root = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
-
+        storage = FirebaseStorage.getInstance();
         Register=(Button)findViewById(R.id.fbviewregtoeventtbtn);
         if (getIntent().getExtras() != null) {
             Intent intent = getIntent();
@@ -53,6 +65,7 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
             ViewEventParticipatorsno = (TextView) findViewById(R.id.fbviewEventParticipatorsno);
             ViewEventHostName = (TextView) findViewById(R.id.fbviewEventhostname);
             RegistrationIsClosed = (TextView) findViewById(R.id.fbRegistrationIsClosed);
+            imageView= (ImageView) findViewById(R.id.imageView2);
 
 
 //             Event event = (Event) intent.getSerializableExtra("Event");
@@ -68,6 +81,7 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
 //            ViewEventHostName.setText(event.getEventHost());
 //             }
 
+            Event event = EventArraydata.getInstance().getEvents().get(position);
 
             ViewEventHeadline.setText(EventArraydata.getInstance().getEvents().get(position).getEventName());
             ViewEventdate.setText(EventArraydata.getInstance().getEvents().get(position).getEventDate());
@@ -77,6 +91,30 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
             ViewEventParticipatorsno.setText(String.valueOf(EventArraydata.getInstance().getEvents().get(position).getEventParticipatorsno()));
             ViewEventHostName.setText(EventArraydata.getInstance().getEvents().get(position).getEventHost());
             EventIsClosed = EventArraydata.getInstance().getEvents().get(position).getEventIsClosed();
+
+
+            StorageReference storageRef=storage.getReferenceFromUrl(IMAGES_BUCKET);
+
+
+            if (event.getImage() != null && event.getImage().length() > 0) {
+
+                String[] parts = event.getImage().split("/");
+                storageRef.child("/images/" + parts[parts.length - 1]).getBytes(1024*1024*5).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bits) {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(bits, 0, bits.length);
+                        imageView.setImageBitmap(bitmap);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle any errors
+                    }
+                });
+            }
+
+
+
             if (EventIsClosed == true){
                 Register.setEnabled(false);
                 RegistrationIsClosed.setVisibility(View.VISIBLE);
