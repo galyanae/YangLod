@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             else {
                   intent=new Intent(MainActivity.this,ComingSoon.class);
-                } 
+                }
                 intent.putExtra("Role", role);
                 startActivity(intent);
             }
