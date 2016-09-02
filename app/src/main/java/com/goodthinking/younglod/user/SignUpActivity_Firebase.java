@@ -122,6 +122,15 @@ public class SignUpActivity_Firebase extends AppCompatActivity {
         });
     }
 
+    public void gotomainActivity(View view) {
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        finish();
+    }
+
+    public void gotoLoginActivity(View view) {
+        startActivity(new Intent(getApplicationContext(), LoginActivity_Firebase.class));
+        finish();
+    }
 
 
 //        auth.createUserWithEmailAndPassword(userEmailstr, userPswstr)
