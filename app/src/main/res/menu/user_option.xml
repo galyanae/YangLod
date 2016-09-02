@@ -14,6 +14,11 @@
         android:title="Log Out"
         android:orderInCategory="3"
         app:showAsAction="never" />
+    <item android:id="@+id/send_email_to_manager"
+        android:title="Email to manager"
+        android:orderInCategory="4"
+        app:showAsAction="never" />
+    
 
 
 </menu>

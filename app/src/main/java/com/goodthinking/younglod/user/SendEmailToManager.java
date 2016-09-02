@@ -10,4 +10,6 @@ public class SendEmailToManager extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_email_to_manager);
     }
+
+
 }

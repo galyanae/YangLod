@@ -102,6 +102,10 @@ public class MainActivity extends AppCompatActivity {
                     logout();
                     return true;
                 }
+                else if (id==R.id.send_email_to_manager){
+                    sendEmailToManager();
+                    return true;
+                }
                 return super.onOptionsItemSelected(item);
             }
 
@@ -113,5 +117,20 @@ public class MainActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "You Logout successfully", Toast.LENGTH_LONG).show();
             }
+
+
+
+    public void sendEmailToManager() {
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/html");
+        intent.putExtra(Intent.EXTRA_EMAIL, "galyanae@.gcom");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+        intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
+
+        startActivity(Intent.createChooser(intent, "Send Email"));
+    }
+
+
 
         }

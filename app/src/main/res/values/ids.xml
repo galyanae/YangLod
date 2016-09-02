@@ -3,4 +3,5 @@
     <item name="menu_user_list" type="id">menu_user_list</item>
     <item name="menu_profile" type="id">profile</item>
     <item name="menu_logout" type="id">logout</item>
+    <item name="send_email_to_manager" type="id">Email to manager</item>
 </resources>
