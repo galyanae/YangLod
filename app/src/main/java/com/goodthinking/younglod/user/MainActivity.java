@@ -1,13 +1,8 @@
 package com.goodthinking.younglod.user;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,15 +10,10 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.goodthinking.younglod.user.R;
 import com.goodthinking.younglod.user.model.Yedia;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.TreeMap;
 
@@ -66,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else if (adapterOne.getItems().get(position).getName().equals("courses")) {
 
-                    Intent intent = new Intent(MainActivity.this, UserMainActivity.class);
+                    Intent intent = new Intent(MainActivity.this, CourseMainActivity.class);
                     intent.putExtra("Role", role);
 
                     startActivity(intent);

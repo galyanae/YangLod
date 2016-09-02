@@ -10,10 +10,10 @@ import android.widget.TextView;
 
 import com.goodthinking.younglod.user.model.Course;
 
-public class MyAdapter extends RecyclerView.Adapter {
+public class CourseAdapter extends RecyclerView.Adapter {
     private Context context;
 
-    public MyAdapter(Context context) {
+    public CourseAdapter(Context context) {
         this.context = context;
     }
 

@@ -16,10 +16,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class UserMainActivity extends AppCompatActivity {
+public class CourseMainActivity extends AppCompatActivity {
 
     private RecyclerView CourseRecyclerView;
-    private MyAdapter MyAdapter;
+    private CourseAdapter CourseAdapter;
     private FirebaseAuth auth;
     private DatabaseReference Coursedatabase, MyCoursetabase;
     private String flag_to_myCourses;
@@ -57,8 +57,8 @@ public class UserMainActivity extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         CourseRecyclerView.setLayoutManager(linearLayoutManager);
-        MyAdapter = new MyAdapter(getApplicationContext());
-        CourseRecyclerView.setAdapter(MyAdapter);
+        CourseAdapter = new CourseAdapter(getApplicationContext());
+        CourseRecyclerView.setAdapter(CourseAdapter);
         RefreshallCourses();
 
     }
@@ -85,7 +85,7 @@ public class UserMainActivity extends AppCompatActivity {
                     course.setKey(data.getKey());
                     CourseArrayData.getInstance().getCourses().add(course);
                 }
-                MyAdapter.notifyDataSetChanged();
+                CourseAdapter.notifyDataSetChanged();
 
             }
 

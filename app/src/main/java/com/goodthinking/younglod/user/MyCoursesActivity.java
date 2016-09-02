@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class MyCoursesActivity extends AppCompatActivity {
 
     private RecyclerView CourseRecyclerView;
-    private MyAdapter MyAdapter;
+    private CourseAdapter CourseAdapter;
     private FirebaseAuth auth;
     private DatabaseReference Coursedatabase,  MyCoursedatabase ;
     ArrayList<String> filter = new ArrayList<>();
@@ -34,11 +34,11 @@ public class MyCoursesActivity extends AppCompatActivity {
         CourseRecyclerView = (RecyclerView) findViewById(R.id.CourseRecyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         CourseRecyclerView.setLayoutManager(linearLayoutManager);
-        MyAdapter = new MyAdapter(getApplicationContext());
-        CourseRecyclerView.setAdapter(MyAdapter);
-        MyAdapter.notifyDataSetChanged();
+        CourseAdapter = new CourseAdapter(getApplicationContext());
+        CourseRecyclerView.setAdapter(CourseAdapter);
+        CourseAdapter.notifyDataSetChanged();
 
-        MyAdapter.notifyDataSetChanged();
+        CourseAdapter.notifyDataSetChanged();
         CourseArrayData.getInstance().getCourses().clear();
         RefreshOnlyMyCourses();
     }
