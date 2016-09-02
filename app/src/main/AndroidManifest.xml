@@ -36,7 +36,7 @@
         <activity android:name=".EventRecyclerview_Firebase" />
         <activity android:name=".EventAddNew_Firebase" />
         <activity android:name=".OneCourseMainActivity" />
-        <activity android:name=".UserMainActivity" />
+        <activity android:name=".CourseMainActivity" />
         <activity android:name=".CourseRegistrationActivity" />
         <activity android:name=".CourseThanksActivity" />
         <activity android:name=".MyCoursesActivity" />
