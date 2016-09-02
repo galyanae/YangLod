@@ -1,13 +1,8 @@
 package com.goodthinking.younglod.user;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,15 +10,11 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.goodthinking.younglod.user.R;
+import com.goodthinking.younglod.user.model.MenuIcon;
 import com.goodthinking.younglod.user.model.Yedia;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.TreeMap;
 
@@ -32,129 +23,95 @@ public class MainActivity extends AppCompatActivity {
     private GridView gridView;
     private AdapterOne adapterOne;
     Intent intent;
+    MenuIcon menuIcon;
     private DatabaseReference root;
-    private TreeMap<String, Yedia> newsArray = new TreeMap();
-    String role = "user";
     boolean isManager = false;
+    private TreeMap<String, Yedia> newsArray = new TreeMap();
+    private String role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        role = "user";
         try {
-            role = getIntent().getExtras().getString("Role");
-        } catch (Exception e) {
-            role = "user";
-        }
-        if (role.equals("manager")) isManager = true;
-        System.out.println("Am I a manager? " + isManager);
-        gridView = (GridView) findViewById(R.id.tableLayout);
+                        role = getIntent().getExtras().getString("Role");
+                    } catch (Exception e) {
+                        role = "user";
+                    }
+                if ("manager".equals(role)) {
+                    isManager = true;
+                }
+                System.out.println("Am I a manager? " + isManager);
+                gridView = (GridView) findViewById(R.id.tableLayout);
         adapterOne = new AdapterOne(getApplicationContext());
         gridView.setAdapter(adapterOne);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 if (adapterOne.getItems().get(position).getName().equals("news")) {
                     intent = new Intent(MainActivity.this, NewsActivity.class);
-                    intent.putExtra("Role", role);
-                    startActivity(intent);
-                } else if (adapterOne.getItems().get(position).getName().equals("events")) {
-
-                    Intent intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
-                    intent.putExtra("Role", role);
-
-                    startActivity(intent);
-                } else if (adapterOne.getItems().get(position).getName().equals("courses")) {
-
-                    Intent intent = new Intent(MainActivity.this, UserMainActivity.class);
-                    intent.putExtra("Role", role);
-
-                    startActivity(intent);
-
-<<<<<<< HEAD
-
-                } else if (adapterOne.getItems().get(position).getName().equals("hayalim")) {
-                    Intent intent = new Intent(MainActivity.this, EditActivity.class);
-                    intent.putExtra("Role", role);
-
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(MainActivity.this, ComingSoon.class);
-                    intent.putExtra("Role", role);
-
-                    startActivity(intent);
-=======
-                } else if (adapterOne.getItems().get(position).getName().equals("business")) {
-                    Intent intent = new Intent(MainActivity.this, EventAddNew_Firebase.class);
-                    intent.putExtra("Role", role);
-
-                    startActivity(intent);
-                } else if (adapterOne.getItems().get(position).getName().equals("hayalim")) {
-                    Intent intent = new Intent(MainActivity.this, EditActivity.class);
-                    intent.putExtra("Role", role);
-
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(MainActivity.this, ComingSoon.class);
-                    intent.putExtra("Role", role);
-
-                    startActivity(intent);
->>>>>>> origin/master
                 }
+                else if (adapterOne.getItems().get(position).getName().equals("events")){
+
+                   intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
+
+                }
+                else if (adapterOne.getItems().get(position).getName().equals("courses")){
+
+                    intent = new Intent(MainActivity.this, UserMainActivity.class);
+
+
+                } else if (adapterOne.getItems().get(position).getName().equals("business")) {
+                    intent = new Intent(MainActivity.this, EventAddNew_Firebase.class);
+
+                } else if (adapterOne.getItems().get(position).getName().equals("hayalim")) {
+                    intent = new Intent(MainActivity.this, EditActivity.class);
+
+                }
+            else {
+                  intent=new Intent(MainActivity.this,ComingSoon.class);
+                }
+                intent.putExtra("Role", role);
+                startActivity(intent);
+            }
+        });
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
             }
 
 
-        });
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        final String userid;
-        if (user == null) {
-            userid = "Anonymous";
-            System.out.println("User is Anonymous");
-        } else {
-
-            userid = user.getUid();
-            System.out.println("userid=" + userid);
-        }
-
-    }
-
-    @Override
+@Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.user_option, menu);
+                getMenuInflater().inflate(R.menu.user_option, menu);
 
-        return true;
-    }
-
-    @Override
+                return true;
+            }
+@Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.menu_user_list) {
-            //goToMyEventPage();
-            return true;
-        } else if (id == R.id.menu_profile) {
-            //goToUserProfilePage();
-            return true;
-        } else if (id == R.id.menu_logout) {
-            logout();
-            return true;
+                int id = item.getItemId();
+                if (id == R.id.menu_user_list) {
+                    //goToMyEventPage();
+                    return true;
+                } else if (id == R.id.menu_profile) {
+                    //goToUserProfilePage();
+                    return true;
+                } else if (id == R.id.menu_logout) {
+                    logout();
+                    return true;
+                }
+                return super.onOptionsItemSelected(item);
+            }
+
+            public void logout() {
+
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(), LoginActivity_Firebase.class));
+                finish();
+
+                Toast.makeText(getApplicationContext(), "You Logout successfully", Toast.LENGTH_LONG).show();
+            }
+
         }
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void logout() {
-
-        FirebaseAuth.getInstance().signOut();
-<<<<<<< HEAD
-//        intent.putExtra("Role", "user");
-=======
-        intent.putExtra("Role", "user");
->>>>>>> origin/master
-
-        startActivity(new Intent(getApplicationContext(), LoginActivity_Firebase.class));
-        finish();
-
-        Toast.makeText(getApplicationContext(), "You Logout successfully", Toast.LENGTH_LONG).show();
-    }
-
-}

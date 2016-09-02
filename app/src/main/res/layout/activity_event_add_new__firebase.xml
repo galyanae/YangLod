@@ -14,7 +14,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/linearLayout">
+        android:layout_alignParentBottom="true">
 
         <EditText
             android:id="@+id/fbAddEventHeadlineview"
@@ -183,7 +183,7 @@
 
             <Button
                 android:layout_width="0dp"
-                android:layout_height="140dp"
+                android:layout_height="150dp"
                 android:layout_weight="1"
                 android:id="@+id/addNewImage"
                 android:onClick="addNewImage"
@@ -230,37 +230,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="100"
+                android:layout_gravity="bottom|center"
+                android:weightSum="3"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true">
 
                 <Button
                     android:id="@+id/fbSaveNewEventbtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="30"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:enabled="true"
                     android:onClick="SaveNewEventbtn"
-                    android:text="@string/add_event_btn" />
+                    android:text="@string/add_event_btn"
+                    android:background="#00abf0" />
 
                 <Button
                     android:id="@+id/fbEditEventbtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="30"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:enabled="true"
                     android:onClick="EditEventbtn"
-                    android:text="@string/edit_event_btn" />
+                    android:text="@string/edit_event_btn"
+                    android:background="#fff100" />
 
 
                 <Button
                     android:id="@+id/fbCancelAddEventbtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="30"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:onClick="CancelAddEventbtn"
-                    android:text="@string/Cancel_btn" />
+                    android:text="@string/Cancel_btn"
+                    android:background="#eb008b" />
             </LinearLayout>
     </LinearLayout>
 

@@ -17,251 +17,286 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/rgviewmessage"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="#1a13e7"
-            android:textSize="15dp" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="20dp" />
-
-        <TextView
-            android:id="@+id/rgviewEventHeadline"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_event_name"
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/rgviewEventSynopsys"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_event_synopsis"
-            android:textSize="15dp" />
-
-        <RelativeLayout
-            android:id="@+id/rgdaterelative"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true">
+            android:layout_height="135dp">
 
             <TextView
-                android:id="@+id/rgviewEventdatetxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/rgviewEventdate"
-                android:layout_alignParentLeft="true"
-                android:text="@string/date_text"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/rgviewEventdate"
+                android:id="@+id/rgviewmessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/rgviewEventdatetxt"
-                android:hint="@string/date_format"
-                android:textSize="15dp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rgtimerelative"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true">
-
-            <TextView
-                android:id="@+id/rgviewEventtimetxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/rgviewEventtime"
-                android:layout_alignParentLeft="true"
-                android:text="@string/time_text"
+                android:text=""
+                android:textColor="#1a13e7"
                 android:textSize="15dp" />
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="20dp" />
+
             <TextView
-                android:id="@+id/rgviewEventtime"
+                android:id="@+id/rgviewEventHeadline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/rgviewEventtimetxt"
-                android:hint="@string/time_format"
-                android:textSize="15dp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rgusernamerelative"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true">
+                android:hint="@string/hint_event_name"
+                android:textSize="20dp"
+                android:layout_gravity="top|center_horizontal" />
 
             <TextView
-                android:id="@+id/rgviewusernametxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/rgviewUsername"
-                android:layout_alignParentLeft="true"
-                android:text="@string/User_name"
-                android:textSize="15dp" />
-
-
-            <TextView
-                android:id="@+id/rgviewUsername"
+                android:id="@+id/rgviewEventSynopsys"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/rgviewusernametxt"
-                android:hint="@string/User_name"
+                android:hint="@string/hint_event_synopsis"
                 android:textSize="15dp" />
-        </RelativeLayout>
+        </LinearLayout>
 
-        <RelativeLayout
-            android:id="@+id/rguserphonerelative"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/rgviewuserphonetxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/rgviewUserphone"
-                android:layout_alignParentLeft="true"
-                android:text="@string/User_phone"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/rgviewUserphone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/rgviewuserphonetxt"
-                android:text="@string/User_phone"
-                android:textSize="15dp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rguseremailrelative"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true">
-
-            <TextView
-                android:id="@+id/rgviewuseremailtxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/rgviewUseremail"
-                android:layout_alignParentLeft="true"
-                android:text="@string/email_field"
-                android:textSize="15dp" />
-
-
-            <TextView
-                android:id="@+id/rgviewUseremail"
+            <RelativeLayout
+                android:id="@+id/rgdaterelative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/rgviewuseremailtxt"
-                android:hint="@string/email_field"
-                android:textSize="15dp" />
-        </RelativeLayout>
+                android:layout_alignParentLeft="true">
 
-        <RelativeLayout
-            android:id="@+id/rguserparticipatorsrelative"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true">
+                <TextView
+                    android:id="@+id/rgviewEventdatetxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/rgviewEventdate"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/date_text"
+                    android:textSize="15dp" />
 
-            <TextView
-                android:id="@+id/rgparticipatorstxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/rgparticipators"
-                android:layout_alignParentLeft="true"
-                android:text="@string/Registration_Userparticipators_no"
-                android:textSize="15dp" />
+                <TextView
+                    android:id="@+id/rgviewEventdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/rgviewEventdatetxt"
+                    android:hint="@string/date_format"
+                    android:textSize="15dp" />
+            </RelativeLayout>
 
-
-            <EditText
-                android:id="@+id/rgparticipators"
+            <RelativeLayout
+                android:id="@+id/rgtimerelative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/rgparticipatorstxt"
-                android:inputType="number"
-                android:singleLine="true"
-                android:textSize="15dp" />
-        </RelativeLayout>
+                android:layout_alignParentLeft="true">
+
+                <TextView
+                    android:id="@+id/rgviewEventtimetxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/rgviewEventtime"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/time_text"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/rgviewEventtime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/rgviewEventtimetxt"
+                    android:hint="@string/time_format"
+                    android:textSize="15dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rgusernamerelative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true">
+
+                <TextView
+                    android:id="@+id/rgviewusernametxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/rgviewUsername"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/User_name"
+                    android:textSize="15dp" />
+
+
+                <TextView
+                    android:id="@+id/rgviewUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/rgviewusernametxt"
+                    android:hint="@string/User_name"
+                    android:textSize="15dp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="224dp">
+
+            <RelativeLayout
+                android:id="@+id/rguserphonerelative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true">
+
+                <TextView
+                    android:id="@+id/rgviewuserphonetxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/rgviewUserphone"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/User_phone"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/rgviewUserphone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/rgviewuserphonetxt"
+                    android:text="@string/User_phone"
+                    android:textSize="15dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rguseremailrelative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true">
+
+                <TextView
+                    android:id="@+id/rgviewuseremailtxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/rgviewUseremail"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/email_field"
+                    android:textSize="15dp" />
+
+
+                <TextView
+                    android:id="@+id/rgviewUseremail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/rgviewuseremailtxt"
+                    android:hint="@string/email_field"
+                    android:textSize="15dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rguserparticipatorsrelative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true">
+
+                <TextView
+                    android:id="@+id/rgparticipatorstxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/rgparticipators"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/Registration_Userparticipators_no"
+                    android:textSize="15dp" />
+
+
+                <EditText
+                    android:id="@+id/rgparticipators"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/rgparticipatorstxt"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textSize="15dp" />
+            </RelativeLayout>
+        </LinearLayout>
 
 
         <LinearLayout
             android:id="@+id/Registeractivitybutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
             android:orientation="horizontal"
             android:weightSum="100">
 
             <Button
                 android:id="@+id/rgviewregtoeventtbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="40"
+                android:layout_width="0dp"
+                android:layout_margin="2dp"
+                android:layout_height="match_parent"
+                android:layout_weight="20"
                 android:enabled="true"
                 android:onClick="RegisterEventbtn"
-                android:text="@string/confirm" />
+                android:text="@string/confirm"
+                android:textSize="10dp"
+                android:background="#00abf0"
+                android:backgroundTint="@drawable/abc_list_longpressed_holo"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/rgCancelbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="30"
+                android:layout_width="0dp"
+                android:layout_margin="2dp"
+                android:layout_height="match_parent"
+                android:textSize="10dp"
+                android:layout_weight="20"
                 android:onClick="Cancelbtn"
-                android:text="@string/return_to_main" />
+                android:text="@string/return_to_main"
+                android:background="#fff100"
+                android:backgroundTint="@drawable/abc_list_longpressed_holo"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/rgCancelRegisterbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="40"
+                android:layout_width="0dp"
+                android:layout_margin="2dp"
+                android:layout_height="match_parent"
+                android:layout_weight="20"
+                android:textSize="10dp"
                 android:enabled="true"
                 android:onClick="CancelRegisterbtn"
-                android:text="@string/cancel_registration" />
+                android:text="@string/cancel_registration"
+                android:background="#eb008b"
+                android:backgroundTint="@drawable/abc_list_longpressed_holo"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/rggotologintbtn"
+                android:layout_width="0dp"
+                android:layout_margin="2dp"
+                android:layout_height="match_parent"
+                android:textSize="10dp"
+                android:layout_weight="20"
+                android:enabled="true"
+                android:onClick="loginEventbtn"
+                android:text="@string/Login_btn"
+                android:background="#5a2591"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/rggotosignuptbtn"
+                android:layout_width="0dp"
+                android:layout_margin="2dp"
+                android:layout_height="match_parent"
+                android:layout_weight="20"
+                android:enabled="true"
+                android:textSize="10dp"
+                android:onClick="signupEventbtn"
+                android:text="@string/SignUP_btn"
+                android:background="#25963a"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
 
         </LinearLayout>
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/Registeractivitybutton2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="100"
-        app:layout_anchor="@id/regviewlinearLayout"
-        app:layout_anchorGravity="bottom|left|end">
-
-        <Button
-            android:id="@+id/rggotologintbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="30"
-            android:enabled="true"
-            android:onClick="loginEventbtn"
-            android:text="@string/Login_btn" />
-
-        <Button
-            android:id="@+id/rggotosignuptbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="30"
-            android:enabled="true"
-            android:onClick="signupEventbtn"
-            android:text="@string/SignUP_btn" />
 
 
     </LinearLayout>
