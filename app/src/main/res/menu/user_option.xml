@@ -18,7 +18,10 @@
         android:title="Email to manager"
         android:orderInCategory="4"
         app:showAsAction="never" />
-    
+    <item android:id="@+id/send_message_to_users"
+        android:title="Send message to users"
+        android:orderInCategory="5"
+        app:showAsAction="never" />
 
 
 </menu>
