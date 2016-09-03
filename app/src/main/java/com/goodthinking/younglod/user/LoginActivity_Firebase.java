@@ -37,8 +37,8 @@ public class LoginActivity_Firebase extends AppCompatActivity {
 
 
         if (auth.getCurrentUser() != null) {
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            String UserID = user.getUid();
+            String UserID = auth.getCurrentUser().getUid();
+            System.out.println("userid=" + UserID);
             loadUser(UserID);
         } else {
             setContentView(R.layout.activity_login_activity__firebase);
@@ -52,6 +52,10 @@ public class LoginActivity_Firebase extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getChildrenCount() <= 0) {
+                            Toast.makeText(LoginActivity_Firebase.this, "no user record critical error uid=", Toast.LENGTH_LONG).show();
+                        }
+                        System.out.println("children=" + dataSnapshot.getChildrenCount());
                         User newUser = dataSnapshot.getValue(User.class);
                         String name = newUser.getUserName();
                         String role = newUser.getRole();

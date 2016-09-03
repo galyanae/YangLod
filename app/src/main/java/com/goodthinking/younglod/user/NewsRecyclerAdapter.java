@@ -71,8 +71,8 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
             str = str.substring(6) + "/" + str.substring(4, 6) + "/" + str.substring(0, 4) + " " + tm.substring(0, 2) + ":" +
                     tm.substring(2) + " ";
             ((SimpleItemViewHolder) holder).tvYedia.setText(str + newsItem.getInfo());
-            if (isManager) ((SimpleItemViewHolder) holder).tvYedia.setVisibility(View.VISIBLE);
-            else ((SimpleItemViewHolder) holder).tvYedia.setVisibility(View.GONE);
+            if (isManager) ((SimpleItemViewHolder) holder).ivDelete.setVisibility(View.VISIBLE);
+            else ((SimpleItemViewHolder) holder).ivDelete.setVisibility(View.GONE);
 /*
             if (newsItem.getImage() != null && newsItem.getImage().length() > 0) {
                 ((SimpleItemViewHolder) holder).ivYedia.setVisibility(View.VISIBLE);
@@ -90,7 +90,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
 
     public final class SimpleItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvHeadline, tvYedia;
-        ImageView ivYedia;
+        ImageView ivYedia, ivDelete;
         public int position;
 
         public SimpleItemViewHolder(View itemView) {
@@ -100,6 +100,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
             tvHeadline = (TextView) itemView.findViewById(R.id.tvHeadline);
             tvYedia = (TextView) itemView.findViewById(R.id.tvYedia);
             ivYedia = (ImageView) itemView.findViewById(R.id.ivYedia);
+            ivDelete = (ImageView) itemView.findViewById(R.id.ivDelete);
 
         }
 
