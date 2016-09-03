@@ -29,7 +29,7 @@ import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.goodthinking.younglod.user.model.Yedia;
+import com.goodthinking.younglod.user.model.newsItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,7 +46,7 @@ public class NewsActivity extends AppCompatActivity {
     AlertDialog show;
     private DatabaseReference root;
     DatabaseReference newsRef;
-    private TreeMap<String, Yedia> newsArray = new TreeMap();
+    private TreeMap<String, newsItem> newsArray = new TreeMap();
     protected RecyclerView NewsRecyclerView;
     protected NewsRecyclerAdapter newsRecyclerAdapter;
     LinearLayoutManager linearLayoutManager;
@@ -91,20 +91,20 @@ public class NewsActivity extends AppCompatActivity {
                 Log.d(getClass().getName(), "newsCount=" + dataSnapshot.getChildrenCount());
                 for (DataSnapshot snap : dataSnapshot.getChildren()) {
                     String key = snap.getKey();
-                    Yedia yedia = new Yedia();
-                    yedia = snap.getValue(Yedia.class); // load the news details
-                    yedia.setKey(snap.getKey());
-                    System.out.println("inserting newsArray=" + yedia.toString());
+                    newsItem newsItem = new newsItem();
+                    newsItem = snap.getValue(newsItem.class); // load the news details
+                    newsItem.setKey(snap.getKey());
+                    System.out.println("inserting newsArray=" + newsItem.toString());
 
 
-                    if (yedia.getImage() != null && yedia.getImage().length() > 0) {
-                        byte[] decodedString = Base64.decode(yedia.getImage(), Base64.DEFAULT);
+                    if (newsItem.getImage() != null && newsItem.getImage().length() > 0) {
+                        byte[] decodedString = Base64.decode(newsItem.getImage(), Base64.DEFAULT);
                         Bitmap bmp = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                        yedia.setImg(bmp);
+                        newsItem.setImg(bmp);
                     }
                     // the key construct from date+time+count, ensures that news will be sorted according to their date
                     // and time
-                    newsArray.put(yedia.getDate() + yedia.getTime() + yedia.getKey(), yedia);
+                    newsArray.put(newsItem.getDate() + newsItem.getTime() + newsItem.getKey(), newsItem);
                     System.out.println(newsArray.size());
                 }
                 // time to refresh event details

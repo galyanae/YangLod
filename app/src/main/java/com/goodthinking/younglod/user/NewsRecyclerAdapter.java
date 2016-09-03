@@ -11,12 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.goodthinking.younglod.user.model.Yedia;
+import com.goodthinking.younglod.user.model.newsItem;
 
 import java.util.TreeMap;
 
 public class NewsRecyclerAdapter extends RecyclerView.Adapter {
-    private TreeMap<String, Yedia> newsArray;
+    private TreeMap<String, newsItem> newsArray;
     private Context context;
     private final Handler handler = new Handler();
     AlertDialog show;
@@ -32,7 +32,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
     ImageView ivForward;
     Object caller;
 
-    public NewsRecyclerAdapter(TreeMap<String, Yedia> newsArray, Object caller) {
+    public NewsRecyclerAdapter(TreeMap<String, newsItem> newsArray, Object caller) {
         this.caller = caller;
         this.newsArray = newsArray;
     }
@@ -51,28 +51,28 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
         SimpleItemViewHolder viewHolder = (SimpleItemViewHolder) holder;
         viewHolder.position = position;
         System.out.println("position=" + position);
-        Yedia yedia = new Yedia();
+        newsItem newsItem = new newsItem();
 
         // loop until getting the right event
         int pos = 0;
-        for (TreeMap.Entry<String, Yedia> entry : newsArray.entrySet()) {
+        for (TreeMap.Entry<String, newsItem> entry : newsArray.entrySet()) {
             if (pos == position) {
-                yedia = entry.getValue();
+                newsItem = entry.getValue();
                 break;
             }
             System.out.println(entry.getKey() + " - " + entry.getValue().toString());
             pos++;
         }
         if (pos == position) {
-            ((SimpleItemViewHolder) holder).tvHeadline.setText(yedia.getHeadline());
-            String str = yedia.getDate();
-            String tm = yedia.getTime();
+            ((SimpleItemViewHolder) holder).tvHeadline.setText(newsItem.getHeadline());
+            String str = newsItem.getDate();
+            String tm = newsItem.getTime();
             str = str.substring(6) + "/" + str.substring(4, 6) + "/" + str.substring(0, 4) + " " + tm.substring(0, 2) + ":" +
                     tm.substring(2) + " ";
-            ((SimpleItemViewHolder) holder).tvYedia.setText(str + yedia.getYedia());
-            if (yedia.getImage() != null && yedia.getImage().length() > 0) {
+            ((SimpleItemViewHolder) holder).tvYedia.setText(str + newsItem.getInfo());
+            if (newsItem.getImage() != null && newsItem.getImage().length() > 0) {
                 ((SimpleItemViewHolder) holder).ivYedia.setVisibility(View.VISIBLE);
-                ((SimpleItemViewHolder) holder).ivYedia.setImageBitmap(yedia.getImg());
+                ((SimpleItemViewHolder) holder).ivYedia.setImageBitmap(newsItem.getImg());
             } else ((SimpleItemViewHolder) holder).ivYedia.setVisibility(View.GONE);
 
         }
@@ -135,25 +135,25 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
         ivBackward = (ImageView) view.findViewById(R.id.ivBackward);
         ivForward = (ImageView) view.findViewById(R.id.ivForward);
 
-        Yedia yedia = new Yedia();
+        newsItem newsItem = new newsItem();
         int pos = 0;
-        for (TreeMap.Entry<String, Yedia> entry : newsArray.entrySet()) {
+        for (TreeMap.Entry<String, newsItem> entry : newsArray.entrySet()) {
             if (pos == position) {
-                yedia = entry.getValue();
+                newsItem = entry.getValue();
                 break;
             }
             pos++;
         }
         if (pos == position) {
-            String str = yedia.getDate();
+            String str = newsItem.getDate();
             Date.setText(str.substring(6) + "/" + str.substring(4, 6) + "/" + str.substring(0, 4) + " ");
-            str = yedia.getTime();
+            str = newsItem.getTime();
             Time.setText(str.substring(0, 2) + ":" + str.substring(2) + " ");
-            tvHead.setText(yedia.getHeadline());
-            tvYedia.setText(yedia.getYedia());
-            if (yedia.getImage() != null && yedia.getImage().length() > 0) {
+            tvHead.setText(newsItem.getHeadline());
+            tvYedia.setText(newsItem.getInfo());
+            if (newsItem.getImage() != null && newsItem.getImage().length() > 0) {
                 tvImg.setVisibility(View.VISIBLE);
-                tvImg.setImageBitmap(yedia.getImg());
+                tvImg.setImageBitmap(newsItem.getImg());
             } else tvImg.setVisibility(View.GONE);
 
             if (position == 0)
@@ -197,25 +197,25 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
             newPosition++;
         }
 
-        Yedia yedia = new Yedia();
+        newsItem newsItem = new newsItem();
         int pos = 0;
-        for (TreeMap.Entry<String, Yedia> entry : newsArray.entrySet()) {
+        for (TreeMap.Entry<String, newsItem> entry : newsArray.entrySet()) {
             if (pos == newPosition) {
-                yedia = entry.getValue();
+                newsItem = entry.getValue();
                 break;
             }
             pos++;
         }
         if (pos == newPosition) {
-            String str = yedia.getDate();
+            String str = newsItem.getDate();
             Date.setText(str.substring(6) + "/" + str.substring(4, 6) + "/" + str.substring(0, 4) + " ");
-            str = yedia.getTime();
+            str = newsItem.getTime();
             Time.setText(str.substring(0, 2) + ":" + str.substring(2) + " ");
-            tvHead.setText(yedia.getHeadline());
-            tvYedia.setText(yedia.getYedia());
-            if (yedia.getImage() != null && yedia.getImage().length() > 0) {
+            tvHead.setText(newsItem.getHeadline());
+            tvYedia.setText(newsItem.getInfo());
+            if (newsItem.getImage() != null && newsItem.getImage().length() > 0) {
                 tvImg.setVisibility(View.VISIBLE);
-                tvImg.setImageBitmap(yedia.getImg());
+                tvImg.setImageBitmap(newsItem.getImg());
             } else tvImg.setVisibility(View.GONE);
 
             if (newPosition == 0)
@@ -230,7 +230,6 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
 
             currentPosition = newPosition;
         }
-        //position
         show.setView(v);
     }
 }

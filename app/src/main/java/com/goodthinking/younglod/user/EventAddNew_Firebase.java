@@ -49,7 +49,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
     private int position;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private String key;
-
+    private String tableName = "events";
     private String timeEvent;
     private String dateEvent;
     private CheckBox eventIsNotValid;
@@ -166,7 +166,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
 
 
     public void SaveNewEventbtn(View view) {
-        DatabaseReference newEvent = Eventdatabase.child("Tables").child("Events");
+        DatabaseReference newEvent = Eventdatabase.child("Tables").child(tableName);
         key = newEvent.push().getKey();
         saveImage();
         String EventHeadLine = AddEventHeadline.getText().toString().trim();
@@ -243,7 +243,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 Map<String, Object> children = new HashMap<String, Object>();
                 children.put("image", downloadUrl.getPath());
-                Eventdatabase.child("Tables").child("Events").child(key).updateChildren(children);
+                Eventdatabase.child("Tables").child(tableName).child(key).updateChildren(children);
                 finish();
             }
         });

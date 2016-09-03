@@ -1,27 +1,90 @@
 package com.goodthinking.younglod.user.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
 import java.util.HashMap;
 
-/**
- * Created by user on 19/07/2016.
- */
 @IgnoreExtraProperties
-public class Event implements Serializable {
+public class Event implements Parcelable {
     private String EventName;
     private String EventDate;
+    private String EventEndDate;
+    private String time;
+    private String EventTutor;      // MADRICH
     private String EventTime;
     private String EventSynopsys;
     private String EventInformation;
     private String EventHost;
     private Boolean EventIsNotValid;
     private int EventParticipatorsno;
+    private int EventMaxParticipants;
     private Boolean EventIsClosed;
     private String StatusIsValidDate;
+    private String eventCost;
+    private String eventAudience;
+    private String eventLang;
     private String Image;
+    
+    public String getEventEndDate() {
+        return EventEndDate;
+    }
+
+    public void setEventEndDate(String eventEndDate) {
+        EventEndDate = eventEndDate;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getEventTutor() {
+        return EventTutor;
+    }
+
+    public void setEventTutor(String eventTutor) {
+        EventTutor = eventTutor;
+    }
+
+    public int getEventMaxParticipants() {
+        return EventMaxParticipants;
+    }
+
+    public void setEventMaxParticipants(int eventMaxParticipants) {
+        EventMaxParticipants = eventMaxParticipants;
+    }
+
+    public String getEventCost() {
+        return eventCost;
+    }
+
+    public void setEventCost(String eventCost) {
+        this.eventCost = eventCost;
+    }
+
+    public String getEventAudience() {
+        return eventAudience;
+    }
+
+    public void setEventAudience(String eventAudience) {
+        this.eventAudience = eventAudience;
+    }
+
+    public String getEventLang() {
+        return eventLang;
+    }
+
+    public void setEventLang(String eventLang) {
+        this.eventLang = eventLang;
+    }
 
     public String getImage() {
         return Image;
@@ -167,4 +230,65 @@ public class Event implements Serializable {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.EventName);
+        dest.writeString(this.EventDate);
+        dest.writeString(this.EventEndDate);
+        dest.writeString(this.time);
+        dest.writeString(this.EventTutor);
+        dest.writeString(this.EventTime);
+        dest.writeString(this.EventSynopsys);
+        dest.writeString(this.EventInformation);
+        dest.writeString(this.EventHost);
+        dest.writeValue(this.EventIsNotValid);
+        dest.writeInt(this.EventParticipatorsno);
+        dest.writeInt(this.EventMaxParticipants);
+        dest.writeValue(this.EventIsClosed);
+        dest.writeString(this.StatusIsValidDate);
+        dest.writeString(this.eventCost);
+        dest.writeString(this.eventAudience);
+        dest.writeString(this.eventLang);
+        dest.writeString(this.Image);
+        dest.writeString(this.Key);
+    }
+
+    protected Event(Parcel in) {
+        this.EventName = in.readString();
+        this.EventDate = in.readString();
+        this.EventEndDate = in.readString();
+        this.time = in.readString();
+        this.EventTutor = in.readString();
+        this.EventTime = in.readString();
+        this.EventSynopsys = in.readString();
+        this.EventInformation = in.readString();
+        this.EventHost = in.readString();
+        this.EventIsNotValid = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.EventParticipatorsno = in.readInt();
+        this.EventMaxParticipants = in.readInt();
+        this.EventIsClosed = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.StatusIsValidDate = in.readString();
+        this.eventCost = in.readString();
+        this.eventAudience = in.readString();
+        this.eventLang = in.readString();
+        this.Image = in.readString();
+        this.Key = in.readString();
+    }
+
+    public static final Parcelable.Creator<Event> CREATOR = new Parcelable.Creator<Event>() {
+        @Override
+        public Event createFromParcel(Parcel source) {
+            return new Event(source);
+        }
+
+        @Override
+        public Event[] newArray(int size) {
+            return new Event[size];
+        }
+    };
 }
