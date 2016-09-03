@@ -148,6 +148,7 @@
     <string name="delete">Delete</string>
     <string name="valid_events">Event is valid</string>
     <string name="no_valid_events">Event is no valid</string>
+    <string name="taking_pictures">Taking picture</string>
 
 
 </resources>
