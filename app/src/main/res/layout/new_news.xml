@@ -28,6 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/date"
+                android:onClick="newsdate"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -41,6 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/time"
+                android:onClick="newstime"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -129,7 +131,7 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:onClick="save"
-            android:src="@drawable/ic_save_24dp" />
+            android:src="@drawable/ic_save_36dp" />
 
         <Space
             android:layout_width="0dp"
@@ -142,7 +144,7 @@
             android:layout_gravity="start"
             android:gravity="start"
             android:onClick="cancel"
-            android:src="@drawable/ic_cancel" />
+            android:src="@drawable/ic_cancel_36dp" />
 
         <Space
             android:layout_width="0dp"
