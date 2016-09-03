@@ -79,7 +79,8 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
     private void RefreshallEvents() {
 
         Eventdatabase = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference refEvents = Eventdatabase.child("Tables").child("Events");
+        String tableName = "Events";
+        DatabaseReference refEvents = Eventdatabase.child("Tables").child(tableName);
         queryRef = refEvents.orderByChild("statusIsValidDate").startAt("1");
         //  Eventdatabase.child("Amuta").child("Events").addListenerForSingleValueEvent(new ValueEventListener() {
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {

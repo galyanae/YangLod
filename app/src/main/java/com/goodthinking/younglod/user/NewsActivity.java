@@ -5,8 +5,6 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
@@ -16,7 +14,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -74,7 +71,7 @@ public class NewsActivity extends AppCompatActivity {
         }
         if (role.equals("manager")) {
             isManager = true;
-
+            fab.setVisibility(View.VISIBLE);
         } else {
             fab.setVisibility(View.GONE);
         }
@@ -96,12 +93,6 @@ public class NewsActivity extends AppCompatActivity {
                     newsItem.setKey(snap.getKey());
                     System.out.println("inserting newsArray=" + newsItem.toString());
 
-
-                    if (newsItem.getImage() != null && newsItem.getImage().length() > 0) {
-                        byte[] decodedString = Base64.decode(newsItem.getImage(), Base64.DEFAULT);
-                        Bitmap bmp = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                        newsItem.setImg(bmp);
-                    }
                     // the key construct from date+time+count, ensures that news will be sorted according to their date
                     // and time
                     newsArray.put(newsItem.getDate() + newsItem.getTime() + newsItem.getKey(), newsItem);
@@ -205,6 +196,31 @@ public class NewsActivity extends AppCompatActivity {
         builder.setView(view);
         show = builder.show();
         show.setView(v);
+        ivCancel.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                cancel(arg0);
+            }
+
+        });
+        ivSave.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                saveNews(arg0);
+            }
+
+        });
+        ivPicture.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                picture(arg0);
+            }
+
+        });
+
     }
 
     public static class TimePickerFragment extends DialogFragment
@@ -251,5 +267,46 @@ public class NewsActivity extends AppCompatActivity {
             String DAY = startDate.substring(8);
             System.out.println("Year" + YEAR + " month" + MONTH + " day" + DAY);
         }
+    }
+
+    public void saveNews(View v) {
+        System.out.println("here i am saving data");
+        //DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+        //DatabaseReference newsRef = root.child("Tables").child("news");
+        String sdate = bDate.getText().toString();
+        sdate = sdate.substring(6) + sdate.substring(3, 5) + sdate.substring(0, 2);
+        String stime = bTime.getText().toString();
+        stime = stime.substring(0, 2) + stime.substring(3);
+        newsItem nItem = new newsItem(etInfo.getText().toString(),
+                etTitle.getText().toString(),
+                sdate,
+                stime,
+                "nada", "n");
+
+        String str = newsRef.push().getKey();
+        System.out.println("saving news to database key=" + str);
+        nItem.setKey(str);
+        System.out.println(nItem.toString());
+        newsArray.put(nItem.getDate() + nItem.getTime() + nItem.getKey(), nItem);
+
+        newsRef.child(str).setValue(nItem.toMap(), new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError != null) {
+                    System.out.println("Data could not be saved " + databaseError.getMessage());
+                } else {
+                    System.out.println("Data saved successfully." + databaseReference.getKey());
+                    newsRecyclerAdapter.notifyDataSetChanged();
+                    show.dismiss();
+                }
+            }
+        });
+    }
+
+    public void cancel(View v) {
+        show.dismiss();
+    }
+
+    public void picture(View v) {
     }
 }

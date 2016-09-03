@@ -1,20 +1,25 @@
 package com.goodthinking.younglod.user.model;
 
-import android.graphics.Bitmap;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.HashMap;
+import java.util.Map;
 
 
 @IgnoreExtraProperties
-public class newsItem {
-    private String image;
+public class newsItem implements Parcelable {
     private String info;
     private String headline;
     private String date;
     private String time;
     private String iName;
+    private String picInTitle; // show picture in info yes/no
+    @Exclude
+    private String key;
 
     public String getiName() {
         return iName;
@@ -24,27 +29,12 @@ public class newsItem {
         this.iName = iName;
     }
 
-    public boolean isPicInTitle() {
+    public String isPicInTitle() {
         return picInTitle;
     }
 
-    public void setPicInTitle(boolean picInTitle) {
+    public void setPicInTitle(String picInTitle) {
         this.picInTitle = picInTitle;
-    }
-
-    private boolean picInTitle; // show picture in info yes/no
-    private int imgID;
-    @Exclude
-    private Bitmap img;
-    @Exclude
-    private String key;
-
-    public Bitmap getImg() {
-        return img;
-    }
-
-    public void setImg(Bitmap img) {
-        this.img = img;
     }
 
     public String getTime() {
@@ -63,8 +53,6 @@ public class newsItem {
         this.key = key;
     }
 
-
-
     public String getDate() {
         return date;
     }
@@ -81,14 +69,6 @@ public class newsItem {
         this.headline = headline;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public String getInfo() {
         return info;
     }
@@ -97,35 +77,80 @@ public class newsItem {
         this.info = info;
     }
 
-
-
-    public int getImgID() {
-        return imgID;
-    }
-
-    public void setImgID(int imgID) {
-        this.imgID = imgID;
-    }
-
     public newsItem() {
     }
 
-    public newsItem(String date, String headline, String image, String info) {
-        this.date = date;
-        this.headline = headline;
-        this.image = image;
+    public newsItem(String info, String headline, String date, String time, String iName, String picInTitle) {
         this.info = info;
+        this.headline = headline;
+        this.date = date;
+        this.time = time;
+        this.iName = iName;
+        this.picInTitle = picInTitle;
     }
 
     @Override
     public String toString() {
         return "newsItem{" +
-                "imgID=" + imgID +
                 ", info='" + info + '\'' +
                 ", headline='" + headline + '\'' +
                 ", date='" + date + '\'' +
                 ", time='" + time + '\'' +
+                ", iName='" + iName + '\'' +
+                ", picInTitle=" + picInTitle +
                 ", key='" + key + '\'' +
                 '}';
     }
+
+    public Map<String, Object> toMap() {
+        Map<String, Object> mp = new HashMap<>();
+        mp.put("info", info);
+        mp.put("headline", headline);
+        mp.put("date", date);
+        mp.put("time", time);
+        mp.put("iName", iName);
+        mp.put("picInTitle", picInTitle);
+
+        return mp;
+
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.info);
+        dest.writeString(this.headline);
+        dest.writeString(this.date);
+        dest.writeString(this.time);
+        dest.writeString(this.iName);
+        dest.writeString(this.picInTitle);
+        dest.writeString(this.key);
+    }
+
+    protected newsItem(Parcel in) {
+        this.info = in.readString();
+        this.headline = in.readString();
+        this.date = in.readString();
+        this.time = in.readString();
+        this.iName = in.readString();
+        this.picInTitle = in.readString();
+        this.key = in.readString();
+    }
+
+    public static final Parcelable.Creator<newsItem> CREATOR = new Parcelable.Creator<newsItem>() {
+        @Override
+        public newsItem createFromParcel(Parcel source) {
+            return new newsItem(source);
+        }
+
+        @Override
+        public newsItem[] newArray(int size) {
+            return new newsItem[size];
+        }
+    };
+
 }

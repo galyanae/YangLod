@@ -130,7 +130,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:onClick="save"
             android:src="@drawable/ic_save_36dp" />
 
         <Space
@@ -143,7 +142,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:gravity="start"
-            android:onClick="cancel"
             android:src="@drawable/ic_cancel_36dp" />
 
         <Space
@@ -157,7 +155,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
-            android:onClick="picture"
             android:hint="@string/taking_pictures"
             android:src="@drawable/ic_camera_36" />
 

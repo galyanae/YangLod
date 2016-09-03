@@ -70,10 +70,12 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
             str = str.substring(6) + "/" + str.substring(4, 6) + "/" + str.substring(0, 4) + " " + tm.substring(0, 2) + ":" +
                     tm.substring(2) + " ";
             ((SimpleItemViewHolder) holder).tvYedia.setText(str + newsItem.getInfo());
+/*
             if (newsItem.getImage() != null && newsItem.getImage().length() > 0) {
                 ((SimpleItemViewHolder) holder).ivYedia.setVisibility(View.VISIBLE);
                 ((SimpleItemViewHolder) holder).ivYedia.setImageBitmap(newsItem.getImg());
             } else ((SimpleItemViewHolder) holder).ivYedia.setVisibility(View.GONE);
+*/
 
         }
     }
@@ -151,10 +153,12 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
             Time.setText(str.substring(0, 2) + ":" + str.substring(2) + " ");
             tvHead.setText(newsItem.getHeadline());
             tvYedia.setText(newsItem.getInfo());
+/*
             if (newsItem.getImage() != null && newsItem.getImage().length() > 0) {
                 tvImg.setVisibility(View.VISIBLE);
                 tvImg.setImageBitmap(newsItem.getImg());
             } else tvImg.setVisibility(View.GONE);
+*/
 
             if (position == 0)
                 ivBackward.setVisibility(View.INVISIBLE);
@@ -213,10 +217,12 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
             Time.setText(str.substring(0, 2) + ":" + str.substring(2) + " ");
             tvHead.setText(newsItem.getHeadline());
             tvYedia.setText(newsItem.getInfo());
+/*
             if (newsItem.getImage() != null && newsItem.getImage().length() > 0) {
                 tvImg.setVisibility(View.VISIBLE);
                 tvImg.setImageBitmap(newsItem.getImg());
             } else tvImg.setVisibility(View.GONE);
+*/
 
             if (newPosition == 0)
                 ivBackward.setVisibility(View.INVISIBLE);
