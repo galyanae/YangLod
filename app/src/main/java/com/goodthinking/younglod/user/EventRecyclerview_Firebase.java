@@ -54,8 +54,8 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
             role = "user";
         }
         if (role.equals("manager")) {isManager = true;
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setVisibility(View.VISIBLE);}
+            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.setVisibility(View.VISIBLE);}
 
         System.out.println("Am I a manager? " + isManager);
 

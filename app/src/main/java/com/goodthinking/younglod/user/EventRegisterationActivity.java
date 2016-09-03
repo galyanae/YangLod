@@ -72,7 +72,7 @@ public class EventRegisterationActivity extends AppCompatActivity {
             Intent intent = getIntent();
             key = intent.getStringExtra("Eventkey");
             position = intent.getIntExtra("position", 0);
-            //   if (key != "") {
+
             if (!key.equals("")) {
                 EventHeadline.setText(EventArraydata.getInstance().getEvents().get(position).getEventName());
                 Eventdate.setText(EventArraydata.getInstance().getEvents().get(position).getEventDate());
@@ -174,7 +174,8 @@ public class EventRegisterationActivity extends AppCompatActivity {
             return;
         } else {
             UserNoOfParticipators = Integer.parseInt(NoOfParticipatorsField.getText().toString());
-            DatabaseReference newD = Userdatabase.child("users");
+           // DatabaseReference newD = Userdatabase.child("users");
+            DatabaseReference newD = Userdatabase;
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         userID = user.getUid();
@@ -188,8 +189,8 @@ public class EventRegisterationActivity extends AppCompatActivity {
         progressDialog.show();
         Map<String, Object> childUpdates = new HashMap<>();
 
-        childUpdates.put("/Events/" + key + "/Applicants/" + userID, Newuser.ApplicanttoMap());
-        childUpdates.put(  "/"+userID + "/MyEvents/" + key, "true");
+        childUpdates.put("/Tables/Events/" + key + "/Applicants/" + userID, Newuser.ApplicanttoMap());
+        childUpdates.put("/users/"+ userID + "/MyEvents/" + key, "true");
         //newD.updateChildren(childUpdates);
         //progressDialog.dismiss();
         newD.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
@@ -245,8 +246,8 @@ public class EventRegisterationActivity extends AppCompatActivity {
                         userID = user.getUid();
                         Map<String, Object> childUpdates = new HashMap<>();
 
-                        childUpdates.put("/Events/" + key + "/Applicants/" + userID, null);
-                        childUpdates.put("/" + userID + "/MyEvents/" + key, null);
+                        childUpdates.put("/Tables/Events/" + key + "/Applicants/" + userID, null);
+                        childUpdates.put("/users/" + userID + "/MyEvents/" + key, null);
 
                         newD.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
                             @Override

@@ -56,7 +56,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
     private CheckBox eventIsClosed;
     private String imageName;
     private Bitmap bitmap;
-
+String role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +96,12 @@ public class EventAddNew_Firebase extends AppCompatActivity {
                 AddEventInfo.setText(EventArraydata.getInstance().getEvents().get(position).getEventInformation());
                 AddEventParticipatorsno.setText(String.valueOf(EventArraydata.getInstance().getEvents().get(position).getEventParticipatorsno()));
                 AddEventHostName.setText(EventArraydata.getInstance().getEvents().get(position).getEventHost());
+
+                eventIsNotValid.setChecked(EventArraydata.getInstance().getEvents().get(position).getEventIsNotValid());
+                eventIsClosed.setChecked(EventArraydata.getInstance().getEvents().get(position).getEventIsClosed());
+
                 AddEventbtn.setEnabled(false);
+                EditEventbtn.setEnabled(true);
             }
             else{
                 EditEventbtn.setEnabled(false);
@@ -170,6 +175,11 @@ public class EventAddNew_Firebase extends AppCompatActivity {
         key = newEvent.push().getKey();
         saveImage();
         String EventHeadLine = AddEventHeadline.getText().toString().trim();
+        if (EventHeadLine.equals("")){
+            Toast.makeText(getApplicationContext(), R.string.must_headline, Toast.LENGTH_LONG).show();
+            return;
+        }
+
         String Eventdate = AddEventdate.getText().toString().trim();
         String Eventtime = AddEventtime.getText().toString().trim();
         String EventSynopsys = AddEventSynopsys.getText().toString().trim();
@@ -252,7 +262,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
 
     public void CancelAddEventbtn(View view) {
         Intent intent=new Intent(getApplicationContext(),EventRecyclerview_Firebase.class);
-
+        intent.putExtra("Role", role);
         startActivity(intent);
         finish();
     }
@@ -263,6 +273,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
 // Show only images, no videos or anything else
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.putExtra("Role", role);
 // Always show the chooser (if there are multiple options available)
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
 

@@ -1,11 +1,13 @@
 package com.goodthinking.younglod.user;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +28,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class EventInformationActivity_Firebase extends AppCompatActivity {
     private static final String IMAGES_BUCKET ="gs://hadashot-9bbf1.appspot.com";
     private TextView ViewEventHeadline, ViewEventdate, ViewEventtime,
@@ -40,6 +45,7 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
     private String keyUserId;
     private Boolean EventIsClosed;
     private FirebaseStorage storage;
+    String role;
 
 
     @Override
@@ -152,9 +158,15 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
             Register.setText(R.string.register_event_btn);
         }
     }
+    public void EditEventbtn(View view) {
+        Intent intent=new Intent(getApplicationContext(),EventAddNew_Firebase.class);
+        intent_putExtra(intent);
+
+    }
 
     public void CancelAddEventbtn(View view) {
         Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+        intent.putExtra("Role", role);
         startActivity(intent);
         finish();
     }
@@ -164,12 +176,55 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
         intent_putExtra(intent);
       //  finish();
     }
+    public void Listofuserstbtn(View view) {
+        Intent intent=new Intent(getApplicationContext(),Applicant_list.class);
+        intent_putExtra(intent);
+    }
 
 
     private void intent_putExtra(Intent intent) {
         intent.putExtra("Eventkey", EventArraydata.getInstance().getEvents().get(position).getKey());
         intent.putExtra("position",position);
+        intent.putExtra("Role", role);
         startActivity(intent);
         finish();
+    }
+
+    public void DeleteEventB(View view) {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Delete Event")
+                .setMessage("Are you sure you want to delete event?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        final DatabaseReference newD = root.child("Tables");
+
+                        Map<String, Object> childUpdates = new HashMap<>();
+
+                        childUpdates.put("/Events/" + key, null);
+
+                        newD.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                if (databaseError != null) {
+                                    Toast.makeText(getApplicationContext(), getString(R.string.delete_failed_message), Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), getString(R.string.delete_event_message), Toast.LENGTH_LONG).show();
+                                    Intent intent=new Intent(getApplicationContext(), EventRegisterationActivity.class);
+                                    intent.putExtra("Role", role);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                                Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+                                intent.putExtra("Role", role);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 }

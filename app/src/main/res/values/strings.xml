@@ -141,6 +141,13 @@
     <string name="getit">get it</string>
     <string name="fromdate">"FROM: "</string>
     <string name="todate">"TILL: "</string>
+    <string name="must_headline">Headline requested</string>
+    <string name="delete_failed_message">delete is failed</string>
+    <string name="delete_event_message">Event was deleted sucssesfully</string>
+    <string name="no_events_to_show">No events to show</string>
+    <string name="delete">Delete</string>
+    <string name="valid_events">Event is valid</string>
+    <string name="no_valid_events">Event is no valid</string>
 
 
 </resources>

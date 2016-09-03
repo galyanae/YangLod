@@ -42,7 +42,7 @@ public class EventThanksActivity extends AppCompatActivity {
     }
 
     private void checkRegistration() {
-        Query qrefUserRegister = root.child("Amuta").child("Events").child(keyEvent).child("Applicants").child(keyUserId);
+        Query qrefUserRegister = root.child("Tables").child("Events").child(keyEvent).child("Applicants").child(keyUserId);
         qrefUserRegister.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {

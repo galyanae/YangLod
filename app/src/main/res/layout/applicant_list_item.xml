@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+
+    <android.support.v7.widget.CardView
+
+        android:id="@+id/Applistcardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:elevation="10dp"
+        card_view:cardCornerRadius="11dp">
+
+        <LinearLayout
+            android:id="@+id/llforapplist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ItemAppicantName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00b7ff"
+                android:hint="@string/applicant_name"
+                android:textSize="20sp" />
+
+
+            <TextView
+                android:id="@+id/ItemAppicantPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="@string/applicant_phone"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/ItemAppicantEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="@string/applicant_mail"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/ItemAppicantnoofparticipators"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="@string/applicat_participtors_num"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

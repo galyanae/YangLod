@@ -92,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
                 getMenuInflater().inflate(R.menu.user_option, menu);
 
     if (!"manager".equals(role)) {
-        menu.removeItem(4);
-    }
+                    menu.getItem(4).setVisible(false);
+               }
 
                 return true;
             }

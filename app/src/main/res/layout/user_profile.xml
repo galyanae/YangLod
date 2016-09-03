@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp">
+
+    <RelativeLayout
+        android:id="@+id/prousernamerelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true">
+
+        <TextView
+            android:id="@+id/proviewusernametxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/proiviewUsername"
+            android:layout_alignParentLeft="true"
+            android:text="@string/User_name"
+            android:textSize="15dp" />
+
+
+        <TextView
+            android:id="@+id/proiviewUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/proviewusernametxt"
+            android:hint="@string/User_name"
+            android:textSize="15dp" />
+    </RelativeLayout>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="5dp" />
+
+    <RelativeLayout
+        android:id="@+id/prouserphonerelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true">
+
+        <TextView
+            android:id="@+id/progviewuserphonetxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/proviewUserphone"
+            android:layout_alignParentLeft="true"
+            android:text="@string/User_phone"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/proviewUserphone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/progviewuserphonetxt"
+            android:text="@string/User_phone"
+            android:textSize="15dp" />
+    </RelativeLayout>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="5dp" />
+    <RelativeLayout
+        android:id="@+id/prouseremailrelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true">
+        <TextView
+            android:id="@+id/proviewuseremailtxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/proviewUseremail"
+            android:layout_alignParentLeft="true"
+            android:text="@string/email_field"
+            android:textSize="15dp" />
+
+
+        <TextView
+            android:id="@+id/proviewUseremail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/proviewuseremailtxt"
+            android:hint="@string/email_field"
+            android:textSize="15dp" />
+    </RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/user_profile_return_btn"
+        android:id="@+id/user_profile_return"
+        android:onClick="return"/>
+
+
+</LinearLayout>

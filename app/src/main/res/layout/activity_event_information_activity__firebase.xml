@@ -19,142 +19,132 @@
         android:layout_alignParentTop="true"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <TextView
+            android:id="@+id/fbviewEventHeadlineview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:weightSum="1">
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_event_name"
+            android:textSize="20dp" />
+
+        <RelativeLayout
+            android:id="@+id/fbdaterelative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true">
 
             <TextView
-                android:id="@+id/fbviewEventHeadlineview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_event_name"
-                android:textSize="20dp" />
-
-            <RelativeLayout
-                android:id="@+id/fbdaterelative"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true">
-
-                <TextView
-                    android:id="@+id/fbviewEventdatetxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/fbviewEventdateview"
-                    android:layout_alignParentLeft="true"
-                    android:text="@string/date_text"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/fbviewEventdateview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/fbviewEventdatetxt"
-                    android:hint="@string/date_format"
-                    android:textSize="15dp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/fbtimerelative"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true">
-
-                <TextView
-                    android:id="@+id/fbviewEventtimetxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/fbviewEventtimeview"
-                    android:layout_alignParentLeft="true"
-                    android:text="@string/time_text"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/fbviewEventtimeview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/fbviewEventtimetxt"
-                    android:hint="@string/time_format"
-                    android:textSize="15dp" />
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/fbviewEventSynopsysview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_event_synopsis"
-                android:textSize="15dp" />
-
-            <ScrollView
-                android:id="@+id/fbviewEventInformtionview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbarAlwaysDrawVerticalTrack="true"
-                android:scrollbars="vertical">
-
-                <TextView
-                    android:id="@+id/fbviewEventInfoview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/event_information_text"
-                    android:textSize="15dp" />
-            </ScrollView>
-
-            <RelativeLayout
-                android:id="@+id/fbpartrelative"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true">
-
-                <TextView
-                    android:id="@+id/fbviewEventParticipatorsnotxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/fbviewEventParticipatorsno"
-                    android:layout_alignParentLeft="true"
-                    android:text="@string/max_participators_no"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/fbviewEventParticipatorsno"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/fbviewEventParticipatorsnotxt"
-                    android:inputType="number" />
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/fbviewEventhostname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/host_name"
-                android:textSize="15dp" />
-
-            <ImageView
+                android:id="@+id/fbviewEventdatetxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView2"
-                android:layout_gravity="center_horizontal" />
+                android:layout_alignBaseline="@+id/fbviewEventdateview"
+                android:layout_alignParentLeft="true"
+                android:text="@string/date_text"
+                android:textSize="15dp" />
 
             <TextView
-                android:id="@+id/fbRegistrationIsClosed"
+                android:id="@+id/fbviewEventdateview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/registration_is_closed"
-                android:textColor="#ff0004"
-                android:visibility="invisible"
-                android:textSize="15dp"
-                android:layout_weight="0.52" />
-        </LinearLayout>
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/fbviewEventdatetxt"
+                android:hint="@string/date_format"
+                android:textSize="15dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/fbtimerelative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true">
+
+            <TextView
+                android:id="@+id/fbviewEventtimetxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/fbviewEventtimeview"
+                android:layout_alignParentLeft="true"
+                android:text="@string/time_text"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/fbviewEventtimeview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/fbviewEventtimetxt"
+                android:hint="@string/time_format"
+                android:textSize="15dp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/fbviewEventSynopsysview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_event_synopsis"
+            android:textSize="15dp" />
+
+        <ScrollView
+            android:id="@+id/fbviewEventInformtionview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbars="vertical">
+
+            <TextView
+                android:id="@+id/fbviewEventInfoview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/event_information_text"
+                android:textSize="15dp" />
+        </ScrollView>
+
+        <RelativeLayout
+            android:id="@+id/fbpartrelative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true">
+
+            <TextView
+                android:id="@+id/fbviewEventParticipatorsnotxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/fbviewEventParticipatorsno"
+                android:layout_alignParentLeft="true"
+                android:text="@string/max_participators_no"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/fbviewEventParticipatorsno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/fbviewEventParticipatorsnotxt"
+                android:inputType="number" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/fbviewEventhostname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/host_name"
+            android:textSize="15dp" />
+        <TextView
+            android:id="@+id/fbRegistrationIsClosed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/registration_is_closed"
+            android:textColor="#ff0004"
+            android:visibility="invisible"
+            android:textSize="15dp" />
 
 
     </LinearLayout>
+
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/imageView2"/>
 
 
     <LinearLayout
@@ -168,18 +158,47 @@
 
         <LinearLayout
             android:id="@+id/fbviewactivitybutton1"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_weight="50"
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/fbviewlistofusersbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:enabled="true"
+                android:onClick="Listofuserstbtn"
+                android:text="@string/Event_user_list_btn" />
+
+            <Button
+                android:id="@+id/fbDeleteEventbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:enabled="true"
+                android:onClick="DeleteEventB"
+                android:text="@string/delete" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/fbviewactivitybutton2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="50"
             android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/fbviewEditEventbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="30"
+                android:enabled="true"
+                android:onClick="EditEventbtn"
+                android:text="@string/edit_event_btn" />
 
             <Button
                 android:id="@+id/fbviewregtoeventtbtn"
@@ -188,15 +207,8 @@
                 android:layout_weight="30"
                 android:enabled="true"
                 android:onClick="RegisterEventbtn"
-                android:text="@string/register_event_btn"
-                android:background="#00abeb" />
+                android:text="@string/register_event_btn" />
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView4"
-                android:layout_weight="30" />
 
             <Button
                 android:id="@+id/fbviewCancelAddEventbtn"
@@ -204,8 +216,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="30"
                 android:onClick="CancelAddEventbtn"
-                android:text="@string/Cancel_btn"
-                android:background="#eb008b" />
+                android:text="@string/return_to_main" />
         </LinearLayout>
     </LinearLayout>
 

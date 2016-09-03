@@ -7,7 +7,6 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/logo"
     tools:context="com.goodthinking.younglod.user.LoginActivity_Firebase">
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,49 +14,44 @@
         android:id="@+id/Loginlayout"
         android:orientation="vertical"
         android:gravity="center"
-        android:weightSum="100"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true">
+        android:background="@drawable/logo"
+        android:layout_marginTop="8dp"
+        >
         <ImageView
             android:id="@+id/Amuta_logo"
-            android:layout_gravity="top"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="30"
-             />
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            />
         <android.support.design.widget.TextInputLayout
-            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:layout_weight="15"
-            android:layout_height="0dp"
-         >
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/Login_email"
                 android:hint="@string/email_field"
                 android:inputType="textEmailAddress"
-                android:maxLines="1"
+                android:singleLine="true"
                 />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="15"
-           >
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/Login_password"
                 android:hint="@string/signup_field"
                 android:inputType="textPassword"
-                android:maxLines="1"
+                android:singleLine="true"
                 />
         </android.support.design.widget.TextInputLayout>
         <Button
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10"
+            android:layout_height="wrap_content"
             android:id="@+id/login_button"
             android:layout_marginTop="5dp"
             android:background="@drawable/round_corner_button"
@@ -68,8 +62,7 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10"
+            android:layout_height="wrap_content"
             android:id="@+id/skip_login_button"
             android:background="@null"
             android:onClick="gotomainmenu"
@@ -78,8 +71,7 @@
             android:textColor="#000000" />
         <Button
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10"
+            android:layout_height="wrap_content"
             android:id="@+id/register_fromlogin_button"
             android:background="@null"
             android:textAllCaps="false"
@@ -88,16 +80,14 @@
             android:textColor="#000000" />
         <Button
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10"
+            android:layout_height="wrap_content"
             android:id="@+id/reset_password_button"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:background="@null"
             android:onClick="resetpassword"
             android:textAllCaps="false"
             android:text="@string/forgot_password_btn"
             android:textColor="#000000" />
-
 
     </LinearLayout>
 
