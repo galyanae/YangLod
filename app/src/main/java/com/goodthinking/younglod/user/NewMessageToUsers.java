@@ -1,5 +1,6 @@
 package com.goodthinking.younglod.user;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -58,6 +59,8 @@ public class NewMessageToUsers extends AppCompatActivity {
     private void populateSpinner() {
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
+        final Context ctx = this;
+
         events = new HashMap<>();
         db.child("Tables").child("Events").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -71,8 +74,8 @@ public class NewMessageToUsers extends AppCompatActivity {
 
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                        getApplicationContext(),
-                        android.R.layout.simple_list_item_single_choice,
+                        ctx,
+                        android.R.layout.simple_spinner_dropdown_item,
                         new ArrayList<>(events.keySet()));
 
                 Spinner spinner = (Spinner) findViewById(R.id.eventsSpinner);
