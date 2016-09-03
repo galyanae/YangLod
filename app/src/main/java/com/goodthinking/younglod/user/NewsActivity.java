@@ -1,16 +1,21 @@
 package com.goodthinking.younglod.user;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateFormat;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,9 +23,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.goodthinking.younglod.user.model.Yedia;
@@ -50,10 +56,11 @@ public class NewsActivity extends AppCompatActivity {
     ImageView ivCancel;
     ImageView ivSave;
     ImageView ivPicture;
-    Button bDate;
-    Button bTime;
+    static Button bDate;
+    static Button bTime;
     EditText etTitle;
     EditText etInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +113,7 @@ public class NewsActivity extends AppCompatActivity {
                 linearLayoutManager.setReverseLayout(true);
                 linearLayoutManager.setStackFromEnd(true);
                 NewsRecyclerView.setLayoutManager(linearLayoutManager);
-                newsRecyclerAdapter = new NewsRecyclerAdapter(newsArray);
+                newsRecyclerAdapter = new NewsRecyclerAdapter(newsArray, this);
                 NewsRecyclerView.setAdapter(newsRecyclerAdapter);
                 newsRecyclerAdapter.notifyDataSetChanged();
             }
@@ -140,6 +147,37 @@ public class NewsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void newstime(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        String str = bTime.getText().toString();
+        int hour = Integer.parseInt(str.substring(0, 2));
+        int minute = Integer.parseInt(str.substring(3, 5));
+        System.out.println("hour=" + hour + " minute=" + minute);
+        Bundle args = new Bundle();
+        args.putInt("hour", hour);
+        args.putInt("minute", minute);
+        newFragment.setArguments(args);
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
+    public void newsdate(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+
+        String str = bDate.getText().toString();
+        int day = Integer.parseInt(str.substring(0, 2));
+        int month = Integer.parseInt(str.substring(3, 5));
+        int year = Integer.parseInt(str.substring(6));
+        System.out.println("year=" + year + " month=" + month + " day=" + day);
+        month--;
+        Bundle args = new Bundle();
+        args.putInt("year", year);
+        args.putInt("month", month);
+        args.putInt("day", day);
+        newFragment.setArguments(args);
+
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
     public void addNews(View v) {
         Toast.makeText(NewsActivity.this, "fab clicked", Toast.LENGTH_SHORT).show();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -164,13 +202,54 @@ public class NewsActivity extends AppCompatActivity {
         int minute = c.get(Calendar.MINUTE);
         bTime.setText(String.format("%02d:%02d", hour, minute));
 
-
         builder.setView(view);
-
         show = builder.show();
-
         show.setView(v);
+    }
 
+    public static class TimePickerFragment extends DialogFragment
+            implements TimePickerDialog.OnTimeSetListener {
 
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            Bundle args = getArguments();
+            int hour = args.getInt("hour", 0);
+            int minute = args.getInt("minute", 0);
+
+            return new TimePickerDialog(getActivity(), this, hour, minute,
+                    DateFormat.is24HourFormat(getActivity()));
+        }
+
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+            bTime.setText(String.format("%02d:%02d", hourOfDay, minute));
+
+        }
+    }
+
+    public static class DatePickerFragment extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            Bundle args = getArguments();
+            int year = args.getInt("year", 0);
+            int month = args.getInt("month", 0);
+            int day = args.getInt("day", 0);
+
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+
+            month++;
+            System.out.println("year=" + year + " month=" + month + " day=" + day);
+            String startDate = String.format("%04d-%02d-%02d", year, month, day);
+            bDate.setText(String.format("%02d/%02d/%04d", day, month, year));
+            String YEAR = startDate.substring(0, 4);
+            String MONTH = startDate.substring(5, 7);
+            String DAY = startDate.substring(8);
+            System.out.println("Year" + YEAR + " month" + MONTH + " day" + DAY);
+        }
     }
 }

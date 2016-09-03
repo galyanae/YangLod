@@ -30,8 +30,10 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
     ImageView tvImg;
     ImageView ivBackward;
     ImageView ivForward;
+    Object caller;
 
-    public NewsRecyclerAdapter(TreeMap<String, Yedia> newsArray) {
+    public NewsRecyclerAdapter(TreeMap<String, Yedia> newsArray, Object caller) {
+        this.caller = caller;
         this.newsArray = newsArray;
     }
 
