@@ -5,17 +5,34 @@ import android.graphics.Bitmap;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
-/**
- * Created by Ravit on 30/07/2016.
- */
+
 
 @IgnoreExtraProperties
-public class Yedia {
+public class newsItem {
     private String image;
-    private String yedia;
+    private String info;
     private String headline;
     private String date;
     private String time;
+    private String iName;
+
+    public String getiName() {
+        return iName;
+    }
+
+    public void setiName(String iName) {
+        this.iName = iName;
+    }
+
+    public boolean isPicInTitle() {
+        return picInTitle;
+    }
+
+    public void setPicInTitle(boolean picInTitle) {
+        this.picInTitle = picInTitle;
+    }
+
+    private boolean picInTitle; // show picture in info yes/no
     private int imgID;
     @Exclude
     private Bitmap img;
@@ -72,12 +89,12 @@ public class Yedia {
         this.image = image;
     }
 
-    public String getYedia() {
-        return yedia;
+    public String getInfo() {
+        return info;
     }
 
-    public void setYedia(String yedia) {
-        this.yedia = yedia;
+    public void setInfo(String info) {
+        this.info = info;
     }
 
 
@@ -90,19 +107,21 @@ public class Yedia {
         this.imgID = imgID;
     }
 
-    public Yedia() {}
-    public Yedia(String date, String headline, String image, String yedia) {
+    public newsItem() {
+    }
+
+    public newsItem(String date, String headline, String image, String info) {
         this.date = date;
         this.headline = headline;
         this.image = image;
-        this.yedia = yedia;
+        this.info = info;
     }
 
     @Override
     public String toString() {
-        return "Yedia{" +
+        return "newsItem{" +
                 "imgID=" + imgID +
-                ", yedia='" + yedia + '\'' +
+                ", info='" + info + '\'' +
                 ", headline='" + headline + '\'' +
                 ", date='" + date + '\'' +
                 ", time='" + time + '\'' +

@@ -9,10 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.goodthinking.younglod.user.model.MenuIcon;
-import com.goodthinking.younglod.user.model.Yedia;
 import com.goodthinking.younglod.user.model.Event;
-import com.goodthinking.younglod.user.model.User;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
