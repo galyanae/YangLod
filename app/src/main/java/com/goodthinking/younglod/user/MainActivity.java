@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/html");
-        intent.putExtra(Intent.EXTRA_EMAIL, "galyanae@.gcom");
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"galyanae@mail.ru"});
         intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
         intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
 
