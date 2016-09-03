@@ -39,6 +39,13 @@ public class LoginActivity_Firebase extends AppCompatActivity {
         if (auth.getCurrentUser() != null) {
             String UserID = auth.getCurrentUser().getUid();
             System.out.println("userid=" + UserID);
+            if (auth.getCurrentUser().isAnonymous()) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("UserName", "Anonymous");
+                intent.putExtra("Role", "user");
+                startActivity(intent);
+                finish();
+            }
             loadUser(UserID);
         } else {
             setContentView(R.layout.activity_login_activity__firebase);
