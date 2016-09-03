@@ -131,7 +131,7 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:onClick="save"
-            android:src="@drawable/ic_save_garb" />
+            android:src="@drawable/ic_save_36dp" />
 
         <Space
             android:layout_width="0dp"
