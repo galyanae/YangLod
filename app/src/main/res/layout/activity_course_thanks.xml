@@ -14,14 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:scrollbars="vertical"
-        android:fillViewport="false">
+        android:scrollbars="vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
             android:layout_above="@+id/ReturntoMainActivity"
-            android:hint="CourseThanksnote"
+            android:text=""
             android:id="@+id/CourseThanksnote"/>
     </ScrollView>
     <Button
@@ -40,6 +39,6 @@
         android:layout_alignParentBottom="true"
         android:text="@string/go_to_my_courses"
         android:layout_alignParentLeft="true"
-        android:onClick="GoToMyEventsFromThanksB"/>
+        android:onClick="GoToMyCoursesFromThanksB"/>
 
 </RelativeLayout>

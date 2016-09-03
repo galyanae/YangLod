@@ -1,8 +1,8 @@
 package com.goodthinking.younglod.user;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +15,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * Created by Owner on 03/09/2016.
+ */
 public class CourseThanksActivity extends AppCompatActivity {
 
     private DatabaseReference root;
@@ -36,7 +39,7 @@ public class CourseThanksActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         keyUserId = mAuth.getCurrentUser().getUid();
 
-       CourseThanksnoteText = (TextView) findViewById(R.id.CourseThanksnote);
+        CourseThanksnoteText = (TextView) findViewById(R.id.CourseThanksnote);
 
         checkRegistration();
     }
@@ -53,7 +56,7 @@ public class CourseThanksActivity extends AppCompatActivity {
                     //          Toast.LENGTH_SHORT).show();
                 }
                 else {
-                   CourseThanksnoteText.setText(R.string.Thanks_note_course);
+                    CourseThanksnoteText.setText(R.string.Thanks_note);
                     // EventThanksnoteText.setText("Thank you for your interest in the event, Our representative will contact you as soon as possible.  " +
                     //   "This registration does not constitute approval of your participation");
                     // Toast.makeText(EventInformationActivity_Firebase.this, snapshot.getValue().toString(),
@@ -75,9 +78,7 @@ public class CourseThanksActivity extends AppCompatActivity {
 
     }
 
-    public void GoToMyEventsFromThanksB(View view) {
-        startActivity(new Intent(getApplicationContext(),MyCoursesActivity.class));
+    public void GoToMyCoursesFromThanksB(View view) {
+        startActivity(new Intent(getApplicationContext(),MyCourse_Activity.class));
     }
-
-
 }

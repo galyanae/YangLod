@@ -1,9 +1,10 @@
 package com.goodthinking.younglod.user;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.goodthinking.younglod.user.model.Course;
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,30 +17,31 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MyCoursesActivity extends AppCompatActivity {
-
+/**
+ * Created by Owner on 03/09/2016.
+ */
+public class MyCourse_Activity extends AppCompatActivity {
     private RecyclerView CourseRecyclerView;
-    private CourseAdapter CourseAdapter;
+    private CourseRecyclerAdapter CourseRecyclerAdapter;
     private FirebaseAuth auth;
     private DatabaseReference Coursedatabase,  MyCoursedatabase ;
     ArrayList<String> filter = new ArrayList<>();
-    Course course;
 
     private Boolean CourseIsNotValid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_main);
-        CourseRecyclerView = (RecyclerView) findViewById(R.id.CourseRecyclerView);
+        setContentView(R.layout.activity_course_recyclerview_firebase);
+        CourseRecyclerView = (RecyclerView) findViewById(R.id.CourseRecyclerview);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         CourseRecyclerView.setLayoutManager(linearLayoutManager);
-        CourseAdapter = new CourseAdapter(getApplicationContext());
-        CourseRecyclerView.setAdapter(CourseAdapter);
-        CourseAdapter.notifyDataSetChanged();
+        CourseRecyclerAdapter = new CourseRecyclerAdapter(getApplicationContext());
+        CourseRecyclerView.setAdapter(CourseRecyclerAdapter);
+        CourseRecyclerAdapter.notifyDataSetChanged();
 
-        CourseAdapter.notifyDataSetChanged();
-        CourseArrayData.getInstance().getCourses().clear();
+        CourseRecyclerAdapter.notifyDataSetChanged();
+        CourseArraydata.getInstance().getCourses().clear();
         RefreshOnlyMyCourses();
     }
 
@@ -57,10 +59,10 @@ public class MyCoursesActivity extends AppCompatActivity {
                 filter.clear();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     String key = data.getKey();
-                    //System.out.println("MyEvent" + key);
+                    //System.out.println("MyCourse" + key);
                     filter.add(key);
                 }
-                //EventArraydata.getInstance().getEvents().clear();
+                //CourseArraydata.getInstance().getCourses().clear();
                 for (int i = 0; i < filter.size(); i++) {
                     final String Coursekey = filter.get(i);
                     System.out.println("key is" + Coursekey);
@@ -72,19 +74,39 @@ public class MyCoursesActivity extends AppCompatActivity {
                             course.setKey(dataSnapshot.getKey());
                             //String CheckEventKey = event.getKey();
                             //System.out.println("CheckEventkey" + CheckEventKey);
-
-                                CourseArrayData.getInstance().getCourses().add(course);}
-
+                            CourseIsNotValid = course.getCourseIsNotValid();
+                            if (CourseIsNotValid == false){
+                                CourseArraydata.getInstance().getCourses().add(course);}
+                            CourseRecyclerAdapter.notifyDataSetChanged();
+                        }
 
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-
+                            Toast.makeText(getApplicationContext(), "Download failed" + databaseError.getMessage(), Toast.LENGTH_LONG).show();
                         }
-                    });}}
+                    });
+
+//
+                }
+            }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Toast.makeText(getApplicationContext(), "Download failed" + databaseError.getMessage(), Toast.LENGTH_LONG).show();
             }
-        });}}
+        });
+
+//
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //EventArraydata.getInstance().getEvents().clear();
+    }
+
+
+}
+

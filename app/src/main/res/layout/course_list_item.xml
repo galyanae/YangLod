@@ -13,7 +13,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/CourseCardview"
+        android:id="@+id/Coursecardview"
         card_view:cardCornerRadius="11dp"
         android:elevation="10dp"
         android:layout_marginBottom="10dp"
@@ -39,20 +39,11 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/ItemCourseStartDate"
+                android:id="@+id/ItemCoursedate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/date_format"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/ItemCourseEndDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/date_format"
-                android:textSize="15sp" />
-
-
+                android:textSize="15dp" />
 
             <RelativeLayout
                 android:id="@+id/formoreinfotxt"
@@ -74,5 +65,6 @@
 
 
 </LinearLayout>
+
 
 

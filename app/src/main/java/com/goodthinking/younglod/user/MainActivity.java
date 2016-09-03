@@ -64,14 +64,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if (adapterOne.getItems().get(position).getName().equals("courses")){
 
-                    intent = new Intent(MainActivity.this, CourseMainActivity.class);
+                    intent = new Intent(MainActivity.this, CourseRecyclerview_Firebase.class);
 
 
                 } else if (adapterOne.getItems().get(position).getName().equals("business")) {
                     intent = new Intent(MainActivity.this, EventAddNew_Firebase.class);
 
-                } else if (adapterOne.getItems().get(position).getName().equals("hayalim")) {
-                    intent = new Intent(MainActivity.this, EditActivity.class);
+
 
                 }
             else {

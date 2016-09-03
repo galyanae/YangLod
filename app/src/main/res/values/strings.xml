@@ -149,6 +149,9 @@
     <string name="valid_events">Event is valid</string>
     <string name="no_valid_events">Event is no valid</string>
     <string name="taking_pictures">Taking picture</string>
+    <string name="Course_user_list_btn">Users list</string>
+    <string name="delete_course_message">Delete course</string>
+    <string name="update_register_course_btn">Update registration</string>
 
 
 </resources>
