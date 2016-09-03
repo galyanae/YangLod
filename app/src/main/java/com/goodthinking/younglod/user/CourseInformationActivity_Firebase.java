@@ -90,16 +90,16 @@ public class CourseInformationActivity_Firebase extends AppCompatActivity {
 //            ViewEventHostName.setText(event.getEventHost());
 //             }
 
-            Course course = CourseArraydata.getInstance().getCourses().get(position);
+            Course course = CourseArrayData.getInstance().getCourses().get(position);
 
-            ViewCourseHeadline.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseName());
-            ViewCoursedate.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseDate());
-            ViewCoursetime.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseTime());
-            ViewCourseSynopsys.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseSynopsys());
-            ViewCourseInfo.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseInformation());
-            ViewCourseParticipatorsno.setText(String.valueOf(CourseArraydata.getInstance().getCourses().get(position).getCourseParticipatorsno()));
-            ViewCourseHostName.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseHost());
-            CourseIsClosed = CourseArraydata.getInstance().getCourses().get(position).getCourseIsClosed();
+            ViewCourseHeadline.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseName());
+            ViewCoursedate.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseDate());
+            ViewCoursetime.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseTime());
+            ViewCourseSynopsys.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseSynopsys());
+            ViewCourseInfo.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseInformation());
+            ViewCourseParticipatorsno.setText(String.valueOf(CourseArrayData.getInstance().getCourses().get(position).getCourseParticipatorsno()));
+            ViewCourseHostName.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseHost());
+            CourseIsClosed = CourseArrayData.getInstance().getCourses().get(position).getCourseIsClosed();
 
 
             StorageReference storageRef=storage.getReferenceFromUrl(IMAGES_BUCKET);
@@ -186,7 +186,7 @@ public class CourseInformationActivity_Firebase extends AppCompatActivity {
 
 
     private void intent_putExtra(Intent intent) {
-        intent.putExtra("Coursekey", CourseArraydata.getInstance().getCourses().get(position).getKey());
+        intent.putExtra("Coursekey", CourseArrayData.getInstance().getCourses().get(position).getKey());
         intent.putExtra("position",position);
         intent.putExtra("Role", role);
         startActivity(intent);

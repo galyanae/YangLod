@@ -41,7 +41,7 @@ public class MyCourse_Activity extends AppCompatActivity {
         CourseRecyclerAdapter.notifyDataSetChanged();
 
         CourseRecyclerAdapter.notifyDataSetChanged();
-        CourseArraydata.getInstance().getCourses().clear();
+        CourseArrayData.getInstance().getCourses().clear();
         RefreshOnlyMyCourses();
     }
 
@@ -62,7 +62,7 @@ public class MyCourse_Activity extends AppCompatActivity {
                     //System.out.println("MyCourse" + key);
                     filter.add(key);
                 }
-                //CourseArraydata.getInstance().getCourses().clear();
+                //CourseArrayData.getInstance().getCourses().clear();
                 for (int i = 0; i < filter.size(); i++) {
                     final String Coursekey = filter.get(i);
                     System.out.println("key is" + Coursekey);
@@ -76,7 +76,8 @@ public class MyCourse_Activity extends AppCompatActivity {
                             //System.out.println("CheckEventkey" + CheckEventKey);
                             CourseIsNotValid = course.getCourseIsNotValid();
                             if (CourseIsNotValid == false){
-                                CourseArraydata.getInstance().getCourses().add(course);}
+                                CourseArrayData.getInstance().getCourses().add(course);
+                            }
                             CourseRecyclerAdapter.notifyDataSetChanged();
                         }
 

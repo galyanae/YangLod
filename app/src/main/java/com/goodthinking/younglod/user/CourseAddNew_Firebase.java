@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.goodthinking.younglod.user.CourseArraydata;
+import com.goodthinking.younglod.user.CourseArrayData;
 import com.goodthinking.younglod.user.CourseRecyclerview_Firebase;
 import com.goodthinking.younglod.user.R;
 import com.goodthinking.younglod.user.model.Course;
@@ -94,16 +94,16 @@ import java.util.Map;
                 // Event event = (Event) intent.getSerializableExtra("Event");
                 //   if (key != " ") {
                 if (!key.equals("")) {
-                    AddCourseHeadline.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseName());
-                    AddCoursedate.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseDate());
-                    AddCoursetime.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseTime());
-                    AddCourseSynopsys.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseSynopsys());
-                    AddCourseInfo.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseInformation());
-                    AddCourseParticipatorsno.setText(String.valueOf(CourseArraydata.getInstance().getCourses().get(position).getCourseParticipatorsno()));
-                    AddCourseHostName.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseHost());
+                    AddCourseHeadline.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseName());
+                    AddCoursedate.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseDate());
+                    AddCoursetime.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseTime());
+                    AddCourseSynopsys.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseSynopsys());
+                    AddCourseInfo.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseInformation());
+                    AddCourseParticipatorsno.setText(String.valueOf(CourseArrayData.getInstance().getCourses().get(position).getCourseParticipatorsno()));
+                    AddCourseHostName.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseHost());
 
-                    courseIsNotValid.setChecked(CourseArraydata.getInstance().getCourses().get(position).getCourseIsNotValid());
-                    courseIsClosed.setChecked(CourseArraydata.getInstance().getCourses().get(position).getCourseIsClosed());
+                    courseIsNotValid.setChecked(CourseArrayData.getInstance().getCourses().get(position).getCourseIsNotValid());
+                    courseIsClosed.setChecked(CourseArrayData.getInstance().getCourses().get(position).getCourseIsClosed());
 
                     AddCoursebtn.setEnabled(false);
                     EditCoursebtn.setEnabled(true);

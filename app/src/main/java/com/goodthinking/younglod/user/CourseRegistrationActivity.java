@@ -78,10 +78,10 @@ public class CourseRegistrationActivity extends AppCompatActivity {
             position = intent.getIntExtra("position", 0);
 
             if (!key.equals("")) {
-                CourseHeadline.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseName());
-                Coursedate.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseDate());
-                Coursetime.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseTime());
-                CourseSynopsys.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseSynopsys());
+                CourseHeadline.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseName());
+                Coursedate.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseDate());
+                Coursetime.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseTime());
+                CourseSynopsys.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseSynopsys());
             }
             if (auth.getCurrentUser() != null) {
                 loginbtn.setEnabled(false);

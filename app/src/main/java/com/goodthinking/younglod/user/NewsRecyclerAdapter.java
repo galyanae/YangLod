@@ -21,7 +21,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
     private final Handler handler = new Handler();
     AlertDialog show;
     int currentPosition;
-
+    boolean isManager;
     TextView Date;
     TextView Time;
     TextView tvHead;
@@ -32,9 +32,10 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
     ImageView ivForward;
     Object caller;
 
-    public NewsRecyclerAdapter(TreeMap<String, newsItem> newsArray, Object caller) {
+    public NewsRecyclerAdapter(TreeMap<String, newsItem> newsArray, Object caller, boolean isManager) {
         this.caller = caller;
         this.newsArray = newsArray;
+        this.isManager = isManager;
     }
 
     public NewsRecyclerAdapter() {
@@ -70,6 +71,8 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
             str = str.substring(6) + "/" + str.substring(4, 6) + "/" + str.substring(0, 4) + " " + tm.substring(0, 2) + ":" +
                     tm.substring(2) + " ";
             ((SimpleItemViewHolder) holder).tvYedia.setText(str + newsItem.getInfo());
+            if (isManager) ((SimpleItemViewHolder) holder).tvYedia.setVisibility(View.VISIBLE);
+            else ((SimpleItemViewHolder) holder).tvYedia.setVisibility(View.GONE);
 /*
             if (newsItem.getImage() != null && newsItem.getImage().length() > 0) {
                 ((SimpleItemViewHolder) holder).ivYedia.setVisibility(View.VISIBLE);

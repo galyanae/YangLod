@@ -31,7 +31,7 @@ public class CourseRecyclerAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         SimpleItemViewHolder viewHolder = (SimpleItemViewHolder) holder;
         viewHolder.position = position;
-        Course course = CourseArraydata.getInstance().getCourses().get(position);
+        Course course = CourseArrayData.getInstance().getCourses().get(position);
         ((SimpleItemViewHolder) holder).ItemCourseHeadLine.setText(course.getCourseName());
         ((SimpleItemViewHolder) holder).ItemCourseSynopsys.setText(course.getCourseSynopsys());
         ((SimpleItemViewHolder) holder).ItemCourseDate.setText("ON: " + course.getCourseDate()+ " AT: "+course.getCourseTime());
@@ -40,7 +40,7 @@ public class CourseRecyclerAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return CourseArraydata.getInstance().getCourses().size();
+        return CourseArrayData.getInstance().getCourses().size();
     }
 
     public final class SimpleItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -60,7 +60,7 @@ public class CourseRecyclerAdapter extends RecyclerView.Adapter {
         @Override
         public void onClick(View v) {
             Intent intent=new Intent(context,CourseInformationActivity_Firebase.class);
-            intent.putExtra("Coursekey",CourseArraydata.getInstance().getCourses().get(position).getKey());
+            intent.putExtra("Coursekey", CourseArrayData.getInstance().getCourses().get(position).getKey());
             intent.putExtra("position",position );
             context.startActivity(intent);
 

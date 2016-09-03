@@ -7,14 +7,14 @@ import java.util.ArrayList;
 /**
  * Created by Owner on 03/09/2016.
  */
-public class CourseArraydata {
-    private static CourseArraydata ourInstance = new CourseArraydata();
+public class CourseArrayData {
+    private static CourseArrayData ourInstance = new CourseArrayData();
 
-    public static CourseArraydata getInstance() {
+    public static CourseArrayData getInstance() {
         return ourInstance;
     }
 
-    private CourseArraydata() {
+    private CourseArrayData() {
     }
     private ArrayList<Course> Courses=new ArrayList<>();
 

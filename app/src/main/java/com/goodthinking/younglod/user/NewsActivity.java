@@ -104,7 +104,7 @@ public class NewsActivity extends AppCompatActivity {
                 linearLayoutManager.setReverseLayout(true);
                 linearLayoutManager.setStackFromEnd(true);
                 NewsRecyclerView.setLayoutManager(linearLayoutManager);
-                newsRecyclerAdapter = new NewsRecyclerAdapter(newsArray, this);
+                newsRecyclerAdapter = new NewsRecyclerAdapter(newsArray, this, isManager);
                 NewsRecyclerView.setAdapter(newsRecyclerAdapter);
                 newsRecyclerAdapter.notifyDataSetChanged();
             }

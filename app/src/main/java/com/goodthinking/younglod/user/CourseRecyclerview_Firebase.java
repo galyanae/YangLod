@@ -89,11 +89,11 @@ public class CourseRecyclerview_Firebase extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //CourseToArrayData(dataSnapshot);
-                CourseArraydata.getInstance().getCourses().clear();
+                CourseArrayData.getInstance().getCourses().clear();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Course course = data.getValue(Course.class);
                     course.setKey(data.getKey());
-                    CourseArraydata.getInstance().getCourses().add(course);
+                    CourseArrayData.getInstance().getCourses().add(course);
                 }
                 CourseRecyclerAdapter.notifyDataSetChanged();
 
