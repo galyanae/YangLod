@@ -1,21 +1,20 @@
 package com.goodthinking.younglod.user;
 
-/**
- * Created by Owner on 30/08/2016.
- */
-
 import com.goodthinking.younglod.user.model.Course;
 
 import java.util.ArrayList;
 
-public class CourseArrayData {
-    private static CourseArrayData ourInstance = new CourseArrayData();
+/**
+ * Created by Owner on 03/09/2016.
+ */
+public class CourseArraydata {
+    private static CourseArraydata ourInstance = new CourseArraydata();
 
-    public static CourseArrayData getInstance() {
+    public static CourseArraydata getInstance() {
         return ourInstance;
     }
 
-    private CourseArrayData() {
+    private CourseArraydata() {
     }
     private ArrayList<Course> Courses=new ArrayList<>();
 

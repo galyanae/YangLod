@@ -3,16 +3,15 @@ package com.goodthinking.younglod.user;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.goodthinking.younglod.user.model.Course;
 import com.goodthinking.younglod.user.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,31 +21,37 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Created by Owner on 03/09/2016.
+ */
 public class CourseRegistrationActivity extends AppCompatActivity {
-
-    private TextView rgviewCourseHeadline, rgviewCoursedate,
-            rgviewCoursetime, rgviewCourseSynopsys, rgviewUsername, rgviewUserphone,
-            rgviewUseremail, Rgviewmessage;
+    private TextView CourseHeadline, Coursedate, Coursetime,
+            CourseSynopsys, UserName, Userphone, Usermail, Rgviewmessage;
     private EditText NoOfParticipatorsField;
     private Button loginbtn, signupbtn, registerbtn, cancelRegisterbtn;
-    private String userID, Usernamestr, UserPhonestr, UserEmailstr;
+    private String userID;
+
+    private String Usernamestr = "anonymous";
+    private String UserPhonestr = "";
+    private String UserEmailstr = "";
     private FirebaseAuth auth;
     private DatabaseReference Userdatabase;
     private ProgressDialog progressDialog;
     private int position, UserNoOfParticipators;
     private String key;
-    Course course;
+
     private String UserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_registration);
-        course = getIntent().getParcelableExtra("oneCourse");
 
         auth = FirebaseAuth.getInstance();
         Userdatabase = FirebaseDatabase.getInstance().getReference();
@@ -54,32 +59,29 @@ public class CourseRegistrationActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
 
         NoOfParticipatorsField = (EditText) findViewById(R.id.rgparticipators);
-        rgviewCourseHeadline = (TextView) findViewById(R.id.rgviewCourseHeadline);
-        rgviewCoursedate = (TextView) findViewById(R.id.rgviewCoursedate);
-        rgviewCoursetime = (TextView) findViewById(R.id.rgviewCoursetime);
-        rgviewCourseSynopsys = (TextView) findViewById(R.id.rgviewCourseSynopsys);
-
-        rgviewUsername = (TextView) findViewById(R.id.rgviewUsername);
-        rgviewUserphone = (TextView) findViewById(R.id.rgviewUserphone);
-        rgviewUseremail = (TextView) findViewById(R.id.rgviewUseremail);
-
+        CourseHeadline = (TextView) findViewById(R.id.rgviewCourseHeadline);
+        Coursedate = (TextView) findViewById(R.id.rgviewCoursedate);
+        Coursetime = (TextView) findViewById(R.id.rgviewCoursetime);
+        CourseSynopsys = (TextView) findViewById(R.id.rgviewCourseSynopsys);
+        UserName = (TextView) findViewById(R.id.rgviewUsername);
+        Userphone = (TextView) findViewById(R.id.rgviewUserphone);
+        Usermail = (TextView) findViewById(R.id.rgviewUseremail);
         loginbtn = (Button) findViewById(R.id.rggotologintbtn);
         signupbtn = (Button) findViewById(R.id.rggotosignuptbtn);
-        registerbtn = (Button) findViewById(R.id.rgviewregtoeventtbtn);
+        registerbtn = (Button) findViewById(R.id.rgviewregtocoursetbtn);
         cancelRegisterbtn = (Button) findViewById(R.id.rgCancelRegisterbtn);
         Rgviewmessage = (TextView) findViewById(R.id.rgviewmessage);
 
         if (getIntent().getExtras() != null) {
             Intent intent = getIntent();
-            key = intent.getStringExtra("CourseKey");
+            key = intent.getStringExtra("Coursekey");
             position = intent.getIntExtra("position", 0);
-            System.out.println(getClass().getName()+" key "+key+" position "+position);
-            //   if (key != "") {
+
             if (!key.equals("")) {
-                rgviewCourseHeadline.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseName());
-                rgviewCoursedate.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseStartdate());
-                rgviewCoursetime.setText(CourseArrayData.getInstance().getCourses().get(position).getCoursetime());
-                rgviewCourseSynopsys.setText(CourseArrayData.getInstance().getCourses().get(position).getCourseSynopsys());
+                CourseHeadline.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseName());
+                Coursedate.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseDate());
+                Coursetime.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseTime());
+                CourseSynopsys.setText(CourseArraydata.getInstance().getCourses().get(position).getCourseSynopsys());
             }
             if (auth.getCurrentUser() != null) {
                 loginbtn.setEnabled(false);
@@ -93,7 +95,9 @@ public class CourseRegistrationActivity extends AppCompatActivity {
                 registerbtn.setEnabled(false);
                 cancelRegisterbtn.setEnabled(false);
             }
-        } else {
+        }
+
+        else {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
             return;
@@ -103,23 +107,25 @@ public class CourseRegistrationActivity extends AppCompatActivity {
 
 
     private void loadUser(String userID) {
-        Userdatabase.child("Tables").child("users").child(userID)
+        Userdatabase.child("users").child(userID)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User newUser = dataSnapshot.getValue(User.class);
-                        Usernamestr = newUser.getUserName();
-                        UserPhonestr = newUser.getUserPhone();
-                        UserEmailstr = newUser.getUserEmail();
+                        if (newUser != null) {
+                            Usernamestr = newUser.getUserName();
+                            UserPhonestr = newUser.getUserPhone();
+                            UserEmailstr = newUser.getUserEmail();
+                        }
 
-                        rgviewUsername.setText(Usernamestr);
-                        rgviewUserphone.setText(UserPhonestr);
-                        rgviewUseremail.setText(UserEmailstr);
+                        UserName.setText(Usernamestr);
+                        Userphone.setText(UserPhonestr);
+                        Usermail.setText(UserEmailstr);
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        Toast.makeText(getApplicationContext(), "Download failed" + databaseError.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Download failed"+databaseError.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
     }
@@ -134,12 +140,12 @@ public class CourseRegistrationActivity extends AppCompatActivity {
                     registerbtn.setText(R.string.confirm);
                     cancelRegisterbtn.setEnabled(false);
                     loadUser(UserID);
-                    //  Toast.makeText(EventInformationActivity_Firebase.this, "No record found",
+                    //  Toast.makeText(CourseInformationActivity_Firebase.this, "No record found",
                     //          Toast.LENGTH_SHORT).show();
                 } else {
                     Rgviewmessage.setText(R.string.Registration_update_headline);
                     registerbtn.setText(R.string.update);
-                    // Toast.makeText(EventInformationActivity_Firebase.this, snapshot.getValue().toString(),
+                    // Toast.makeText(CourseInformationActivity_Firebase.this, snapshot.getValue().toString(),
                     //         Toast.LENGTH_SHORT).show();
                     User newUser = snapshot.getValue(User.class);
                     Usernamestr = newUser.getUserName();
@@ -147,9 +153,9 @@ public class CourseRegistrationActivity extends AppCompatActivity {
                     UserEmailstr = newUser.getUserEmail();
                     UserNoOfParticipators = newUser.getUserNoOfParticipators();
 
-                    rgviewUsername.setText(Usernamestr);
-                    rgviewUserphone.setText(UserPhonestr);
-                    rgviewUseremail.setText(UserEmailstr);
+                    UserName.setText(Usernamestr);
+                    Userphone.setText(UserPhonestr);
+                    Usermail.setText(UserEmailstr);
                     NoOfParticipatorsField.setText("" + UserNoOfParticipators);
                 }
             }
@@ -162,7 +168,7 @@ public class CourseRegistrationActivity extends AppCompatActivity {
     }
 
 
-    public void RegisterEventbtn(View view) {
+    public void RegisterCoursebtn(View view) {
 
 //        UserNoOfParticipators = NoOfParticipatorsField.getText().toString().equals("") ? 0 :
 //                Integer.parseInt(NoOfParticipatorsField.getText().toString());
@@ -172,7 +178,8 @@ public class CourseRegistrationActivity extends AppCompatActivity {
             return;
         } else {
             UserNoOfParticipators = Integer.parseInt(NoOfParticipatorsField.getText().toString());
-            DatabaseReference newD = Userdatabase.child("users");
+            // DatabaseReference newD = Userdatabase.child("users");
+            DatabaseReference newD = Userdatabase;
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             userID = user.getUid();
@@ -186,8 +193,8 @@ public class CourseRegistrationActivity extends AppCompatActivity {
             progressDialog.show();
             Map<String, Object> childUpdates = new HashMap<>();
 
-            childUpdates.put("/Courses/" + key + "/Applicants/" + userID, Newuser.ApplicanttoMap());
-            childUpdates.put("/users/" + userID + "/MyCourses/" + key, "true");
+            childUpdates.put("/Tables/Courses/" + key + "/Applicants/" + userID, Newuser.ApplicanttoMap());
+            childUpdates.put("/users/"+ userID + "/MyCourses/" + key, "true");
             //newD.updateChildren(childUpdates);
             //progressDialog.dismiss();
             newD.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
@@ -197,14 +204,14 @@ public class CourseRegistrationActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), getString(R.string.register_faild_message), Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getApplicationContext(), getString(R.string.Registration_successful), Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getApplicationContext(), CourseRegistrationActivity.class));
-                        finish();
+                        Intent intent = new Intent(getApplicationContext(), CourseThanksActivity.class);
+                        intent.putExtra("courseID", key);
+                        startActivity(intent);
                     }
+                    FirebaseMessaging.getInstance().subscribeToTopic(key);
                     progressDialog.dismiss();
+
                     // startActivity(new Intent(getApplicationContext(), EventThanksActivity.class));
-                    Intent intent = new Intent(getApplicationContext(), CourseThanksActivity.class);
-                    intent.putExtra("courseID", key);
-                    startActivity(intent);
                     finish();
 
                 }
@@ -212,7 +219,7 @@ public class CourseRegistrationActivity extends AppCompatActivity {
         }
     }
 
-    public void loginEventbtn(View view) {
+    public void loginCoursebtn(View view) {
         startActivity(new Intent(getApplicationContext(), LoginActivity_Firebase.class));
         finish();
     }
@@ -224,7 +231,7 @@ public class CourseRegistrationActivity extends AppCompatActivity {
         finish();
     }
 
-    public void signupEventbtn(View view) {
+    public void signupCoursebtn(View view) {
         startActivity(new Intent(getApplicationContext(), SignUpActivity_Firebase.class));
         finish();
     }
@@ -243,7 +250,7 @@ public class CourseRegistrationActivity extends AppCompatActivity {
                         userID = user.getUid();
                         Map<String, Object> childUpdates = new HashMap<>();
 
-                        childUpdates.put("/Courses/" + key + "/Applicants/" + userID, null);
+                        childUpdates.put("/Tables/Courses/" + key + "/Applicants/" + userID, null);
                         childUpdates.put("/users/" + userID + "/MyCourses/" + key, null);
 
                         newD.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
@@ -256,6 +263,7 @@ public class CourseRegistrationActivity extends AppCompatActivity {
                                     startActivity(new Intent(getApplicationContext(), CourseRegistrationActivity.class));
                                     finish();
                                 }
+                                FirebaseMessaging.getInstance().unsubscribeFromTopic(key);
                                 progressDialog.dismiss();
                                 Intent intent = new Intent(getApplicationContext(), CourseThanksActivity.class);
                                 intent.putExtra("courseID", key);

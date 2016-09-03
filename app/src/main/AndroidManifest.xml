@@ -35,12 +35,15 @@
         <activity android:name=".EventRegisterationActivity" />
         <activity android:name=".EventRecyclerview_Firebase" />
         <activity android:name=".EventAddNew_Firebase" />
-        <activity android:name=".OneCourseMainActivity" />
-        <activity android:name=".CourseMainActivity" />
-        <activity android:name=".CourseRegistrationActivity" />
-        <activity android:name=".CourseThanksActivity" />
-        <activity android:name=".MyCoursesActivity" />
-        <activity android:name=".EditActivity" />
+     <activity android:name=".CourseAddNew_Firebase"></activity>
+        <activity android:name=".CourseInformationActivity_Firebase"></activity>
+        <activity android:name=".CourseRecyclerview_Firebase"></activity>
+        <activity android:name=".CourseRegistrationActivity"></activity>
+        <activity android:name=".CourseThanksActivity"></activity>
+        <activity android:name=".MyCourse_Activity"></activity>
+
+
+
         <activity android:name=".Applicant_list"></activity>
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -50,7 +53,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".NewsAddNewActivity" />
+
         <activity android:name=".AboutUsActivity" />
         <activity android:name=".SendEmailToManager" />
 

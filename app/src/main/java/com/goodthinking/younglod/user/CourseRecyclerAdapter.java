@@ -10,39 +10,41 @@ import android.widget.TextView;
 
 import com.goodthinking.younglod.user.model.Course;
 
-public class CourseAdapter extends RecyclerView.Adapter {
+/**
+ * Created by Owner on 03/09/2016.
+ */
+public class CourseRecyclerAdapter extends RecyclerView.Adapter {
     private Context context;
 
-    public CourseAdapter(Context context) {
+    public CourseRecyclerAdapter(Context context) {
         this.context = context;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.courses_gread_view_adapter, parent, false);
-        return new SimpleItemViewHolder(v);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.course_list_item, parent, false);
+        SimpleItemViewHolder pvh = new SimpleItemViewHolder(v);
+        return pvh;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         SimpleItemViewHolder viewHolder = (SimpleItemViewHolder) holder;
         viewHolder.position = position;
-        Course course = CourseArrayData.getInstance().getCourses().get(position);
+        Course course = CourseArraydata.getInstance().getCourses().get(position);
         ((SimpleItemViewHolder) holder).ItemCourseHeadLine.setText(course.getCourseName());
         ((SimpleItemViewHolder) holder).ItemCourseSynopsys.setText(course.getCourseSynopsys());
-        ((SimpleItemViewHolder) holder).ItemCourseStartDate.setText(context.getString(R.string.fromdate) + course.getCourseStartdate()+ " AT: "+course.getCoursetime());
+        ((SimpleItemViewHolder) holder).ItemCourseDate.setText("ON: " + course.getCourseDate()+ " AT: "+course.getCourseTime());
 
-        ((SimpleItemViewHolder) holder).ItemCoursesEndDate.setText(context.getString(R.string.todate) 
-                + course.getCourseEndDate());
     }
 
     @Override
     public int getItemCount() {
-        return CourseArrayData.getInstance().getCourses().size();
+        return CourseArraydata.getInstance().getCourses().size();
     }
 
     public final class SimpleItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView ItemCourseHeadLine, ItemCourseSynopsys, ItemCourseStartDate, ItemCoursesEndDate;
+        TextView ItemCourseHeadLine, ItemCourseSynopsys, ItemCourseDate;
         public int position;
 
         public SimpleItemViewHolder(View itemView) {
@@ -51,22 +53,18 @@ public class CourseAdapter extends RecyclerView.Adapter {
             context = itemView.getContext();
             ItemCourseHeadLine = (TextView) itemView.findViewById(R.id.ItemCourseHeadLine);
             ItemCourseSynopsys = (TextView) itemView.findViewById(R.id.ItemCourseSynopsys);
-            ItemCourseStartDate = (TextView) itemView.findViewById(R.id.ItemCourseStartDate);
-            ItemCoursesEndDate = (TextView) itemView.findViewById(R.id.ItemCourseEndDate);
+            ItemCourseDate = (TextView) itemView.findViewById(R.id.ItemCoursedate);
+
         }
 
         @Override
         public void onClick(View v) {
-            Intent intent=new Intent(context,OneCourseMainActivity.class);
-            System.out.println("position=" + position);
-            System.out.println(CourseArrayData.getInstance().getCourses().get(position).getKey());
-            //
-            intent.putExtra("oneCourse", CourseArrayData.getInstance().getCourses().get(position)); // using the (String name, Parcelable value) overload!
-            intent.putExtra("CourseKey", CourseArrayData.getInstance().getCourses().get(position).getKey());
-            intent.putExtra("position", position);
-
+            Intent intent=new Intent(context,CourseInformationActivity_Firebase.class);
+            intent.putExtra("Coursekey",CourseArraydata.getInstance().getCourses().get(position).getKey());
+            intent.putExtra("position",position );
             context.startActivity(intent);
 
         }
     }
 }
+
