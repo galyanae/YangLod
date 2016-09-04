@@ -29,7 +29,7 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
     boolean isManager = false;
     String role = "user";
     private Query queryRef;
-    private String vTypeEv;
+    private String vTypeEv="Valid";
     String tableName = "Events";
 
     @Override
@@ -38,7 +38,7 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
         setContentView(R.layout.activity_event_recyclerview_firebase);
         Intent intent = getIntent();
         vTypeEv = intent.getStringExtra("typeEvents");
-
+        if (vTypeEv == null || vTypeEv.length()==0) vTypeEv="Valid";
 
         SharedPreferences sharedPref = this.getSharedPreferences("TableName", this.MODE_PRIVATE);
         tableName = sharedPref.getString("tableName", "Events");

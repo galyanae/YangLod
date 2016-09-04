@@ -71,8 +71,16 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
             str = str.substring(6) + "/" + str.substring(4, 6) + "/" + str.substring(0, 4) + " " + tm.substring(0, 2) + ":" +
                     tm.substring(2) + " ";
             ((SimpleItemViewHolder) holder).tvYedia.setText(str + newsItem.getInfo());
-            if (isManager) ((SimpleItemViewHolder) holder).ivDelete.setVisibility(View.VISIBLE);
-            else ((SimpleItemViewHolder) holder).ivDelete.setVisibility(View.GONE);
+            if (isManager) {
+                ((SimpleItemViewHolder) holder).ivDelete.setVisibility(View.VISIBLE);
+                ((SimpleItemViewHolder) holder).ivDelete.setOnClickListener(new View.OnClickListener() {
+
+                    public void onClick(View view) {
+                        System.out.println("delete called");
+                    }
+                });
+
+            } else ((SimpleItemViewHolder) holder).ivDelete.setVisibility(View.GONE);
 /*
             if (newsItem.getImage() != null && newsItem.getImage().length() > 0) {
                 ((SimpleItemViewHolder) holder).ivYedia.setVisibility(View.VISIBLE);
@@ -106,6 +114,11 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
 
         @Override
         public void onClick(View v) {
+            int field = v.getId();
+            if (field==R.id.ivDelete)
+                System.out.println("ivDelete called");
+            else System.out.println("holder called");
+
             int pos = getAdapterPosition();
             fullNews(v, pos);
         }
