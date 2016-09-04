@@ -31,7 +31,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -39,11 +38,12 @@ import java.util.Map;
 
 public class EventAddNew_Firebase extends AppCompatActivity {
 
-    private static final int PICK_IMAGE_REQUEST =1 ;
+    private static final int PICK_IMAGE_REQUEST = 1;
     private static final String IMAGES_BUCKET = "gs://hadashot-9bbf1.appspot.com";
-    private EditText AddEventHeadline, AddEventSynopsys, AddEventInfo, AddEventParticipatorsno, AddEventHostName;
+    private EditText AddEventHeadline, AddEventSynopsys,
+            AddEventInfo, AddEventParticipatorsno, AddEventHostName;
     private TextView AddEventdate, AddEventtime;
-    private Button AddEventbtn,EditEventbtn;
+    private Button AddEventbtn, EditEventbtn;
     private DatabaseReference Eventdatabase;
     private ProgressDialog progressDialog;
     private int position;
@@ -51,12 +51,12 @@ public class EventAddNew_Firebase extends AppCompatActivity {
     private String key;
 
     private String timeEvent;
-    private String dateEvent;
+    private String dateEvent = "";
     private CheckBox eventIsNotValid;
     private CheckBox eventIsClosed;
     private String imageName;
     private Bitmap bitmap;
-String role;
+    String role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +73,7 @@ String role;
         AddEventParticipatorsno = (EditText) findViewById(R.id.fbAddEventParticipatorsno);
         AddEventHostName = (EditText) findViewById(R.id.fbEventhostname);
         AddEventbtn = (Button) findViewById(R.id.fbSaveNewEventbtn);
-        EditEventbtn= (Button) findViewById(R.id.fbEditEventbtn);
+        EditEventbtn = (Button) findViewById(R.id.fbEditEventbtn);
         eventIsNotValid = (CheckBox) findViewById(R.id.editEventIsValidCheckBox);
         eventIsClosed = (CheckBox) findViewById(R.id.editEventIsClosedCheckBox);
 
@@ -87,7 +87,7 @@ String role;
             // Event event=(Event)extras.get(
 
             // Event event = (Event) intent.getSerializableExtra("Event");
-         //   if (key != " ") {
+            //   if (key != " ") {
             if (!key.equals("")) {
                 AddEventHeadline.setText(EventArraydata.getInstance().getEvents().get(position).getEventName());
                 AddEventdate.setText(EventArraydata.getInstance().getEvents().get(position).getEventDate());
@@ -102,8 +102,7 @@ String role;
 
                 AddEventbtn.setEnabled(false);
                 EditEventbtn.setEnabled(true);
-            }
-            else{
+            } else {
                 EditEventbtn.setEnabled(false);
             }
 
@@ -132,13 +131,13 @@ String role;
                                                   int monthOfYear, int dayOfMonth) {
                                 // set day of month , month and year value in the edit text
                                 monthOfYear++;
-                               // AddEventdate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                // AddEventdate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                                 AddEventdate.setText(String.format("%02d/%02d/%04d", dayOfMonth, monthOfYear, year));
                                 dateEvent = String.format("%04d-%02d-%02d", year, monthOfYear, dayOfMonth);
 
                             }
                         }, mYear, mMonth, mDay);
-                datePickerDialog.setTitle("Select Date");
+                datePickerDialog.setTitle(getString(R.string.select_date));
                 datePickerDialog.show();
             }
 
@@ -157,12 +156,12 @@ String role;
                 mTimePicker = new TimePickerDialog(EventAddNew_Firebase.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                      //  AddEventtime.setText(selectedHour + ":" + selectedMinute);
+                        //  AddEventtime.setText(selectedHour + ":" + selectedMinute);
                         timeEvent = String.format("%02d:%02d", selectedHour, selectedMinute);
                         AddEventtime.setText(timeEvent);
                     }
                 }, mHour, mMinute, true);//Yes 24 hour time
-                mTimePicker.setTitle("Select Time");
+                mTimePicker.setTitle(getString(R.string.select_time));
                 mTimePicker.show();
             }
         });
@@ -175,7 +174,7 @@ String role;
         key = newEvent.push().getKey();
         saveImage();
         String EventHeadLine = AddEventHeadline.getText().toString().trim();
-        if (EventHeadLine.equals("")){
+        if (EventHeadLine.equals("")) {
             Toast.makeText(getApplicationContext(), R.string.must_headline, Toast.LENGTH_LONG).show();
             return;
         }
@@ -192,12 +191,11 @@ String role;
 
         String StatusIsValidDate;
 
-        if (eventIsNotValid.isChecked() == true) {
-            StatusIsValidDate = "0-"+dateEvent.trim();
+        if (EventIsNotValid == true) {
+            StatusIsValidDate = "0-" + dateEvent.trim();
 
-        }
-        else {
-            StatusIsValidDate = "1-"+dateEvent.trim();
+        } else {
+            StatusIsValidDate = "1-" + dateEvent.trim();
         }
 
         String image = "";
@@ -207,17 +205,17 @@ String role;
         //Map<String, Object> eventnew = new HashMap<>();
         //eventnew.put(key, event.Objecttofirebase());
 
-        progressDialog.setMessage("Adding new Event...");
+        progressDialog.setMessage(getString(R.string.adding_new_event));
         progressDialog.show();
 
-        newEvent.child(key).setValue(event, new DatabaseReference.CompletionListener() {
+        newEvent.child(key).setValue(event.Objecttofirebase(), new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 if (databaseError != null) {
-                    Toast.makeText(getApplicationContext(), "Creation failed" + databaseError.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.creation_failed) + databaseError.getMessage(), Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "successfully created", Toast.LENGTH_LONG).show();
-
+                    Toast.makeText(getApplicationContext(), R.string.successfully_created, Toast.LENGTH_LONG).show();
+                    finish();
                 }
                 progressDialog.dismiss();
             }
@@ -232,7 +230,7 @@ String role;
         StorageReference storageRef = storage.getReferenceFromUrl(IMAGES_BUCKET);
 
         // Create a reference to "mountains.jpg"
-        StorageReference mountainsRef = storageRef.child("images/"+imageName);
+        StorageReference mountainsRef = storageRef.child("images/" + imageName);
 
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -261,37 +259,86 @@ String role;
     }
 
     public void CancelAddEventbtn(View view) {
-        Intent intent=new Intent(getApplicationContext(),EventRecyclerview_Firebase.class);
+        Intent intent = new Intent(getApplicationContext(), EventRecyclerview_Firebase.class);
         intent.putExtra("Role", role);
         startActivity(intent);
         finish();
     }
 
+    public void EditEventbtn(View view) {
+        DatabaseReference newEvent = Eventdatabase.child("Amuta").child("Events").child(key);
+        // key = newEvent.push().getKey();
+        System.out.println(key);
 
-    public void addNewImage(View view) {
-        Intent intent = new Intent();
-// Show only images, no videos or anything else
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        intent.putExtra("Role", role);
-// Always show the chooser (if there are multiple options available)
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+        String EventHeadLine = AddEventHeadline.getText().toString().trim();
+        if (EventHeadLine.equals("")) {
+            Toast.makeText(getApplicationContext(), R.string.must_headline, Toast.LENGTH_LONG).show();
+            return;
+        }
+        String Eventdate = AddEventdate.getText().toString().trim();
+        //  String Eventdate = dateEvent;
+        String Eventtime = AddEventtime.getText().toString().trim();
+        String EventSynopsys = AddEventSynopsys.getText().toString().trim();
+        String EventInfo = AddEventInfo.getText().toString().trim();
+        String EventHost = AddEventHostName.getText().toString().trim();
+        int MaxNoOfParticipetors = AddEventParticipatorsno.getText().toString().equals("") ? 0 : Integer.parseInt(AddEventParticipatorsno.getText().toString());
 
+        Boolean EventIsNotValid = eventIsNotValid.isChecked();
+        Boolean EventIsClosed = eventIsClosed.isChecked();
+
+        //        dateEvent = EventArraydata.getInstance().getEvents().get(position).getEventDate();
+//                String Year = dateEvent.substring(0,4);
+//                String Month = dateEvent.substring(5,7);
+//                String Day = dateEvent.substring(8);
+        String Day = Eventdate.substring(0, 2);
+        String Month = Eventdate.substring(3, 5);
+        String Year = Eventdate.substring(6);
+        dateEvent = Year + "-" + Month + "-" + Day;
+
+        String StatusIsValidDate;
+
+        if (EventIsNotValid == true) {
+            StatusIsValidDate = "0-" + dateEvent.trim();
+
+        } else {
+            StatusIsValidDate = "1-" + dateEvent.trim();
+        }
+
+        //  Event event = new Event(EventHeadLine, Eventdate, Eventtime,
+        //          EventSynopsys, EventInfo, EventHost, EventIsNotValid, MaxNoOfParticipetors, EventIsClosed, "0");
+
+        Event event = new Event(EventHeadLine, Eventdate, Eventtime,
+                EventSynopsys, EventInfo, EventHost, EventIsNotValid, MaxNoOfParticipetors, EventIsClosed, StatusIsValidDate, "");
+
+        event.setKey(key);
+
+        /*Map<String, Object> eventUpdate = new HashMap<>();
+        eventUpdate.put(key, event.Objecttofirebase());*/
+        progressDialog.setMessage(getString(R.string.editing_event));
+        progressDialog.show();
+        newEvent.updateChildren(event.Objecttofirebase(), new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError != null) {
+                    Toast.makeText(getApplicationContext(), getString(R.string.edit_failed) + databaseError.getMessage(), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), R.string.successfully_updated, Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                progressDialog.dismiss();
+
+            }
+        });
     }
 
-    /**
-     * Activity result is image upload
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE_REQUEST &&
                 resultCode == RESULT_OK && data != null && data.getData() != null) {
-
             Uri uri = data.getData();
             imageName = uri.getPathSegments().get(uri.getPathSegments().size() - 1) + ".jpg";
 

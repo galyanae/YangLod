@@ -126,6 +126,9 @@
     <string name="editing_event">editing event</string>
     <string name="edit_failed">edit_failed</string>
     <string name="successfully_updated">successfully updated</string>
+    <string name="select_date">Please select date</string>
+    <string name="select_time">Please select time</string>
+
     <string-array name="languages_array">
         <item>עברית</item>
         <item>ערבית</item>
