@@ -64,7 +64,7 @@ public class EventRegisterationActivity extends AppCompatActivity {
         Usermail = (TextView) findViewById(R.id.rgviewUseremail);
         loginbtn = (Button) findViewById(R.id.rggotologintbtn);
         signupbtn = (Button) findViewById(R.id.rggotosignuptbtn);
-        registerbtn = (Button) findViewById(R.id.rgviewregtoeventtbtn);
+        registerbtn = (Button) findViewById(R.id.rgviewregtoEventtbtn);
         cancelRegisterbtn = (Button) findViewById(R.id.rgCancelRegisterbtn);
         Rgviewmessage = (TextView) findViewById(R.id.rgviewmessage);
 
@@ -133,14 +133,16 @@ public class EventRegisterationActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
                 if (snapshot == null || snapshot.getValue() == null) {
                     Rgviewmessage.setText(R.string.Registration_headline);
-                    registerbtn.setText(R.string.confirm);
+                    //registerbtn.setText(R.string.confirm);
                     cancelRegisterbtn.setEnabled(false);
                     loadUser(UserID);
                     //  Toast.makeText(EventInformationActivity_Firebase.this, "No record found",
                     //          Toast.LENGTH_SHORT).show();
                 } else {
-                    Rgviewmessage.setText(R.string.Registration_update_headline);
+                    //Rgviewmessage.setText(R.string.Registration_update_headline);
+                    Rgviewmessage.setTextSize(14);
                     registerbtn.setText(R.string.update);
+                    cancelRegisterbtn.setText(R.string.cancel_my_registration);
                     // Toast.makeText(EventInformationActivity_Firebase.this, snapshot.getValue().toString(),
                     //         Toast.LENGTH_SHORT).show();
                     User newUser = snapshot.getValue(User.class);

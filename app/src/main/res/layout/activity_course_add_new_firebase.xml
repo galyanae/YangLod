@@ -9,225 +9,244 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.goodthinking.younglod.user.CourseAddNew_Firebase">
 
-    <LinearLayout
-        android:id="@+id/fblinearLayout"
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:id="@+id/scrollView2" >
 
-        <android.support.design.widget.TextInputLayout
+        <LinearLayout
+            android:id="@+id/fblinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
-
-            <EditText
-                android:id="@+id/fbAddCourseHeadlineview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_course_name"
-                android:textSize="20dp" />
-        </android.support.design.widget.TextInputLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true">
-
-            <TextView
-                android:id="@+id/fbAddCoursedatetxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/fbAddCoursedateview"
-                android:layout_alignParentLeft="true"
-                android:text="@string/date_text"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/fbAddCoursedateview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/fbAddCoursedatetxt"
-                android:hint="@string/date_format"
-                android:textSize="15dp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true">
-
-            <TextView
-                android:id="@+id/fbAddCoursetimetxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/fbAddCoursetimeview"
-                android:layout_alignParentLeft="true"
-                android:text="@string/time_text"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/fbAddCoursetimeview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/fbAddCoursetimetxt"
-                android:hint="@string/time_format"
-                android:textSize="15dp" />
-        </RelativeLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-
-            <EditText
-                android:id="@+id/fbAddCourseSynopsysview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_course_synopsis"
-                android:textSize="15dp" />
-        </android.support.design.widget.TextInputLayout>
-
-        <ScrollView
-            android:id="@+id/fbAddCourseInformtionview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbarAlwaysDrawVerticalTrack="true"
-            android:scrollbars="vertical">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
 
-
                 <EditText
-                    android:id="@+id/fbAddCourseInfoview"
+                    android:id="@+id/fbAddCourseHeadlineview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/course_information_text"
-                    android:textSize="15dp" />
+                    android:hint="@string/hint_course_name"
+                    android:textSize="20dp" />
             </android.support.design.widget.TextInputLayout>
-        </ScrollView>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true">
-
-            <TextView
-                android:id="@+id/fbAddCourseParticipatorsnotxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/fbAddCourseParticipatorsno"
-                android:layout_alignParentLeft="true"
-                android:text="@string/max_participators_no"
-                android:textSize="15dp" />
-
-            <EditText
-                android:id="@+id/fbAddCourseParticipatorsno"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/fbAddCourseParticipatorsnotxt"
-                android:inputType="number" />
-
-        </RelativeLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-
-            <EditText
-                android:id="@+id/fbCoursehostname"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/host_name"
-                android:textSize="15dp" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_alignParentLeft="true">
 
+                <TextView
+                    android:id="@+id/fbAddCoursedatetxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/fbAddCoursedateview"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/date_text"
+                    android:textSize="15dp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/fbAddCoursedateview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/fbAddCoursedatetxt"
+                    android:hint="@string/date_format"
+                    android:textSize="15dp" />
+            </RelativeLayout>
 
-            <Button
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_image_edit"
-                android:onClick="addNewImage"
-                android:id="@+id/addNewImage"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentLeft="true">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:scaleType="centerCrop"
-                android:id="@+id/imageViewNewImage"
-                />
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/fbAddCoursetimetxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/fbAddCoursetimeview"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/time_text"
+                    android:textSize="15dp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-            <CheckBox
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/fbAddCoursetimeview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/fbAddCoursetimetxt"
+                    android:hint="@string/time_format"
+                    android:textSize="15dp" />
+            </RelativeLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="@string/course_is_not_valid"
-                android:id="@+id/editCourseIsValidCheckBox"
-                />
+                >
 
-            <CheckBox
-                android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/fbAddCourseSynopsysview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_course_synopsis"
+                    android:textSize="15dp" />
+            </android.support.design.widget.TextInputLayout>
+
+            <ScrollView
+                android:id="@+id/fbAddCourseInformtionview"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/registration_is_closed"
-                android:id="@+id/editCourseIsClosedCheckBox"
-                />
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:scrollbars="vertical">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+
+                    <EditText
+                        android:id="@+id/fbAddCourseInfoview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/course_information_text"
+                        android:textSize="15dp" />
+                </android.support.design.widget.TextInputLayout>
+            </ScrollView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true">
+
+                <TextView
+                    android:id="@+id/fbAddCourseParticipatorsnotxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/fbAddCourseParticipatorsno"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/max_participators_no"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/fbAddCourseParticipatorsno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/fbAddCourseParticipatorsnotxt"
+                    android:inputType="number" />
+
+            </RelativeLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <EditText
+                    android:id="@+id/fbCoursehostname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/host_name"
+                    android:textSize="15dp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:layout_width="120dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/addi"
+                        android:onClick="addNewImage"
+                        android:id="@+id/addNewImage"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="100dp"
+                        android:scaleType="centerCrop"
+                        android:id="@+id/imageViewNewImage"
+                        />
+
+                </RelativeLayout>
+            </android.support.design.widget.TextInputLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp">
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/course_is_not_valid"
+                    android:id="@+id/editCourseIsValidCheckBox"
+                    />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/registration_is_closed"
+                    android:id="@+id/editCourseIsClosedCheckBox"
+                    />
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/addactivitybutton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
+
                 android:orientation="horizontal"
-                android:weightSum="100">
+                android:weightSum="3"
+                android:layout_below="@+id/scrollView2"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
 
                 <Button
                     android:id="@+id/fbSaveNewCoursebtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="30"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="1"
                     android:enabled="true"
                     android:onClick="SaveNewCoursebtn"
-                    android:text="@string/add_course_btn" />
+                    android:background="@drawable/check"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginLeft="10dp" />
 
                 <Button
                     android:id="@+id/fbEditCoursebtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="30"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="1"
                     android:enabled="false"
                     android:onClick="EditCoursebtn"
-                    android:text="@string/edit_course_btn" />
+                    android:background="@drawable/edit"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginLeft="10dp" />
 
 
                 <Button
                     android:id="@+id/fbCancelAddCoursebtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="30"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="1"
                     android:onClick="CancelAddCoursebtn"
-                    android:text="@string/Cancel_btn" />
+                    android:background="@drawable/cancel"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginLeft="10dp" />
             </LinearLayout>
-        </RelativeLayout>
 
 
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

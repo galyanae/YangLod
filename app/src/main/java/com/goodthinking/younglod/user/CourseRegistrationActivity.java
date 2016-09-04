@@ -68,7 +68,7 @@ public class CourseRegistrationActivity extends AppCompatActivity {
         Usermail = (TextView) findViewById(R.id.rgviewUseremail);
         loginbtn = (Button) findViewById(R.id.rggotologintbtn);
         signupbtn = (Button) findViewById(R.id.rggotosignuptbtn);
-        registerbtn = (Button) findViewById(R.id.rgviewregtocoursetbtn);
+        registerbtn = (Button) findViewById(R.id.rgviewregtoCoursetbtn);
         cancelRegisterbtn = (Button) findViewById(R.id.rgCancelRegisterbtn);
         Rgviewmessage = (TextView) findViewById(R.id.rgviewmessage);
 
@@ -143,9 +143,10 @@ public class CourseRegistrationActivity extends AppCompatActivity {
                     //  Toast.makeText(CourseInformationActivity_Firebase.this, "No record found",
                     //          Toast.LENGTH_SHORT).show();
                 } else {
-                    Rgviewmessage.setText(R.string.Registration_update_headline);
+                   // Rgviewmessage.setText(R.string.Registration_update_headline);
                     registerbtn.setText(R.string.update);
-                    // Toast.makeText(CourseInformationActivity_Firebase.this, snapshot.getValue().toString(),
+                    cancelRegisterbtn.setText(R.string.cancel_my_registration);
+                    // Toast.makeText(EventInformationActivity_Firebase.this, snapshot.getValue().toString(),
                     //         Toast.LENGTH_SHORT).show();
                     User newUser = snapshot.getValue(User.class);
                     Usernamestr = newUser.getUserName();

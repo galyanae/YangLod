@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:foregroundGravity="bottom|left"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_plusone_medium_off_client"
+        android:src="@drawable/new_item"
         android:id="@+id/fab"
         android:onClick="addNewCourse"
         app:layout_anchor="@id/CourseRecyclerview"

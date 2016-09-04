@@ -23,22 +23,40 @@
         android:text=""
         android:id="@+id/EventThanksnote"/>
     </ScrollView>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ReturntoMainActivity"
-        android:layout_alignParentBottom="true"
-        android:text="@string/return_to_main"
-        android:layout_alignParentRight="true"
-        android:onClick="returntomain"/>
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:weightSum="2"
         android:layout_height="wrap_content"
-        android:id="@+id/GoToMyEventsFromThanksbtn"
         android:layout_alignParentBottom="true"
-        android:text="@string/go_to_my_events"
-        android:layout_alignParentLeft="true"
-        android:onClick="GoToMyEventsFromThanksB"/>
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/GoToMyEventsFromThanksbtn"
+            android:layout_alignParentBottom="true"
+            android:text="@string/go_to_my_events"
+            android:layout_alignParentLeft="true"
+            android:onClick="GoToMyEventsFromThanksB"
+            android:textStyle="bold"
+            android:background="@color/Yellow" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/ReturntoMainActivity"
+            android:layout_alignParentBottom="true"
+            android:text="@string/return_to_main"
+            android:layout_alignParentRight="true"
+            android:onClick="returntomain"
+            android:textStyle="bold"
+            android:background="@color/DodgerBlue" />
+
+    </LinearLayout>
 
 </RelativeLayout>
