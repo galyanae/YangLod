@@ -12,14 +12,15 @@
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollView" >
+        android:id="@+id/scrollView2" >
 
         <LinearLayout
             android:id="@+id/fblinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -150,93 +151,99 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/host_name"
                     android:textSize="15dp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:layout_width="120dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/addi"
+                        android:onClick="addNewImage"
+                        android:id="@+id/addNewImage"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="100dp"
+                        android:scaleType="centerCrop"
+                        android:id="@+id/imageViewNewImage"
+                        />
+
+                </RelativeLayout>
             </android.support.design.widget.TextInputLayout>
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true" >
-
-                <Button
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp">
+                <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="addNewImage"
-                    android:background="@drawable/ic_image_edit"
-                    android:id="@+id/addNewImage"
-                    android:layout_below="@+id/imageViewNewImage"
-                    android:layout_toRightOf="@+id/imageViewNewImage"
-                    android:layout_toEndOf="@+id/imageViewNewImage"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="false" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/imageViewNewImage"
-                    android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="false"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="false" />
+                    android:text="@string/event_is_not_valid"
+                    android:id="@+id/editEventIsValidCheckBox"
+                    />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/registration_is_closed"
+                    android:id="@+id/editEventIsClosedCheckBox"
+                    />
+
             </RelativeLayout>
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/addactivitybutton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="@string/event_is_not_valid"
-                android:id="@+id/editEventIsValidCheckBox"
-                />
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_below="@+id/scrollView2"
                 android:layout_alignParentRight="true"
-                android:text="@string/registration_is_closed"
-                android:id="@+id/editEventIsClosedCheckBox"
-                />
+                android:layout_alignParentEnd="true">
 
-                <LinearLayout
-                    android:id="@+id/addactivitybutton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="100dp"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
+                <Button
+                    android:id="@+id/fbSaveNewEventbtn"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="1"
+                    android:enabled="true"
+                    android:onClick="SaveNewEventbtn"
+                    android:background="@drawable/check"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginLeft="10dp" />
 
-                    <Button
-                        android:id="@+id/fbSaveNewEventbtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="30"
-                        android:enabled="true"
-                        android:onClick="SaveNewEventbtn"
-                        android:text="@string/add_event_btn" />
-
-                    <Button
-                        android:id="@+id/fbEditEventbtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="30"
-                        android:enabled="false"
-                        android:onClick="EditEventbtn"
-                        android:text="@string/edit_event_btn" />
+                <Button
+                    android:id="@+id/fbEditEventbtn"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:onClick="EditEventbtn"
+                    android:background="@drawable/edit"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginLeft="10dp" />
 
 
-                    <Button
-                        android:id="@+id/fbCancelAddEventbtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="30"
-                        android:onClick="CancelAddEventbtn"
-                        android:text="@string/Cancel_btn" />
-                </LinearLayout>
-            </RelativeLayout>
+                <Button
+                    android:id="@+id/fbCancelAddEventbtn"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="1"
+                    android:onClick="CancelAddEventbtn"
+                    android:background="@drawable/cancel"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
 
 
         </LinearLayout>
