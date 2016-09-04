@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -62,6 +63,11 @@ public class EventAddNew_Firebase extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_add_new__firebase);
+        SharedPreferences sharedPref = this.getSharedPreferences("TableName", this.MODE_PRIVATE);
+        tableName = sharedPref.getString("tableName", "Events");
+
+        sharedPref = this.getSharedPreferences("UserRole", this.MODE_PRIVATE);
+        role = sharedPref.getString("Role", "user");
 
         progressDialog = new ProgressDialog(this);
 

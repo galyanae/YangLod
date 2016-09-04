@@ -46,7 +46,7 @@ public class LoginActivity_Firebase extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-            loadUser(UserID);
+            else loadUser(UserID);
         } else {
             setContentView(R.layout.activity_login_activity__firebase);
             userEmail = (EditText) findViewById(R.id.Login_email);

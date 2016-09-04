@@ -1,6 +1,7 @@
 package com.goodthinking.younglod.user;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -34,19 +35,17 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_recyclerview__firebase);
-
+        setContentView(R.layout.activity_event_recyclerview_firebase);
         Intent intent = getIntent();
         vTypeEv = intent.getStringExtra("typeEvents");
 
-        EventRecyclerView = (RecyclerView) findViewById(R.id.EventRecyclerview);
 
+        SharedPreferences sharedPref = this.getSharedPreferences("TableName", this.MODE_PRIVATE);
+        tableName = sharedPref.getString("tableName", "Events");
 
-        try {
-            role = getIntent().getExtras().getString("Role");
-        } catch (Exception e) {
-            role = "user";
-        }
+        sharedPref = this.getSharedPreferences("UserRole", this.MODE_PRIVATE);
+        role = sharedPref.getString("Role", "user");
+
         if (role.equals("manager")) {
             isManager = true;
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -55,13 +54,13 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
 
         System.out.println("Am I a manager? " + isManager);
 
-
+        EventRecyclerView = (RecyclerView) findViewById(R.id.EventRecyclerview);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         EventRecyclerView.setLayoutManager(linearLayoutManager);
         EventRecyclerAdapter = new EventRecyclerAdapter(getApplicationContext());
         EventRecyclerView.setAdapter(EventRecyclerAdapter);
         EventRecyclerAdapter.notifyDataSetChanged();
-        fab = (FloatingActionButton) findViewById(R.id.EventRecyclerview);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

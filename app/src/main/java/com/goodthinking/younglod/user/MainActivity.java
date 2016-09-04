@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString("TableName", "Courses");
                     editor.commit();
 
-                    intent = new Intent(MainActivity.this, CourseRecyclerview_Firebase.class);
+                    intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
 
 
                 } else if (adapterOne.getItems().get(position).getName().equals("business")) {
