@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if (adapterOne.getItems().get(position).getName().equals("newsold")) {
+                if (adapterOne.getItems().get(position).getName().equals("news")) {
                     intent = new Intent(MainActivity.this, NewsActivity.class);
                 } else if (adapterOne.getItems().get(position).getName().equals("events")) {
                     SharedPreferences sharedPrefT = getApplicationContext().getSharedPreferences("TableName",

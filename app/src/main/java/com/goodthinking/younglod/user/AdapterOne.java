@@ -24,7 +24,7 @@ public class AdapterOne  extends BaseAdapter {
 
         this.context = context;
         menuIcons=new ArrayList<>();
-        menuIcons.add(new MenuIcon(1, R.drawable.newstext, "newsold"));
+        menuIcons.add(new MenuIcon(1, R.drawable.newstext, "news"));
         menuIcons.add(new MenuIcon(2,R.drawable.eventstext,"events"));
         menuIcons.add(new MenuIcon(3, R.drawable.coursestext,"courses"));
         menuIcons.add(new MenuIcon(4, R.drawable.career,"career"));
