@@ -119,7 +119,13 @@
     <string name="startDateTitle">תאריך תחילה</string>
     <string name="endDateTitle">תאריך סיום</string>
     <string name="coursedesc">תאור הקורס/חוג</string>
-
+    <string name="Main_menu_activity">Main menu activity</string>
+    <string name="adding_new_event">adding new event</string>
+    <string name="creation_failed">creation failed</string>
+    <string name="successfully_created">successfully created</string>
+    <string name="editing_event">editing event</string>
+    <string name="edit_failed">edit_failed</string>
+    <string name="successfully_updated">successfully updated</string>
     <string-array name="languages_array">
         <item>עברית</item>
         <item>ערבית</item>
