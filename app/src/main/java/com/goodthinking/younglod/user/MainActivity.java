@@ -69,10 +69,10 @@ public class MainActivity extends AppCompatActivity {
 
                 } else if (adapterOne.getItems().get(position).getName().equals("business")) {
                     intent = new Intent(MainActivity.this, EventAddNew_Firebase.class);
-
-
-
                 }
+                else if (adapterOne.getItems().get(position).getName().equals("contacts")) {
+                    intent = new Intent(MainActivity.this, AboutUsActivity.class);}
+
             else {
                   intent=new Intent(MainActivity.this,ComingSoon.class);
                 }
@@ -136,7 +136,9 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/html");
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"galyanae@mail.ru"});
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ymlod@mtova.org.il","michaelm@mtova.org.il",
+                "dvirma@jdcnet.org","madainbal@gmail.com","y.taasuka@mtova.org.il","idan300@gmail.com",
+                "tigist@mtova.org.il"});
         intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
         intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
 
