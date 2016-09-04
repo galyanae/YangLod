@@ -27,16 +27,14 @@ public class AboutUsActivity extends AppCompatActivity {
 
     public void call(View view) {
         Intent intent = new Intent(Intent.ACTION_DIAL);
-        intent.setData(Uri.parse("tel:0507522470"));
+        intent.setData(Uri.parse("tel:0737962323"));
         startActivity(intent);
     }
 
     public void mail(View view) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/html");
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"ymlod@mtova.org.il","michaelm@mtova.org.il",
-                "dvirma@jdcnet.org","madainbal@gmail.com","y.taasuka@mtova.org.il","idan300@gmail.com",
-                "tigist@mtova.org.il"});
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"lodyoung1@gmail.com"});
         intent.putExtra(Intent.EXTRA_SUBJECT, "Message from app");
         intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
 
