@@ -1,5 +1,8 @@
 package com.goodthinking.younglod.user.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
@@ -10,7 +13,7 @@ import java.util.HashMap;
  * Created by user on 23/07/2016.
  */
 @IgnoreExtraProperties
-public class User implements Serializable {
+public class User implements Parcelable {
 
     private String UserName;
     private String UserPhone;
@@ -115,4 +118,41 @@ public class User implements Serializable {
         return userresult;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.UserName);
+        dest.writeString(this.UserPhone);
+        dest.writeString(this.UserEmail);
+        dest.writeString(this.UserPassword);
+        dest.writeInt(this.UserNoOfParticipators);
+        dest.writeString(this.Role);
+        dest.writeString(this.UserID);
+    }
+
+    protected User(Parcel in) {
+        this.UserName = in.readString();
+        this.UserPhone = in.readString();
+        this.UserEmail = in.readString();
+        this.UserPassword = in.readString();
+        this.UserNoOfParticipators = in.readInt();
+        this.Role = in.readString();
+        this.UserID = in.readString();
+    }
+
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }
