@@ -61,7 +61,7 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
         EventRecyclerAdapter = new EventRecyclerAdapter(getApplicationContext());
         EventRecyclerView.setAdapter(EventRecyclerAdapter);
         EventRecyclerAdapter.notifyDataSetChanged();
-        fab = (FloatingActionButton) findViewById(R.id.EventRecyclerfab);
+        fab = (FloatingActionButton) findViewById(R.id.EventRecyclerview);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,15 +69,12 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), EventAddNew_Firebase.class));
             }
         });
-
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         RefreshallEvents();
-
     }
 
     private void RefreshallEvents() {

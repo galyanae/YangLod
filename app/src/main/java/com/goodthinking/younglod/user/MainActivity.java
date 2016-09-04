@@ -1,6 +1,7 @@
 package com.goodthinking.younglod.user;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -38,98 +39,105 @@ public class MainActivity extends AppCompatActivity {
 
         role = "user";
         try {
-                        role = getIntent().getExtras().getString("Role");
-                    } catch (Exception e) {
-                        role = "user";
-                    }
-                if ("manager".equals(role)) {
-                    isManager = true;
-                    FirebaseMessaging.getInstance().subscribeToTopic("/topics/manager");
-                }
-                System.out.println("Am I a manager? " + isManager);
-                gridView = (GridView) findViewById(R.id.tableLayout);
+            role = getIntent().getExtras().getString("Role");
+        } catch (Exception e) {
+            role = "user";
+        }
+        if ("manager".equals(role)) {
+            isManager = true;
+            FirebaseMessaging.getInstance().subscribeToTopic("/topics/manager");
+        }
+        SharedPreferences sharedPref = this.getSharedPreferences("UserRole", this.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("Role", role);
+        editor.commit();
+        System.out.println("Am I a manager? " + isManager);
+        gridView = (GridView) findViewById(R.id.tableLayout);
         adapterOne = new AdapterOne(getApplicationContext());
         gridView.setAdapter(adapterOne);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 if (adapterOne.getItems().get(position).getName().equals("newsold")) {
                     intent = new Intent(MainActivity.this, NewsActivity.class);
-                }
-                else if (adapterOne.getItems().get(position).getName().equals("events")){
+                } else if (adapterOne.getItems().get(position).getName().equals("events")) {
+                    SharedPreferences sharedPrefT = getApplicationContext().getSharedPreferences("TableName",
+                            getApplicationContext().MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPrefT.edit();
+                    editor.putString("TableName", "Events");
+                    editor.commit();
+                    intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
 
-                   intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
-
-                }
-                else if (adapterOne.getItems().get(position).getName().equals("courses")){
+                } else if (adapterOne.getItems().get(position).getName().equals("courses")) {
+                    SharedPreferences sharedPrefT = getApplicationContext().getSharedPreferences("TableName",
+                            getApplicationContext().MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPrefT.edit();
+                    editor.putString("TableName", "Courses");
+                    editor.commit();
 
                     intent = new Intent(MainActivity.this, CourseRecyclerview_Firebase.class);
 
 
                 } else if (adapterOne.getItems().get(position).getName().equals("business")) {
                     intent = new Intent(MainActivity.this, EventAddNew_Firebase.class);
-                }
-                else if (adapterOne.getItems().get(position).getName().equals("contacts")) {
-                    intent = new Intent(MainActivity.this, AboutUsActivity.class);}
-
-            else {
-                  intent=new Intent(MainActivity.this,ComingSoon.class);
+                } else if (adapterOne.getItems().get(position).getName().equals("contacts")) {
+                    intent = new Intent(MainActivity.this, AboutUsActivity.class);
+                } else {
+                    intent = new Intent(MainActivity.this, ComingSoon.class);
                 }
                 intent.putExtra("Role", role);
                 startActivity(intent);
             }
         });
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-            }
+    }
 
 
-@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-                getMenuInflater().inflate(R.menu.user_option, menu);
+        getMenuInflater().inflate(R.menu.user_option, menu);
 
-    if (!"manager".equals(role)) {
-                    menu.getItem(4).setVisible(false);
-               }
+        if (!"manager".equals(role)) {
+            menu.getItem(4).setVisible(false);
+        }
 
-                return true;
-            }
-@Override
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-                int id = item.getItemId();
-                if (id == R.id.menu_user_list) {
-                    //goToMyEventPage();
-                    return true;
-                } else if (id == R.id.menu_profile) {
-                    //goToUserProfilePage();
-                    return true;
-                } else if (id == R.id.menu_logout) {
-                    logout();
-                    return true;
-                }
-                else if (id==R.id.send_email_to_manager){
-                    sendEmailToManager();
-                    return true;
-                }
-                else if (id==R.id.send_message_to_users){
-                    intent=new Intent(MainActivity.this,NewMessageToUsers.class);
-                    startActivity(intent);
-                    return true;
-                }
-                return super.onOptionsItemSelected(item);
-            }
+        int id = item.getItemId();
+        if (id == R.id.menu_user_list) {
+            //goToMyEventPage();
+            return true;
+        } else if (id == R.id.menu_profile) {
+            //goToUserProfilePage();
+            return true;
+        } else if (id == R.id.menu_logout) {
+            logout();
+            return true;
+        } else if (id == R.id.send_email_to_manager) {
+            sendEmailToManager();
+            return true;
+        } else if (id == R.id.send_message_to_users) {
+            intent = new Intent(MainActivity.this, NewMessageToUsers.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
-            public void logout() {
+    public void logout() {
 
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getApplicationContext(), LoginActivity_Firebase.class));
-                finish();
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(), LoginActivity_Firebase.class));
+        finish();
 
-                Toast.makeText(getApplicationContext(), "You Logout successfully", Toast.LENGTH_LONG).show();
-            }
-
+        Toast.makeText(getApplicationContext(), "You Logout successfully", Toast.LENGTH_LONG).show();
+    }
 
 
     public void sendEmailToManager() {
@@ -144,5 +152,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-        }
+}
