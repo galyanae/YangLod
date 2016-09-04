@@ -41,8 +41,8 @@ public class EventRegisterationActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private int position, UserNoOfParticipators;
     private String key;
-
-   private String UserID;
+    String tableName = "Events";
+    private String UserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,15 +91,13 @@ public class EventRegisterationActivity extends AppCompatActivity {
                 registerbtn.setEnabled(false);
                 cancelRegisterbtn.setEnabled(false);
             }
-        }
-
-        else {
+        } else {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
             return;
         }
 
-        }
+    }
 
 
     private void loadUser(String userID) {
@@ -121,13 +119,13 @@ public class EventRegisterationActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        Toast.makeText(getApplicationContext(), "Download failed"+databaseError.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Download failed" + databaseError.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
     }
 
     private void checkRegistration(String userID) {
-        Query qrefUserRegister = Userdatabase.child("Tables").child("Events").child(key).child("Applicants").child(userID);
+        Query qrefUserRegister = Userdatabase.child("Tables").child(tableName).child(key).child("Applicants").child(userID);
         qrefUserRegister.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -176,45 +174,45 @@ public class EventRegisterationActivity extends AppCompatActivity {
             return;
         } else {
             UserNoOfParticipators = Integer.parseInt(NoOfParticipatorsField.getText().toString());
-           // DatabaseReference newD = Userdatabase.child("users");
+            // DatabaseReference newD = Userdatabase.child("users");
             DatabaseReference newD = Userdatabase;
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        userID = user.getUid();
-        User Newuser = new User(Usernamestr, UserPhonestr, UserEmailstr, UserNoOfParticipators);
-        Newuser.setUserID(userID);
-        // Map<String, Object> applicant = new HashMap<>();
-        //  applicant.put(userID, Newuser.ApplicanttoMap());
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            userID = user.getUid();
+            User Newuser = new User(Usernamestr, UserPhonestr, UserEmailstr, UserNoOfParticipators);
+            Newuser.setUserID(userID);
+            // Map<String, Object> applicant = new HashMap<>();
+            //  applicant.put(userID, Newuser.ApplicanttoMap());
 
 
-        progressDialog.setMessage(getString(R.string.Progress_Dialog_Register));
-        progressDialog.show();
-        Map<String, Object> childUpdates = new HashMap<>();
+            progressDialog.setMessage(getString(R.string.Progress_Dialog_Register));
+            progressDialog.show();
+            Map<String, Object> childUpdates = new HashMap<>();
 
-        childUpdates.put("/Tables/Events/" + key + "/Applicants/" + userID, Newuser.ApplicanttoMap());
-        childUpdates.put("/users/"+ userID + "/MyEvents/" + key, "true");
-        //newD.updateChildren(childUpdates);
-        //progressDialog.dismiss();
-        newD.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                if (databaseError != null) {
-                    Toast.makeText(getApplicationContext(), getString(R.string.register_faild_message), Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), getString(R.string.Registration_successful), Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getApplicationContext(), EventThanksActivity.class);
-                    intent.putExtra("eventID", key);
-                    startActivity(intent);
+            childUpdates.put("/Tables/" + tableName + "/" + key + "/Applicants/" + userID, Newuser.ApplicanttoMap());
+            childUpdates.put("/users/" + userID + "/My" + tableName + "/" + key, "true");
+            //newD.updateChildren(childUpdates);
+            //progressDialog.dismiss();
+            newD.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                    if (databaseError != null) {
+                        Toast.makeText(getApplicationContext(), getString(R.string.register_faild_message), Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), getString(R.string.Registration_successful), Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(), EventThanksActivity.class);
+                        intent.putExtra("eventID", key);
+                        startActivity(intent);
+                    }
+                    FirebaseMessaging.getInstance().subscribeToTopic(key);
+                    progressDialog.dismiss();
+
+                    // startActivity(new Intent(getApplicationContext(), EventThanksActivity.class));
+                    finish();
+
                 }
-                FirebaseMessaging.getInstance().subscribeToTopic(key);
-                progressDialog.dismiss();
-
-                // startActivity(new Intent(getApplicationContext(), EventThanksActivity.class));
-                finish();
-
-            }
-        });
-    }
+            });
+        }
     }
 
     public void loginEventbtn(View view) {
@@ -248,8 +246,8 @@ public class EventRegisterationActivity extends AppCompatActivity {
                         userID = user.getUid();
                         Map<String, Object> childUpdates = new HashMap<>();
 
-                        childUpdates.put("/Tables/Events/" + key + "/Applicants/" + userID, null);
-                        childUpdates.put("/users/" + userID + "/MyEvents/" + key, null);
+                        childUpdates.put("/Tables/" + tableName + "/" + key + "/Applicants/" + userID, null);
+                        childUpdates.put("/users/" + userID + "/My" + tableName + "/" + key, null);
 
                         newD.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
                             @Override

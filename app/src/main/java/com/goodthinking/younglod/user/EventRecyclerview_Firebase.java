@@ -1,18 +1,15 @@
 package com.goodthinking.younglod.user;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.goodthinking.younglod.user.model.Event;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,21 +24,21 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference Eventdatabase, MyEventdatabase;
     private String flag_to_myEvents;
+    FloatingActionButton fab;
     boolean isManager = false;
     String role = "user";
     private Query queryRef;
-
-    private DatabaseReference Userdatabase;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+    private String vTypeEv;
+    String tableName = "Events";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_recyclerview__firebase);
+
+        Intent intent = getIntent();
+        vTypeEv = intent.getStringExtra("typeEvents");
+
         EventRecyclerView = (RecyclerView) findViewById(R.id.EventRecyclerview);
 
 
@@ -50,9 +47,11 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
         } catch (Exception e) {
             role = "user";
         }
-        if (role.equals("manager")) {isManager = true;
+        if (role.equals("manager")) {
+            isManager = true;
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.setVisibility(View.VISIBLE);}
+            fab.setVisibility(View.VISIBLE);
+        }
 
         System.out.println("Am I a manager? " + isManager);
 
@@ -62,11 +61,16 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
         EventRecyclerAdapter = new EventRecyclerAdapter(getApplicationContext());
         EventRecyclerView.setAdapter(EventRecyclerAdapter);
         EventRecyclerAdapter.notifyDataSetChanged();
+        fab = (FloatingActionButton) findViewById(R.id.EventRecyclerfab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), EventAddNew_Firebase.class));
+            }
+        });
 
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
@@ -79,9 +83,12 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
     private void RefreshallEvents() {
 
         Eventdatabase = FirebaseDatabase.getInstance().getReference();
-        String tableName = "Events";
         DatabaseReference refEvents = Eventdatabase.child("Tables").child(tableName);
-        queryRef = refEvents.orderByChild("statusIsValidDate").startAt("1");
+        if (vTypeEv.equals("Valid")) {
+            queryRef = refEvents.orderByChild("StatusIsValidDate").startAt("1");
+        } else {
+            queryRef = refEvents.orderByChild("StatusIsValidDate").startAt("0").endAt("1");
+        }
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -94,16 +101,19 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
                 }
                 EventRecyclerAdapter.notifyDataSetChanged();
 
+                if (EventArraydata.getInstance().getEvents().size() == 0) {
+                    Toast.makeText(getApplicationContext(), R.string.no_events_to_show, Toast.LENGTH_SHORT).show();
+                }
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Toast.makeText(getApplicationContext(), "Download failed" + databaseError.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 
     }
-
 
 
     public void addNewEvent(View view) {
@@ -116,39 +126,12 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "EventRecyclerview_Firebase Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.goodthinking.younglod.user/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
     }
 
     @Override
     public void onStop() {
         super.onStop();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "EventRecyclerview_Firebase Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.goodthinking.younglod.user/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
+
     }
 }

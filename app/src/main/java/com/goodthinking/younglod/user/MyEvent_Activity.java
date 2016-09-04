@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.Toast;
 
 import com.goodthinking.younglod.user.model.Event;
@@ -22,9 +21,9 @@ public class MyEvent_Activity extends AppCompatActivity {
     private RecyclerView EventRecyclerView;
     private EventRecyclerAdapter EventRecyclerAdapter;
     private FirebaseAuth auth;
-    private DatabaseReference Eventdatabase,  MyEventdatabase ;
+    private DatabaseReference Eventdatabase, MyEventdatabase;
     ArrayList<String> filter = new ArrayList<>();
-
+    String tableName = "Events";
     private Boolean EventIsNotValid;
 
     @Override
@@ -50,7 +49,7 @@ public class MyEvent_Activity extends AppCompatActivity {
         //System.out.println(UserID);
 
         Eventdatabase = FirebaseDatabase.getInstance().getReference();
-        MyEventdatabase = Eventdatabase.child("users").child(UserID).child("MyEvents");
+        MyEventdatabase = Eventdatabase.child("users").child(UserID).child("My" + tableName);
         MyEventdatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -65,7 +64,7 @@ public class MyEvent_Activity extends AppCompatActivity {
                     final String Eventkey = filter.get(i);
                     System.out.println("key is" + Eventkey);
                     Eventdatabase = FirebaseDatabase.getInstance().getReference();
-                    Eventdatabase.child("Tables").child("Events").child(Eventkey).addValueEventListener(new ValueEventListener() {
+                    Eventdatabase.child("Tables").child(tableName).child(Eventkey).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Event event = dataSnapshot.getValue(Event.class);
@@ -73,8 +72,9 @@ public class MyEvent_Activity extends AppCompatActivity {
                             //String CheckEventKey = event.getKey();
                             //System.out.println("CheckEventkey" + CheckEventKey);
                             EventIsNotValid = event.getEventIsNotValid();
-                            if (EventIsNotValid == false){
-                            EventArraydata.getInstance().getEvents().add(event);}
+                            if (EventIsNotValid == false) {
+                                EventArraydata.getInstance().getEvents().add(event);
+                            }
                             EventRecyclerAdapter.notifyDataSetChanged();
                         }
 
