@@ -64,11 +64,8 @@ public class EventAddNew_Firebase extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_add_new_firebase);
-        SharedPreferences sharedPref = this.getSharedPreferences("TableName", this.MODE_PRIVATE);
-        tableName = sharedPref.getString("tableName", "Events");
 
-        sharedPref = this.getSharedPreferences("UserRole", this.MODE_PRIVATE);
-        role = sharedPref.getString("Role", "user");
+
 
         progressDialog = new ProgressDialog(this);
 
@@ -94,7 +91,10 @@ public class EventAddNew_Firebase extends AppCompatActivity {
 
         if (getIntent().getExtras() != null) {
             Intent intent = getIntent();
+            role = intent.getStringExtra("Role");
+            tableName = intent.getStringExtra("tableName");
             key = intent.getStringExtra("Eventkey");
+            if (key==null) key="";
             position = intent.getIntExtra("position", 0);
 
             // Bundle extras = getIntent().getExtras();
@@ -102,7 +102,8 @@ public class EventAddNew_Firebase extends AppCompatActivity {
 
             // Event event = (Event) intent.getSerializableExtra("Event");
             //   if (key != " ") {
-            if (!key.equals("")) {
+
+            if (key!=null && !key.equals("")) {
                 AddEventHeadline.setText(EventArraydata.getInstance().getEvents().get(position).getEventName());
                 AddEventdate.setText(EventArraydata.getInstance().getEvents().get(position).getEventDate());
                 AddEventtime.setText(EventArraydata.getInstance().getEvents().get(position).getEventTime());
