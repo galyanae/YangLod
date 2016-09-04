@@ -49,7 +49,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
     private int position;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private String key;
-    String tableName="Events";
+    String tableName = "Events";
     private String timeEvent;
     private String dateEvent = "";
     private CheckBox eventIsNotValid;
