@@ -55,6 +55,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
     private String dateEvent = "";
     private CheckBox eventIsNotValid;
     private CheckBox eventIsClosed;
+    private boolean imagePresent = false;
     private String imageName;
     private Bitmap bitmap;
     String role;
@@ -62,7 +63,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_add_new__firebase);
+        setContentView(R.layout.activity_event_add_new_firebase);
         SharedPreferences sharedPref = this.getSharedPreferences("TableName", this.MODE_PRIVATE);
         tableName = sharedPref.getString("tableName", "Events");
 
@@ -79,6 +80,13 @@ public class EventAddNew_Firebase extends AppCompatActivity {
         AddEventParticipatorsno = (EditText) findViewById(R.id.fbAddEventParticipatorsno);
         AddEventHostName = (EditText) findViewById(R.id.fbEventhostname);
         AddEventbtn = (Button) findViewById(R.id.fbSaveNewEventbtn);
+        AddEventbtn.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                System.out.println("delete called");
+                SaveNewEventbtn(view);
+            }
+        });
         EditEventbtn = (Button) findViewById(R.id.fbEditEventbtn);
         eventIsNotValid = (CheckBox) findViewById(R.id.editEventIsValidCheckBox);
         eventIsClosed = (CheckBox) findViewById(R.id.editEventIsClosedCheckBox);
@@ -109,7 +117,9 @@ public class EventAddNew_Firebase extends AppCompatActivity {
                 AddEventbtn.setEnabled(false);
                 EditEventbtn.setEnabled(true);
             } else {
-                EditEventbtn.setEnabled(false);
+                EditEventbtn.setEnabled(true);
+                AddEventbtn.setEnabled(true);
+
             }
 
         }
@@ -176,9 +186,10 @@ public class EventAddNew_Firebase extends AppCompatActivity {
 
 
     public void SaveNewEventbtn(View view) {
+        System.out.println("SaveNewEventbtn called");
         DatabaseReference newEvent = Eventdatabase.child("Tables").child(tableName);
         key = newEvent.push().getKey();
-        saveImage();
+        if (imagePresent) saveImage();
         String EventHeadLine = AddEventHeadline.getText().toString().trim();
         if (EventHeadLine.equals("")) {
             Toast.makeText(getApplicationContext(), R.string.must_headline, Toast.LENGTH_LONG).show();
@@ -347,6 +358,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
                 resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri uri = data.getData();
             imageName = uri.getPathSegments().get(uri.getPathSegments().size() - 1) + ".jpg";
+            imagePresent = false;
 
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
@@ -354,9 +366,10 @@ public class EventAddNew_Firebase extends AppCompatActivity {
 
                 ImageView imageView = (ImageView) findViewById(R.id.imageViewNewImage);
                 imageView.setImageBitmap(bitmap);
-
+                imagePresent = true;
             } catch (IOException e) {
                 e.printStackTrace();
+
             }
         }
     }

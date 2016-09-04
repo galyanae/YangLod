@@ -37,20 +37,20 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_recyclerview_firebase);
         Intent intent = getIntent();
+
+        role = intent.getStringExtra("Role");
+        tableName = intent.getStringExtra("tableName");
+
         vTypeEv = intent.getStringExtra("typeEvents");
         if (vTypeEv == null || vTypeEv.length()==0) vTypeEv="Valid";
-
-        SharedPreferences sharedPref = this.getSharedPreferences("TableName", this.MODE_PRIVATE);
-        tableName = sharedPref.getString("tableName", "Events");
-
-        sharedPref = this.getSharedPreferences("UserRole", this.MODE_PRIVATE);
-        role = sharedPref.getString("Role", "user");
 
         if (role.equals("manager")) {
             isManager = true;
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setVisibility(View.VISIBLE);
         }
+        else fab.setVisibility(View.GONE);
+
 
         System.out.println("Am I a manager? " + isManager);
 
@@ -65,7 +65,10 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), EventAddNew_Firebase.class));
+            Intent intent = new Intent(getApplicationContext(), EventAddNew_Firebase.class);
+                intent.putExtra("Role", role);
+                intent.putExtra("tableName", tableName);
+                startActivity(intent);
             }
         });
     }
@@ -114,6 +117,8 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
 
     public void addNewEvent(View view) {
         Intent intent = new Intent(EventRecyclerview_Firebase.this, EventAddNew_Firebase.class);
+        intent.putExtra("Role", role);
+        intent.putExtra("tableName", tableName);
         startActivity(intent);
 
     }

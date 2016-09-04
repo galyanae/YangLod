@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     boolean isManager = false;
     private TreeMap<String, newsItem> newsArray = new TreeMap();
     private String role;
+    private String tableName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                             getApplicationContext().MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPrefT.edit();
                     editor.putString("TableName", "Events");
+                    tableName="Events";
                     editor.commit();
                     intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
 
@@ -74,7 +76,9 @@ public class MainActivity extends AppCompatActivity {
                             getApplicationContext().MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPrefT.edit();
                     editor.putString("TableName", "Courses");
+                    System.out.println("Course written");
                     editor.commit();
+                    tableName="Courses";
 
                     intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
 
@@ -87,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     intent = new Intent(MainActivity.this, ComingSoon.class);
                 }
                 intent.putExtra("Role", role);
+                intent.putExtra("tableName", tableName);
                 startActivity(intent);
             }
         });

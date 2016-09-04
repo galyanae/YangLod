@@ -1,6 +1,7 @@
 package com.goodthinking.younglod.user;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -77,6 +78,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
 
                     public void onClick(View view) {
                         System.out.println("delete called");
+                        deleteNews(view);
                     }
                 });
 
@@ -90,6 +92,41 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
 
         }
     }
+public void deleteNews(View v)
+{
+    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+            context);
+
+    // set title
+    alertDialogBuilder.setTitle("Delete are you sure?");
+
+    // set dialog message
+    alertDialogBuilder
+            .setMessage("Click yes to exit!")
+            .setCancelable(false)
+            .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog,int id) {
+                    // if this button is clicked, close
+                    // current activity
+                    System.out.println("delete confirmed");
+                    dialog.dismiss();
+                }
+            })
+            .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog,int id) {
+                    // if this button is clicked, just close
+                    // the dialog box and do nothing
+                    System.out.println("delete canceled");
+                    dialog.cancel();
+                }
+            });
+
+    // create alert dialog
+    AlertDialog alertDialog = alertDialogBuilder.create();
+
+    // show it
+    alertDialog.show();
+}
 
     @Override
     public int getItemCount() {
