@@ -356,7 +356,7 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 Map<String, Object> children = new HashMap<String, Object>();
-                children.put("image", downloadUrl.getPath());
+                children.put("iName", downloadUrl.getPath());
                 newsRef.child("Tables").child("news").child(key).updateChildren(children);
                 finish();
             }

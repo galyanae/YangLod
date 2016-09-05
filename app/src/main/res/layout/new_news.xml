@@ -91,7 +91,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/koteret"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <ScrollView
             android:id="@+id/ScrollView01"
@@ -113,7 +113,7 @@
                 android:textStyle="italic" />
         </ScrollView>
         <ImageView
-            android:layout_width="120dp"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
             android:id="@+id/imageViewNewImage"
