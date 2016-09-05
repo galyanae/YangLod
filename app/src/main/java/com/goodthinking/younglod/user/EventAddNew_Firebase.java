@@ -281,7 +281,8 @@ public class EventAddNew_Firebase extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
 // Always show the chooser (if there are multiple options available)
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);}
+
 
     public void CancelAddEventbtn(View view) {
         Intent intent = new Intent(getApplicationContext(), EventRecyclerview_Firebase.class);

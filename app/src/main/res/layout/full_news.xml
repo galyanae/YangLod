@@ -124,13 +124,13 @@
         <ImageView
             android:id="@+id/ivForward"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_weight="1"
             android:onClick="pageNews"
-            android:src="@drawable/forward" />
+            android:background="@drawable/next" />
 
         <TextView
             android:id="@+id/tvPages"
@@ -145,13 +145,14 @@
         <ImageView
             android:id="@+id/ivBackward"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_weight="1"
             android:onClick="pageNews"
-            android:src="@drawable/back" />
+            android:background="@drawable/previous"
+            android:adjustViewBounds="false" />
     </LinearLayout>
 
 </RelativeLayout>
