@@ -1,5 +1,6 @@
 package com.goodthinking.younglod.user;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.goodthinking.younglod.user.model.newsItem;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.TreeMap;
 
@@ -31,12 +34,22 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
     ImageView tvImg;
     ImageView ivBackward;
     ImageView ivForward;
-    Object caller;
+    newsItem newsItem;
 
-    public NewsRecyclerAdapter(TreeMap<String, newsItem> newsArray, Object caller, boolean isManager) {
-        this.caller = caller;
+    private DatabaseReference root;
+    DatabaseReference newsRef;
+
+    public interface RefreshMeCallback {
+        void refreshMe();
+    }
+    private RefreshMeCallback callerActivity;
+
+    public NewsRecyclerAdapter(TreeMap<String, newsItem> newsArray, Activity caller, boolean isManager) {
+        this.callerActivity = (RefreshMeCallback) caller;
         this.newsArray = newsArray;
         this.isManager = isManager;
+        root = FirebaseDatabase.getInstance().getReference();
+        newsRef = root.child("Tables").child("news");
     }
 
     public NewsRecyclerAdapter() {
@@ -53,7 +66,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
         SimpleItemViewHolder viewHolder = (SimpleItemViewHolder) holder;
         viewHolder.position = position;
         System.out.println("position=" + position);
-        newsItem newsItem = new newsItem();
+        newsItem = new newsItem();
 
         // loop until getting the right event
         int pos = 0;
@@ -74,11 +87,14 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
             ((SimpleItemViewHolder) holder).tvYedia.setText(str + newsItem.getInfo());
             if (isManager) {
                 ((SimpleItemViewHolder) holder).ivDelete.setVisibility(View.VISIBLE);
+                final newsItem nItem=newsItem;
+
                 ((SimpleItemViewHolder) holder).ivDelete.setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View view) {
                         System.out.println("delete called");
-                        deleteNews(view);
+
+                        deleteNews(view, nItem);
                     }
                 });
 
@@ -92,7 +108,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
 
         }
     }
-public void deleteNews(View v)
+public void deleteNews(View v, newsItem newsItem)
 {
     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
             context);
@@ -100,6 +116,7 @@ public void deleteNews(View v)
     // set title
     alertDialogBuilder.setTitle("Delete are you sure?");
 
+    final newsItem n= newsItem;
     // set dialog message
     alertDialogBuilder
             .setMessage("Click yes to exit!")
@@ -108,7 +125,10 @@ public void deleteNews(View v)
                 public void onClick(DialogInterface dialog,int id) {
                     // if this button is clicked, close
                     // current activity
-                    System.out.println("delete confirmed");
+                    System.out.println("delete confirmed"+n.toString());
+                   /* newsRef.child(n.getKey()).removeValue(); // remove from DB
+                    newsArray.remove(n.getDate()+n.getTime()+n.getKey());  //remove from array*/
+                    ((NewsActivity)context).refreshMe();
                     dialog.dismiss();
                 }
             })

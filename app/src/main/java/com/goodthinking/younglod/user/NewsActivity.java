@@ -37,7 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Calendar;
 import java.util.TreeMap;
 
-public class NewsActivity extends AppCompatActivity {
+public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapter.RefreshMeCallback {
 
     FloatingActionButton fab;
     AlertDialog show;
@@ -104,7 +104,7 @@ public class NewsActivity extends AppCompatActivity {
                 linearLayoutManager.setReverseLayout(true);
                 linearLayoutManager.setStackFromEnd(true);
                 NewsRecyclerView.setLayoutManager(linearLayoutManager);
-                newsRecyclerAdapter = new NewsRecyclerAdapter(newsArray, this, isManager);
+                newsRecyclerAdapter = new NewsRecyclerAdapter(newsArray, NewsActivity.this, isManager);
                 NewsRecyclerView.setAdapter(newsRecyclerAdapter);
                 newsRecyclerAdapter.notifyDataSetChanged();
             }
@@ -308,5 +308,10 @@ public class NewsActivity extends AppCompatActivity {
     }
 
     public void picture(View v) {
+    }
+    public void refreshMe()
+    {
+        newsRecyclerAdapter.notifyDataSetChanged();
+
     }
 }
