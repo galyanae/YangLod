@@ -34,11 +34,11 @@ public class User implements Parcelable {
     public User() {
     }
 
-     public User(String userName, String userPhone, String userEmail, int userNoOfParticipators) {
-        UserName = userName;
-        UserPhone = userPhone;
-        UserEmail = userEmail;
-        UserNoOfParticipators = userNoOfParticipators;
+    public User(String userName, String userPhone, String userEmail, int userNoOfParticipators) {
+        this.UserName = userName;
+        this.UserPhone = userPhone;
+        this.UserEmail = userEmail;
+        this.UserNoOfParticipators = userNoOfParticipators;
     }
 
     @Exclude
@@ -76,11 +76,11 @@ public class User implements Parcelable {
     }
 
     public String getUserEmail() {
-        return UserEmail;
+        return this.UserEmail;
     }
 
     public void setUserEmail(String userEmail) {
-        UserEmail = userEmail;
+        this.UserEmail = userEmail;
     }
 
     public String getUserPassword() {
@@ -90,8 +90,10 @@ public class User implements Parcelable {
     public void setUserPassword(String userPassword) {
         UserPassword = userPassword;
     }
+
     public int getUserNoOfParticipators() {
-        return UserNoOfParticipators;    }
+        return UserNoOfParticipators;
+    }
 
     public void setUserNoOfParticipators(int userNoOfParticipators) {
         UserNoOfParticipators = userNoOfParticipators;
@@ -107,13 +109,14 @@ public class User implements Parcelable {
 
         return userresult;
     }
+
     @Exclude
     public HashMap<String, Object> ApplicanttoMap() {
         HashMap<String, Object> userresult = new HashMap<>();
         userresult.put("UserName", UserName);
         userresult.put("UserPhone", UserPhone);
         userresult.put("UserEmail", UserEmail);
-        userresult.put("UserNoOfParticipators",UserNoOfParticipators);
+        userresult.put("UserNoOfParticipators", UserNoOfParticipators);
 
         return userresult;
     }

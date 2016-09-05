@@ -106,12 +106,13 @@ public class EventRegisterationActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User newUser = dataSnapshot.getValue(User.class);
-                        if (newUser != null) {
+                        if (newUser != null && dataSnapshot.getChildrenCount() > 0) {
                             Usernamestr = newUser.getUserName();
                             UserPhonestr = newUser.getUserPhone();
                             UserEmailstr = newUser.getUserEmail();
-                        }
-
+                        } else
+                            System.out.println(getClass().getName() + " loaduser unfortunatly user empty");
+                        System.out.println("XXXXXX UserEmailstr="+UserEmailstr);
                         UserName.setText(Usernamestr);
                         Userphone.setText(UserPhonestr);
                         Usermail.setText(UserEmailstr);
@@ -129,7 +130,7 @@ public class EventRegisterationActivity extends AppCompatActivity {
         qrefUserRegister.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                if (snapshot == null || snapshot.getValue() == null) {
+                if (snapshot == null || snapshot.getValue() == null || snapshot.getChildrenCount() == 0) {
                     Rgviewmessage.setText(R.string.Registration_headline);
                     //registerbtn.setText(R.string.confirm);
                     cancelRegisterbtn.setEnabled(false);
@@ -179,6 +180,7 @@ public class EventRegisterationActivity extends AppCompatActivity {
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             userID = user.getUid();
+            System.out.println("XXXXXXXXXX UserEmailstr" + UserEmailstr);
             User Newuser = new User(Usernamestr, UserPhonestr, UserEmailstr, UserNoOfParticipators);
             Newuser.setUserID(userID);
             // Map<String, Object> applicant = new HashMap<>();

@@ -28,7 +28,7 @@ public class Event implements Parcelable {
     private String eventCost;
     private String eventAudience;
     private String eventLang;
-    private String Image;
+    private String image;
     
     public String getEventEndDate() {
         return EventEndDate;
@@ -87,11 +87,11 @@ public class Event implements Parcelable {
     }
 
     public String getImage() {
-        return Image;
+        return image;
     }
 
     public void setImage(String image) {
-        Image = image;
+        this.image = image;
     }
 
     @Exclude
@@ -124,7 +124,7 @@ public class Event implements Parcelable {
         EventParticipatorsno = eventParticipatorsno;
         EventIsClosed = eventIsClosed;
         StatusIsValidDate = statusIsValidDate;
-        Image = image;
+        image = image;
     }
 
     public Event() {
@@ -224,7 +224,7 @@ public class Event implements Parcelable {
         event.put("EventParticipatorsno",EventParticipatorsno);
         event.put("EventIsClosed",EventIsClosed);
         event.put("StatusIsValidDate",StatusIsValidDate);
-        event.put("Image", Image);
+        event.put("image", image);
         return event;
 
     }
@@ -254,7 +254,7 @@ public class Event implements Parcelable {
         dest.writeString(this.eventCost);
         dest.writeString(this.eventAudience);
         dest.writeString(this.eventLang);
-        dest.writeString(this.Image);
+        dest.writeString(this.image);
         dest.writeString(this.Key);
     }
 
@@ -276,7 +276,7 @@ public class Event implements Parcelable {
         this.eventCost = in.readString();
         this.eventAudience = in.readString();
         this.eventLang = in.readString();
-        this.Image = in.readString();
+        this.image = in.readString();
         this.Key = in.readString();
     }
 
