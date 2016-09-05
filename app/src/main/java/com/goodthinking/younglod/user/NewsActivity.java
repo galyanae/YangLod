@@ -5,7 +5,11 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
@@ -27,18 +31,31 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.goodthinking.younglod.user.model.newsItem;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeMap;
 
 public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapter.RefreshMeCallback {
-
+    private boolean imagePresent = false;
+    private String imageName;
+    private Bitmap bitmap;
+    private static final int PICK_IMAGE_REQUEST = 1;
+    private static final String IMAGES_BUCKET = "gs://hadashot-9bbf1.appspot.com";
     FloatingActionButton fab;
     AlertDialog show;
     private DatabaseReference root;
@@ -313,5 +330,63 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
     {
         newsRecyclerAdapter.notifyDataSetChanged();
 
+    }
+    private void saveImage() {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        // https://firebase.google.com/docs/storage/android/create-reference
+        // Create a storage reference from our app
+        StorageReference storageRef = storage.getReferenceFromUrl(IMAGES_BUCKET);
+
+        // Create a reference to "mountains.jpg"
+        StorageReference mountainsRef = storageRef.child("images/" + imageName);
+
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = mountainsRef.putBytes(data);
+
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                Map<String, Object> children = new HashMap<String, Object>();
+                children.put("image", downloadUrl.getPath());
+                //Eventdatabase.child("Tables").child(tableName).child(key).updateChildren(children);
+                finish();
+            }
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST &&
+                resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri uri = data.getData();
+            imageName = uri.getPathSegments().get(uri.getPathSegments().size() - 1) + ".jpg";
+            imagePresent = false;
+
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                // Log.d(TAG, String.valueOf(bitmap));
+
+                ImageView imageView = (ImageView) findViewById(R.id.imageViewNewImage);
+                imageView.setImageBitmap(bitmap);
+                imagePresent = true;
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+        }
     }
 }

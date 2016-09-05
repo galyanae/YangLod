@@ -42,6 +42,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
     public interface RefreshMeCallback {
         void refreshMe();
     }
+
     private RefreshMeCallback callerActivity;
 
     public NewsRecyclerAdapter(TreeMap<String, newsItem> newsArray, Activity caller, boolean isManager) {
@@ -87,16 +88,14 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
             ((SimpleItemViewHolder) holder).tvYedia.setText(str + newsItem.getInfo());
             if (isManager) {
                 ((SimpleItemViewHolder) holder).ivDelete.setVisibility(View.VISIBLE);
-                final newsItem nItem=newsItem;
 
-                ((SimpleItemViewHolder) holder).ivDelete.setOnClickListener(new View.OnClickListener() {
+                /*((SimpleItemViewHolder) holder).ivDelete.setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View view) {
-                        System.out.println("delete called");
+                        System.out.println("delete called");*/
 
-                        deleteNews(view, nItem);
-                    }
-                });
+               /*     }
+                });*/
 
             } else ((SimpleItemViewHolder) holder).ivDelete.setVisibility(View.GONE);
 /*
@@ -108,45 +107,61 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
 
         }
     }
-public void deleteNews(View v, newsItem newsItem)
-{
-    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-            context);
 
-    // set title
-    alertDialogBuilder.setTitle("Delete are you sure?");
+    public void deleteNews(View v, int position) {
+        System.out.println("position=" + position);
+        newsItem = new newsItem();
 
-    final newsItem n= newsItem;
-    // set dialog message
-    alertDialogBuilder
-            .setMessage("Click yes to exit!")
-            .setCancelable(false)
-            .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,int id) {
-                    // if this button is clicked, close
-                    // current activity
-                    System.out.println("delete confirmed"+n.toString());
-                   /* newsRef.child(n.getKey()).removeValue(); // remove from DB
-                    newsArray.remove(n.getDate()+n.getTime()+n.getKey());  //remove from array*/
-                    ((NewsActivity)context).refreshMe();
-                    dialog.dismiss();
-                }
-            })
-            .setNegativeButton("No",new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog,int id) {
-                    // if this button is clicked, just close
-                    // the dialog box and do nothing
-                    System.out.println("delete canceled");
-                    dialog.cancel();
-                }
-            });
+        // loop until getting the right news
+        int pos = 0;
+        for (TreeMap.Entry<String, newsItem> entry : newsArray.entrySet()) {
+            if (pos == position) {
+                newsItem = entry.getValue();
+                break;
+            }
+            System.out.println(entry.getKey() + " - " + entry.getValue().toString());
+            pos++;
+        }
+        if (pos == position) {
 
-    // create alert dialog
-    AlertDialog alertDialog = alertDialogBuilder.create();
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                    context);
 
-    // show it
-    alertDialog.show();
-}
+            // set title
+            alertDialogBuilder.setTitle("Delete are you sure?");
+
+
+            // set dialog message
+            alertDialogBuilder
+                    .setMessage("Click yes to exit!")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // if this button is clicked, close
+                            // current activity
+                            System.out.println("delete confirmed" + newsItem.toString());
+                    newsRef.child(newsItem.getKey()).removeValue(); // remove from DB
+                    newsArray.remove(newsItem.getDate()+newsItem.getTime()+newsItem.getKey());  //remove from array
+                            ((NewsActivity) context).refreshMe();
+                            dialog.dismiss();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // if this button is clicked, just close
+                            // the dialog box and do nothing
+                            System.out.println("delete canceled");
+                            dialog.cancel();
+                        }
+                    });
+
+            // create alert dialog
+            AlertDialog alertDialog = alertDialogBuilder.create();
+
+            // show it
+            alertDialog.show();
+        }
+    }
 
     @Override
     public int getItemCount() {
@@ -166,67 +181,70 @@ public void deleteNews(View v, newsItem newsItem)
             tvYedia = (TextView) itemView.findViewById(R.id.tvYedia);
             ivYedia = (ImageView) itemView.findViewById(R.id.ivYedia);
             ivDelete = (ImageView) itemView.findViewById(R.id.ivDelete);
+            ivDelete.setOnClickListener(this);
 
         }
 
         @Override
         public void onClick(View v) {
             int field = v.getId();
-            if (field==R.id.ivDelete)
-                System.out.println("ivDelete called");
-            else System.out.println("holder called");
-
             int pos = getAdapterPosition();
-            fullNews(v, pos);
+
+            if (field == R.id.ivDelete) {
+                System.out.println("ivDelete called");
+                deleteNews(v, pos);
+            } else {
+                System.out.println("holder called");
+                fullNews(v, pos);
+            }
         }
-    }
 
-    private class ToastRunnable implements Runnable {
-        String mText;
+        private class ToastRunnable implements Runnable {
+            String mText;
 
-        public ToastRunnable(String text) {
-            mText = text;
+            public ToastRunnable(String text) {
+                mText = text;
+            }
+
+            public void run() {
+                Toast.makeText(context.getApplicationContext(), mText, Toast.LENGTH_SHORT).show();
+            }
         }
 
-        public void run() {
-            Toast.makeText(context.getApplicationContext(), mText, Toast.LENGTH_SHORT).show();
+        public void doToast(String msg) {
+            handler.post(new ToastRunnable(msg));
         }
-    }
 
-    public void doToast(String msg) {
-        handler.post(new ToastRunnable(msg));
-    }
+        protected void fullNews(View v, int position) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = li.inflate(R.layout.full_news, null, false);
+            currentPosition = position;
+            Date = (TextView) view.findViewById(R.id.tvDate);
+            Time = (TextView) view.findViewById(R.id.tvTime);
+            tvHead = (TextView) view.findViewById(R.id.tvHead);
+            tvYedia = (TextView) view.findViewById(R.id.tvYedia);
+            tvImg = (ImageView) view.findViewById(R.id.ivYedia);
+            tvPages = (TextView) view.findViewById(R.id.tvPages);
+            ivBackward = (ImageView) view.findViewById(R.id.ivBackward);
+            ivForward = (ImageView) view.findViewById(R.id.ivForward);
 
-    protected void fullNews(View v, int position) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = li.inflate(R.layout.full_news, null, false);
-        currentPosition = position;
-        Date = (TextView) view.findViewById(R.id.tvDate);
-        Time = (TextView) view.findViewById(R.id.tvTime);
-        tvHead = (TextView) view.findViewById(R.id.tvHead);
-        tvYedia = (TextView) view.findViewById(R.id.tvYedia);
-        tvImg = (ImageView) view.findViewById(R.id.ivYedia);
-        tvPages = (TextView) view.findViewById(R.id.tvPages);
-        ivBackward = (ImageView) view.findViewById(R.id.ivBackward);
-        ivForward = (ImageView) view.findViewById(R.id.ivForward);
-
-        newsItem newsItem = new newsItem();
-        int pos = 0;
-        for (TreeMap.Entry<String, newsItem> entry : newsArray.entrySet()) {
+            newsItem newsItem = new newsItem();
+            int pos = 0;
+            for (TreeMap.Entry<String, newsItem> entry : newsArray.entrySet()) {
+                if (pos == position) {
+                    newsItem = entry.getValue();
+                    break;
+                }
+                pos++;
+            }
             if (pos == position) {
-                newsItem = entry.getValue();
-                break;
-            }
-            pos++;
-        }
-        if (pos == position) {
-            String str = newsItem.getDate();
-            Date.setText(str.substring(6) + "/" + str.substring(4, 6) + "/" + str.substring(0, 4) + " ");
-            str = newsItem.getTime();
-            Time.setText(str.substring(0, 2) + ":" + str.substring(2) + " ");
-            tvHead.setText(newsItem.getHeadline());
-            tvYedia.setText(newsItem.getInfo());
+                String str = newsItem.getDate();
+                Date.setText(str.substring(6) + "/" + str.substring(4, 6) + "/" + str.substring(0, 4) + " ");
+                str = newsItem.getTime();
+                Time.setText(str.substring(0, 2) + ":" + str.substring(2) + " ");
+                tvHead.setText(newsItem.getHeadline());
+                tvYedia.setText(newsItem.getInfo());
 /*
             if (newsItem.getImage() != null && newsItem.getImage().length() > 0) {
                 tvImg.setVisibility(View.VISIBLE);
@@ -234,63 +252,63 @@ public void deleteNews(View v, newsItem newsItem)
             } else tvImg.setVisibility(View.GONE);
 */
 
-            if (position == 0)
-                ivBackward.setVisibility(View.INVISIBLE);
-            else ivBackward.setVisibility(View.VISIBLE);
+                if (position == 0)
+                    ivBackward.setVisibility(View.INVISIBLE);
+                else ivBackward.setVisibility(View.VISIBLE);
 
-            if (position == (newsArray.size() - 1))
-                ivForward.setVisibility(View.INVISIBLE);
-            else ivForward.setVisibility(View.VISIBLE);
+                if (position == (newsArray.size() - 1))
+                    ivForward.setVisibility(View.INVISIBLE);
+                else ivForward.setVisibility(View.VISIBLE);
 
-            tvPages.setText((position + 1) + "/" + newsArray.size());
-        }
-        builder.setView(view);
-        ivBackward.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                pageNews(view);
+                tvPages.setText((position + 1) + "/" + newsArray.size());
             }
-        });
+            builder.setView(view);
+            ivBackward.setOnClickListener(new View.OnClickListener() {
 
-        ivForward.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    pageNews(view);
+                }
+            });
 
-            public void onClick(View view) {
-                pageNews(view);
+            ivForward.setOnClickListener(new View.OnClickListener() {
 
-            }
-        });
-        show = builder.show();
-    }
+                public void onClick(View view) {
+                    pageNews(view);
 
-    public void pageNews(View v) {
-        int newPosition = currentPosition;
-        if (v.getId() == R.id.ivBackward) {
-            if (currentPosition == 0) return;
-            newPosition--;
-        } else    // probably forward
-        {
-            if (currentPosition == (newsArray.size() - 1)) {
-                return;
-            }
-            newPosition++;
+                }
+            });
+            show = builder.show();
         }
 
-        newsItem newsItem = new newsItem();
-        int pos = 0;
-        for (TreeMap.Entry<String, newsItem> entry : newsArray.entrySet()) {
+        public void pageNews(View v) {
+            int newPosition = currentPosition;
+            if (v.getId() == R.id.ivBackward) {
+                if (currentPosition == 0) return;
+                newPosition--;
+            } else    // probably forward
+            {
+                if (currentPosition == (newsArray.size() - 1)) {
+                    return;
+                }
+                newPosition++;
+            }
+
+            newsItem newsItem = new newsItem();
+            int pos = 0;
+            for (TreeMap.Entry<String, newsItem> entry : newsArray.entrySet()) {
+                if (pos == newPosition) {
+                    newsItem = entry.getValue();
+                    break;
+                }
+                pos++;
+            }
             if (pos == newPosition) {
-                newsItem = entry.getValue();
-                break;
-            }
-            pos++;
-        }
-        if (pos == newPosition) {
-            String str = newsItem.getDate();
-            Date.setText(str.substring(6) + "/" + str.substring(4, 6) + "/" + str.substring(0, 4) + " ");
-            str = newsItem.getTime();
-            Time.setText(str.substring(0, 2) + ":" + str.substring(2) + " ");
-            tvHead.setText(newsItem.getHeadline());
-            tvYedia.setText(newsItem.getInfo());
+                String str = newsItem.getDate();
+                Date.setText(str.substring(6) + "/" + str.substring(4, 6) + "/" + str.substring(0, 4) + " ");
+                str = newsItem.getTime();
+                Time.setText(str.substring(0, 2) + ":" + str.substring(2) + " ");
+                tvHead.setText(newsItem.getHeadline());
+                tvYedia.setText(newsItem.getInfo());
 /*
             if (newsItem.getImage() != null && newsItem.getImage().length() > 0) {
                 tvImg.setVisibility(View.VISIBLE);
@@ -298,19 +316,20 @@ public void deleteNews(View v, newsItem newsItem)
             } else tvImg.setVisibility(View.GONE);
 */
 
-            if (newPosition == 0)
-                ivBackward.setVisibility(View.INVISIBLE);
-            else ivBackward.setVisibility(View.VISIBLE);
+                if (newPosition == 0)
+                    ivBackward.setVisibility(View.INVISIBLE);
+                else ivBackward.setVisibility(View.VISIBLE);
 
-            if (newPosition == (newsArray.size() - 1))
-                ivForward.setVisibility(View.INVISIBLE);
-            else ivForward.setVisibility(View.VISIBLE);
+                if (newPosition == (newsArray.size() - 1))
+                    ivForward.setVisibility(View.INVISIBLE);
+                else ivForward.setVisibility(View.VISIBLE);
 
-            tvPages.setText((newPosition + 1) + "/" + newsArray.size());
+                tvPages.setText((newPosition + 1) + "/" + newsArray.size());
 
-            currentPosition = newPosition;
+                currentPosition = newPosition;
+            }
+            show.setView(v);
         }
-        show.setView(v);
     }
-}
 
+}
