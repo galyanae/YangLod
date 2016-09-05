@@ -66,7 +66,7 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
     LinearLayoutManager linearLayoutManager;
     String role = "user";
     boolean isManager = false;
-
+    String key;
     ImageView ivCancel;
     ImageView ivSave;
     ImageView ivPicture;
@@ -233,9 +233,8 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
 
             @Override
             public void onClick(View arg0) {
-                picture(arg0);
+                addNewImage(arg0);
             }
-
         });
 
     }
@@ -313,6 +312,8 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
                     System.out.println("Data could not be saved " + databaseError.getMessage());
                 } else {
                     System.out.println("Data saved successfully." + databaseReference.getKey());
+                    key = databaseReference.getKey();
+                    if (imagePresent) saveImage();
                     newsRecyclerAdapter.notifyDataSetChanged();
                     show.dismiss();
                 }
@@ -324,13 +325,10 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
         show.dismiss();
     }
 
-    public void picture(View v) {
-    }
-    public void refreshMe()
-    {
+    public void refreshMe() {
         newsRecyclerAdapter.notifyDataSetChanged();
-
     }
+
     private void saveImage() {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         // https://firebase.google.com/docs/storage/android/create-reference
@@ -359,12 +357,12 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 Map<String, Object> children = new HashMap<String, Object>();
                 children.put("image", downloadUrl.getPath());
-                //Eventdatabase.child("Tables").child(tableName).child(key).updateChildren(children);
+                newsRef.child("Tables").child("news").child(key).updateChildren(children);
                 finish();
             }
         });
-
     }
+
     public void addNewImage(View view) {
         Intent intent = new Intent();
 // Show only images, no videos or anything else
@@ -373,6 +371,7 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
 // Always show the chooser (if there are multiple options available)
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

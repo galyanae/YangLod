@@ -242,7 +242,6 @@ public class EventRegisterationActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        DatabaseReference newD = Userdatabase.child("users");
 
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         userID = user.getUid();
@@ -251,7 +250,7 @@ public class EventRegisterationActivity extends AppCompatActivity {
                         childUpdates.put("/Tables/" + tableName + "/" + key + "/Applicants/" + userID, null);
                         childUpdates.put("/users/" + userID + "/My" + tableName + "/" + key, null);
 
-                        newD.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
+                        Userdatabase.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
                             @Override
                             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                                 if (databaseError != null) {
