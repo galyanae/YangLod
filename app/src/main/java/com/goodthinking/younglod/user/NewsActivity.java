@@ -357,8 +357,7 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 Map<String, Object> children = new HashMap<String, Object>();
                 children.put("iName", downloadUrl.getPath());
-                newsRef.child("Tables").child("news").child(key).updateChildren(children);
-                finish();
+                newsRef.child(key).updateChildren(children);
             }
         });
     }
@@ -384,9 +383,9 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
 
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                // Log.d(TAG, String.valueOf(bitmap));
+                Log.d(getClass().getName(), " "+String.valueOf(bitmap));
 
-                ImageView imageView = (ImageView) findViewById(R.id.imageViewNewImage);
+                ImageView imageView = (ImageView) show.findViewById(R.id.imageViewNewImage);
                 imageView.setImageBitmap(bitmap);
                 imagePresent = true;
             } catch (IOException e) {
