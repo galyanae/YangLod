@@ -112,6 +112,13 @@
                 android:textSize="14sp"
                 android:textStyle="italic" />
         </ScrollView>
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:id="@+id/imageViewNewImage"
+            />
+
     </LinearLayout>
 
     <LinearLayout
