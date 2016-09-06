@@ -24,7 +24,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Upload_activity" />
+        <activity android:name=".Upload_activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            />
+        </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".ComingSoon" />
         <activity android:name=".SignUpActivity_Firebase" />
@@ -35,13 +42,12 @@
         <activity android:name=".EventRegisterationActivity" />
         <activity android:name=".EventRecyclerview_Firebase" />
         <activity android:name=".EventAddNew_Firebase" />
-     <activity android:name=".CourseAddNew_Firebase"></activity>
+        <activity android:name=".CourseAddNew_Firebase"></activity>
         <activity android:name=".CourseInformationActivity_Firebase"></activity>
         <activity android:name=".CourseRecyclerview_Firebase"></activity>
         <activity android:name=".CourseRegistrationActivity"></activity>
         <activity android:name=".CourseThanksActivity"></activity>
         <activity android:name=".MyCourse_Activity"></activity>
-
 
 
         <activity android:name=".Applicant_list"></activity>

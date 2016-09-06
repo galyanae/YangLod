@@ -28,7 +28,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.goodthinking.younglod.user.model.newsItem;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -187,7 +186,6 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
     }
 
     public void addNews(View v) {
-        Toast.makeText(NewsActivity.this, "fab clicked", Toast.LENGTH_SHORT).show();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater li = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = li.inflate(R.layout.new_news, null, false);
@@ -313,7 +311,7 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
                 } else {
                     System.out.println("Data saved successfully." + databaseReference.getKey());
                     key = databaseReference.getKey();
-                    if (imagePresent) saveImage();
+                    if (imagePresent) saveImage(key);
                     newsRecyclerAdapter.notifyDataSetChanged();
                     show.dismiss();
                 }
@@ -329,7 +327,7 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
         newsRecyclerAdapter.notifyDataSetChanged();
     }
 
-    private void saveImage() {
+    private void saveImage(String DBid) {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         // https://firebase.google.com/docs/storage/android/create-reference
         // Create a storage reference from our app
@@ -344,7 +342,7 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
         byte[] data = baos.toByteArray();
 
         UploadTask uploadTask = mountainsRef.putBytes(data);
-
+        final String keyid = new String(DBid);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
@@ -356,8 +354,29 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 Map<String, Object> children = new HashMap<String, Object>();
-                children.put("iName", downloadUrl.getPath());
+                children.put("iName", downloadUrl.getLastPathSegment());
+                //children.put("image", downloadUrl.getPath());
+                System.out.println(downloadUrl.getPath());
+                System.out.println(downloadUrl.getLastPathSegment());
                 newsRef.child(key).updateChildren(children);
+                // signal new image ready
+                //now look for the right entry in arrayData and update it.
+                System.out.println("keyid="+keyid);
+                String DBkey="";
+                for (TreeMap.Entry<String, newsItem> entry : newsArray.entrySet()) {
+                    DBkey = entry.getKey();
+                    if (keyid.equals(DBkey.substring(12))) {
+                        newsItem newsItem = new newsItem();
+                        newsItem = entry.getValue();
+                        newsItem.setiName(downloadUrl.getLastPathSegment());
+                        newsArray.put(DBkey, newsItem);
+                        newsRecyclerAdapter.notifyDataSetChanged(); //refresh all
+                        break;
+                    }
+
+                }
+                System.out.println("DBkey"+DBkey+ "keyid="+keyid);
+                //////////
             }
         });
     }
@@ -383,7 +402,7 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
 
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                Log.d(getClass().getName(), " "+String.valueOf(bitmap));
+                //Log.d(getClass().getName(), " "+String.valueOf(bitmap));
 
                 ImageView imageView = (ImageView) show.findViewById(R.id.imageViewNewImage);
                 imageView.setImageBitmap(bitmap);

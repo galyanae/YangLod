@@ -3,7 +3,11 @@ package com.goodthinking.younglod.user;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,12 +18,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.goodthinking.younglod.user.model.newsItem;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.ByteArrayOutputStream;
 import java.util.TreeMap;
 
 public class NewsRecyclerAdapter extends RecyclerView.Adapter {
+    private static final String IMAGES_BUCKET = "gs://hadashot-9bbf1.appspot.com";
     private TreeMap<String, newsItem> newsArray;
     private Context context;
     private final Handler handler = new Handler();
@@ -89,21 +99,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
             if (isManager) {
                 ((SimpleItemViewHolder) holder).ivDelete.setVisibility(View.VISIBLE);
 
-                /*((SimpleItemViewHolder) holder).ivDelete.setOnClickListener(new View.OnClickListener() {
-
-                    public void onClick(View view) {
-                        System.out.println("delete called");*/
-
-               /*     }
-                });*/
-
             } else ((SimpleItemViewHolder) holder).ivDelete.setVisibility(View.GONE);
-/*
-            if (newsItem.getImage() != null && newsItem.getImage().length() > 0) {
-                ((SimpleItemViewHolder) holder).ivYedia.setVisibility(View.VISIBLE);
-                ((SimpleItemViewHolder) holder).ivYedia.setImageBitmap(newsItem.getImg());
-            } else ((SimpleItemViewHolder) holder).ivYedia.setVisibility(View.GONE);
-*/
 
         }
     }
@@ -129,7 +125,6 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
 
             // set title
             alertDialogBuilder.setTitle("Delete are you sure?");
-
 
             // set dialog message
             alertDialogBuilder
@@ -245,12 +240,6 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
                 Time.setText(str.substring(0, 2) + ":" + str.substring(2) + " ");
                 tvHead.setText(newsItem.getHeadline());
                 tvYedia.setText(newsItem.getInfo());
-/*
-            if (newsItem.getImage() != null && newsItem.getImage().length() > 0) {
-                tvImg.setVisibility(View.VISIBLE);
-                tvImg.setImageBitmap(newsItem.getImg());
-            } else tvImg.setVisibility(View.GONE);
-*/
 
                 if (position == 0)
                     ivBackward.setVisibility(View.INVISIBLE);
@@ -277,6 +266,41 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
 
                 }
             });
+            System.out.println("iName="+newsItem.getiName());
+
+            if (newsItem.getiName() != null && newsItem.getiName().length()>0 && !newsItem.getiName().equals("nada"))
+            {
+                System.out.println("go display my image");
+                //there is picture go get it
+                tvImg.setVisibility(View.VISIBLE);
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+                // https://firebase.google.com/docs/storage/android/create-reference
+                // Create a storage reference from our app
+                StorageReference storageRef = storage.getReference();
+
+                // Create a reference to "mountains.jpg"
+/*
+ */
+                storageRef.child(newsItem.getiName()).getBytes(Long.MAX_VALUE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap bmpNew;
+                        ByteArrayOutputStream baoStream = new ByteArrayOutputStream();
+                        bmpNew = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+                        tvImg.setImageBitmap(bmpNew);
+                        // Use the bytes to display the image
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle any errors
+                    }
+                });
+
+                // tvImg.setImageBitmap();
+            } else tvImg.setVisibility(View.GONE);
+
             show = builder.show();
         }
 
