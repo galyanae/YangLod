@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.FirebaseError;
 import com.google.firebase.database.DataSnapshot;
@@ -40,8 +41,9 @@ public class NewMessageToUsers extends AppCompatActivity {
 
 
     //TODO: This API key is wrong, need to get another from 'Manage -> Cloud Messaging'
-    private static final String API_KEY = "AIzaSyB7ajsBlHR8vSzuR3shPCA4g9sFzxnqw6k";
+    private static final String API_KEY = "AIzaSyApaL01LVo4ozBZgIvuAKpWMu3e-qSYa88";
     private Map<String, String> events = null;
+    private Context ctx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,22 +56,26 @@ public class NewMessageToUsers extends AppCompatActivity {
         populateSpinner();
 
         sendMessageToUsersButton.setOnClickListener(new SendMessageToUsersClickListener());
+
     }
 
     private void populateSpinner() {
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
-        final Context ctx = this;
+        ctx = this;
 
         events = new HashMap<>();
+        events.put("all", "All");
         db.child("Tables").child("Events").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot child: snapshot.getChildren()) {
-                    if (child != null && child.child("eventName") != null) {
-                        String eventName = (String) child.child("eventName").getValue();
+                    if (child != null && child.child("EventName") != null) {
+                        String eventName = (String) child.child("EventName").getValue();
                         String eventId =  child.getKey();
-                        events.put(eventName, eventId);
+                        if (eventName != null) {
+                            events.put(eventName, eventId);
+                        }
                     }
 
                 }
@@ -97,6 +103,11 @@ public class NewMessageToUsers extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new EventsSpinnerOnItemSelectedListener());
     }
 
+    private void success() {
+        Toast.makeText(ctx, "Message was sended sucsessfully", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
     private class SendMessageToUsersClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -112,7 +123,7 @@ public class NewMessageToUsers extends AppCompatActivity {
                     }
                 });
             }
-
+            success();
         }
 
         private void sendToTopic(String textToSend) {
@@ -124,13 +135,12 @@ public class NewMessageToUsers extends AppCompatActivity {
                     send(textToSend, conn);
 
                     int responseCode = conn.getResponseCode();
-
-                    System.out.println("FCM Response " + responseCode);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 } finally {
                     if (conn != null) {
                         conn.disconnect();
+
                     }
                 }
 
