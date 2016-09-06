@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             isManager = true;
             FirebaseMessaging.getInstance().subscribeToTopic("/topics/manager");
         }
+        FirebaseMessaging.getInstance().subscribeToTopic("/topics/all");
         SharedPreferences sharedPref = this.getSharedPreferences("UserRole", this.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("Role", role);

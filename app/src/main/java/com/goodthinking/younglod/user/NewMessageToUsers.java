@@ -40,7 +40,7 @@ public class NewMessageToUsers extends AppCompatActivity {
 
 
     //TODO: This API key is wrong, need to get another from 'Manage -> Cloud Messaging'
-    private static final String API_KEY = "AIzaSyB7ajsBlHR8vSzuR3shPCA4g9sFzxnqw6k";
+    private static final String API_KEY = "AIzaSyApaL01LVo4ozBZgIvuAKpWMu3e-qSYa88";
     private Map<String, String> events = null;
 
     @Override
@@ -62,14 +62,17 @@ public class NewMessageToUsers extends AppCompatActivity {
         final Context ctx = this;
 
         events = new HashMap<>();
+        events.put("all", "All");
         db.child("Tables").child("Events").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot child: snapshot.getChildren()) {
-                    if (child != null && child.child("eventName") != null) {
-                        String eventName = (String) child.child("eventName").getValue();
+                    if (child != null && child.child("EventName") != null) {
+                        String eventName = (String) child.child("EventName").getValue();
                         String eventId =  child.getKey();
-                        events.put(eventName, eventId);
+                        if (eventName != null) {
+                            events.put(eventName, eventId);
+                        }
                     }
 
                 }
