@@ -68,6 +68,8 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
             key = intent.getStringExtra("Eventkey");
             position = intent.getIntExtra("position",0);
 
+            System.out.println(" "+position+ "   "+key);
+
             if (role==null || !role.equals("manager")) {
                 Button users = (Button) findViewById(R.id.fbviewlistofusersbtn);
                 Button delete = (Button) findViewById(R.id.fbDeleteEventbtn);
