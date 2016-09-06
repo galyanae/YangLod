@@ -1,5 +1,6 @@
 package com.goodthinking.younglod.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,15 +26,22 @@ public class MyEvent_Activity extends AppCompatActivity {
     ArrayList<String> filter = new ArrayList<>();
     String tableName = "Events";
     private Boolean EventIsNotValid;
-
+String role;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_recyclerview_firebase);
+        try {
+            role = getIntent().getExtras().getString("Role");
+            if(role==null) role="user";
+        } catch (Exception e) {
+            role = "user";
+        }
         EventRecyclerView = (RecyclerView) findViewById(R.id.EventRecyclerview);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         EventRecyclerView.setLayoutManager(linearLayoutManager);
-        EventRecyclerAdapter = new EventRecyclerAdapter(getApplicationContext());
+        EventRecyclerAdapter = new EventRecyclerAdapter(getApplicationContext(),role);
         EventRecyclerView.setAdapter(EventRecyclerAdapter);
         EventRecyclerAdapter.notifyDataSetChanged();
 
