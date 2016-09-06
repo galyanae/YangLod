@@ -74,7 +74,7 @@
         android:adjustViewBounds="true"
         android:maxHeight="1500dp"
         android:maxWidth="150dp"
-        android:scaleType="fitCenter"
+        android:scaleType="centerCrop"
         tools:ignore="contentDescription"
         android:layout_above="@+id/scroll"
         android:layout_alignParentRight="true"
