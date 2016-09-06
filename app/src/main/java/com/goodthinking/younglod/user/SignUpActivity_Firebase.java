@@ -121,34 +121,4 @@ public class SignUpActivity_Firebase extends AppCompatActivity {
             }
         });
     }
-
-    public void gotomainActivity(View view) {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        finish();
-    }
-
-    public void gotoLoginActivity(View view) {
-        startActivity(new Intent(getApplicationContext(), LoginActivity_Firebase.class));
-        finish();
-    }
-
-
-//        auth.createUserWithEmailAndPassword(userEmailstr, userPswstr)
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
-//
-//                        // If sign in fails, display a message to the user. If sign in succeeds
-//                        // the auth state listener will be notified and logic to handle the
-//                        // signed in user can be handled in the listener.
-//                        if (!task.isSuccessful()) {
-//                            Toast.makeText(getApplicationContext(), getString(R.string.register_faild_message) + task.getException(),
-//                                    Toast.LENGTH_SHORT).show();
-//                        }
-
-        // ...
-//                    }
-//                });
-
 }

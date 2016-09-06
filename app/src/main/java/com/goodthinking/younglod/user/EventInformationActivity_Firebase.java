@@ -31,10 +31,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EventInformationActivity_Firebase extends AppCompatActivity {
-    private static final String IMAGES_BUCKET ="gs://hadashot-9bbf1.appspot.com";
+    private static final String IMAGES_BUCKET = "gs://hadashot-9bbf1.appspot.com";
     private TextView ViewEventHeadline, ViewEventdate, ViewEventtime,
             ViewEventSynopsys, ViewEventInfo, ViewEventParticipatorsno, ViewEventHostName, RegistrationIsClosed;
-    private DatabaseReference Eventdatabase,  MyEventdatabase ;
+    private DatabaseReference Eventdatabase, MyEventdatabase;
     private int position;
     Button Register;
     String key;
@@ -45,6 +45,7 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
     private Boolean EventIsClosed;
     private FirebaseStorage storage;
     String role;
+    String tableName;
 
 
     @Override
@@ -56,21 +57,19 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
         Register = (Button) findViewById(R.id.fbviewregtoeventtbtn);
-        try {
-            role = getIntent().getExtras().getString("Role");
-            if(role==null) role="user";
-        } catch (Exception e) {
-            role = "user";
-        }
-        if (role==null) role="user";
+
+        role = getIntent().getExtras().getString("Role");
+        if (role == null) role = "user";
+        tableName = getIntent().getExtras().getString("TableName");
+        if (role == null) role = "user";
         if (getIntent().getExtras() != null) {
             Intent intent = getIntent();
             key = intent.getStringExtra("Eventkey");
-            position = intent.getIntExtra("position",0);
+            position = intent.getIntExtra("position", 0);
 
-            System.out.println(" "+position+ "   "+key);
+            System.out.println(" " + position + "   " + key);
 
-            if (role==null || !role.equals("manager")) {
+            if (role == null || !role.equals("manager")) {
                 Button users = (Button) findViewById(R.id.fbviewlistofusersbtn);
                 Button delete = (Button) findViewById(R.id.fbDeleteEventbtn);
                 Button edit = (Button) findViewById(R.id.fbviewEditEventbtn);
@@ -79,7 +78,6 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
                 users.setVisibility(View.INVISIBLE);
             }
             System.out.println(role);
-            //Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_LONG).show();
 
             ViewEventHeadline = (TextView) findViewById(R.id.fbviewEventHeadlineview);
             ViewEventdate = (TextView) findViewById(R.id.fbviewEventdateview);
@@ -89,21 +87,7 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
             ViewEventParticipatorsno = (TextView) findViewById(R.id.fbviewEventParticipatorsno);
             ViewEventHostName = (TextView) findViewById(R.id.fbviewEventhostname);
             RegistrationIsClosed = (TextView) findViewById(R.id.fbRegistrationIsClosed);
-            imageView= (ImageView) findViewById(R.id.imageView2);
-
-
-//             Event event = (Event) intent.getSerializableExtra("Event");
-//            if (event != null) {
-//
-//
-//            ViewEventHeadline.setText(event.getEventName());
-//            ViewEventdate.setText(event.getEventDate());
-//            ViewEventtime.setText(event.getEventTime());
-//            ViewEventSynopsys.setText(event.getEventSynopsys());
-//            ViewEventInfo.setText(event.getEventInformation());
-//            ViewEventParticipatorsno.setText("" +event.getEventParticipatorsno());
-//            ViewEventHostName.setText(event.getEventHost());
-//             }
+            imageView = (ImageView) findViewById(R.id.imageView2);
 
             Event event = EventArraydata.getInstance().getEvents().get(position);
 
@@ -117,13 +101,13 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
             EventIsClosed = EventArraydata.getInstance().getEvents().get(position).getEventIsClosed();
 
 
-            StorageReference storageRef=storage.getReferenceFromUrl(IMAGES_BUCKET);
+            StorageReference storageRef = storage.getReferenceFromUrl(IMAGES_BUCKET);
 
 
             if (event.getImage() != null && event.getImage().length() > 0) {
 
                 String[] parts = event.getImage().split("/");
-                storageRef.child("/images/" + parts[parts.length - 1]).getBytes(1024*1024*5).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                storageRef.child("/images/" + parts[parts.length - 1]).getBytes(1024 * 1024 * 5).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                     @Override
                     public void onSuccess(byte[] bits) {
                         Bitmap bitmap = BitmapFactory.decodeByteArray(bits, 0, bits.length);
@@ -138,8 +122,7 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
             }
 
 
-
-            if (EventIsClosed == true){
+            if (EventIsClosed == true) {
                 Register.setEnabled(false);
                 RegistrationIsClosed.setVisibility(View.VISIBLE);
             }
@@ -151,7 +134,7 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
     private void checkRegistration() {
         if (mAuth.getCurrentUser() != null && !mAuth.getCurrentUser().isAnonymous()) {
             keyUserId = mAuth.getCurrentUser().getUid();
-            System.out.println("keyUserId   "+keyUserId+" key="+key);
+            System.out.println("keyUserId   " + keyUserId + " key=" + key);
             //Query qrefUserRegister = root.child("Tables").child("Events").child(key).child("Applicants").child(keyUserId);
             root.child("Tables").child("Events").child(key).child("Applicants").child(keyUserId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -177,34 +160,41 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
             Register.setText(R.string.register_event_btn);
         }
     }
+
     public void EditEventbtn(View view) {
-        Intent intent=new Intent(getApplicationContext(),EventAddNew_Firebase.class);
+        Intent intent = new Intent(getApplicationContext(), EventAddNew_Firebase.class);
         intent_putExtra(intent);
 
     }
 
     public void CancelAddEventbtn(View view) {
-        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra("Role", role);
+        intent.putExtra("TableName", tableName);
         startActivity(intent);
         finish();
     }
 
     public void RegisterEventbtn(View view) {
         Intent intent = new Intent(getApplicationContext(), EventRegisterationActivity.class);
+        intent.putExtra("Role", role);
+        intent.putExtra("TableName", tableName);
         intent_putExtra(intent);
-      //  finish();
     }
+
     public void Listofuserstbtn(View view) {
-        Intent intent=new Intent(getApplicationContext(),Applicant_list.class);
+        Intent intent = new Intent(getApplicationContext(), Applicant_list.class);
+        intent.putExtra("Role", role);
+        intent.putExtra("TableName", tableName);
         intent_putExtra(intent);
     }
 
 
     private void intent_putExtra(Intent intent) {
         intent.putExtra("Eventkey", EventArraydata.getInstance().getEvents().get(position).getKey());
-        intent.putExtra("position",position);
+        intent.putExtra("position", position);
         intent.putExtra("Role", role);
+        intent.putExtra("TableName", tableName);
         startActivity(intent);
         finish();
     }
@@ -230,13 +220,15 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), getString(R.string.delete_failed_message), Toast.LENGTH_LONG).show();
                                 } else {
                                     Toast.makeText(getApplicationContext(), getString(R.string.delete_event_message), Toast.LENGTH_LONG).show();
-                                    Intent intent=new Intent(getApplicationContext(), EventRegisterationActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), EventRegisterationActivity.class);
                                     intent.putExtra("Role", role);
+                                    intent.putExtra("TableName", tableName);
                                     startActivity(intent);
                                     finish();
                                 }
-                                Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 intent.putExtra("Role", role);
+                                intent.putExtra("TableName", tableName);
                                 startActivity(intent);
                                 finish();
                             }

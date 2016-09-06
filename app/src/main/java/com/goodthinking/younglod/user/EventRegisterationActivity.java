@@ -41,7 +41,8 @@ public class EventRegisterationActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private int position, UserNoOfParticipators;
     private String key;
-    String tableName = "Events";
+    String tableName;
+    String role;
     private String UserID;
 
     @Override
@@ -67,7 +68,9 @@ public class EventRegisterationActivity extends AppCompatActivity {
         registerbtn = (Button) findViewById(R.id.rgviewregtoEventtbtn);
         cancelRegisterbtn = (Button) findViewById(R.id.rgCancelRegisterbtn);
         Rgviewmessage = (TextView) findViewById(R.id.rgviewmessage);
-
+        role = getIntent().getStringExtra("Role");
+        if (role == null) role = "user";
+        tableName = getIntent().getStringExtra("TableName");
         if (getIntent().getExtras() != null) {
             Intent intent = getIntent();
             key = intent.getStringExtra("Eventkey");
@@ -94,7 +97,10 @@ public class EventRegisterationActivity extends AppCompatActivity {
                 cancelRegisterbtn.setVisibility(View.INVISIBLE);
             }
         } else {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra("Role", role);
+            intent.putExtra("TableName", tableName);
+            startActivity(intent);
             finish();
             return;
         }
@@ -114,7 +120,7 @@ public class EventRegisterationActivity extends AppCompatActivity {
                             UserEmailstr = newUser.getUserEmail();
                         } else
                             System.out.println(getClass().getName() + " loaduser unfortunatly user empty");
-                        System.out.println("XXXXXX UserEmailstr="+UserEmailstr);
+                        System.out.println("XXXXXX UserEmailstr=" + UserEmailstr);
                         UserName.setText(Usernamestr);
                         Userphone.setText(UserPhonestr);
                         Usermail.setText(UserEmailstr);
@@ -209,12 +215,13 @@ public class EventRegisterationActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), getString(R.string.Registration_successful), Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(getApplicationContext(), EventThanksActivity.class);
                         intent.putExtra("eventID", key);
+                        intent.putExtra("Role", role);
+                        intent.putExtra("TableName", tableName);
                         startActivity(intent);
                     }
                     FirebaseMessaging.getInstance().subscribeToTopic(key);
                     progressDialog.dismiss();
 
-                    // startActivity(new Intent(getApplicationContext(), EventThanksActivity.class));
                     finish();
 
                 }
@@ -223,13 +230,18 @@ public class EventRegisterationActivity extends AppCompatActivity {
     }
 
     public void loginEventbtn(View view) {
-        startActivity(new Intent(getApplicationContext(), LoginActivity_Firebase.class));
+        Intent intent = new Intent(getApplicationContext(), LoginActivity_Firebase.class);
+        intent.putExtra("Role", role);
+        intent.putExtra("TableName", tableName);
+        startActivity(intent);
         finish();
     }
 
     public void Cancelbtn(View view) {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra("UserName", Usernamestr);
+        intent.putExtra("Role", role);
+        intent.putExtra("TableName", tableName);
         startActivity(intent);
         finish();
     }
@@ -262,13 +274,18 @@ public class EventRegisterationActivity extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), getString(R.string.cancel_faild_message), Toast.LENGTH_LONG).show();
                                 } else {
                                     Toast.makeText(getApplicationContext(), getString(R.string.Registration_cancel_successful), Toast.LENGTH_LONG).show();
-                                    startActivity(new Intent(getApplicationContext(), EventRegisterationActivity.class));
+                                    Intent intent = new Intent(getApplicationContext(), EventRegisterationActivity.class);
+                                    intent.putExtra("Role", role);
+                                    intent.putExtra("TableName", tableName);
+                                    startActivity(intent);
                                     finish();
                                 }
                                 FirebaseMessaging.getInstance().unsubscribeFromTopic(key);
                                 progressDialog.dismiss();
                                 Intent intent = new Intent(getApplicationContext(), EventThanksActivity.class);
                                 intent.putExtra("eventID", key);
+                                intent.putExtra("Role", role);
+                                intent.putExtra("TableName", tableName);
                                 startActivity(intent);
                                 finish();
                             }

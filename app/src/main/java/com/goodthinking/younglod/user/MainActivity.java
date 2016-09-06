@@ -38,21 +38,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        role = "user";
-        try {
-            role = getIntent().getExtras().getString("Role");
-        } catch (Exception e) {
-            role = "user";
-        }
+        role = getIntent().getExtras().getString("Role");
+        if (role == null || role.length() == 0) role = "user";
         if ("manager".equals(role)) {
             isManager = true;
             FirebaseMessaging.getInstance().subscribeToTopic("/topics/manager");
         }
         FirebaseMessaging.getInstance().subscribeToTopic("/topics/all");
-        SharedPreferences sharedPref = this.getSharedPreferences("UserRole", this.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("Role", role);
-        editor.commit();
+
         System.out.println("Am I a manager? " + isManager);
         gridView = (GridView) findViewById(R.id.tableLayout);
         adapterOne = new AdapterOne(getApplicationContext());
@@ -68,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                             getApplicationContext().MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPrefT.edit();
                     editor.putString("TableName", "Events");
-                    tableName="Events";
+                    tableName = "Events";
                     editor.commit();
                     intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
 
@@ -79,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString("TableName", "Courses");
                     System.out.println("Course written");
                     editor.commit();
-                    tableName="Courses";
+                    tableName = "Courses";
 
                     intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
 
@@ -121,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.menu_user_list) {
             //goToMyEventPage();
-            startActivity(new Intent(getApplicationContext(),MyEvent_Activity.class));
+            startActivity(new Intent(getApplicationContext(), MyEvent_Activity.class));
             return true;
         } else if (id == R.id.menu_profile) {
             //goToUserProfilePage();
@@ -136,29 +129,27 @@ public class MainActivity extends AppCompatActivity {
             intent = new Intent(MainActivity.this, NewMessageToUsers.class);
             startActivity(intent);
             return true;
-        }
-     else if (id == R.id.eventsValid) {
+        } else if (id == R.id.eventsValid) {
             SharedPreferences sharedPrefT = getApplicationContext().getSharedPreferences("TableName",
                     getApplicationContext().MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPrefT.edit();
             editor.putString("TableName", "Events");
-            tableName="Events";
+            tableName = "Events";
             editor.commit();
             intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
             intent.putExtra("typeEvents", "noValid");
             intent.putExtra("Role", role);
             intent.putExtra("tableName", tableName);
             startActivity(intent);
-        return true;
-    }
- else if (id == R.id.coursesValid) {
+            return true;
+        } else if (id == R.id.coursesValid) {
             SharedPreferences sharedPrefT = getApplicationContext().getSharedPreferences("TableName",
                     getApplicationContext().MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPrefT.edit();
             editor.putString("TableName", "Courses");
             System.out.println("Course written");
             editor.commit();
-            tableName="Courses";
+            tableName = "Courses";
 
             intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
             intent.putExtra("typeEvents", "noValid");

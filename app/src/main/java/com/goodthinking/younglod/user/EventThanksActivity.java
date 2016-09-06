@@ -23,6 +23,8 @@ public class EventThanksActivity extends AppCompatActivity {
     private String keyEvent;
 
     private TextView EventThanksnoteText;
+    String role;
+    String tableName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,8 @@ public class EventThanksActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         keyEvent = intent.getStringExtra("eventID");
+        role = intent.getStringExtra("Role");
+        tableName = intent.getStringExtra("TableName");
 
         root = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
@@ -42,20 +46,19 @@ public class EventThanksActivity extends AppCompatActivity {
     }
 
     private void checkRegistration() {
-        Query qrefUserRegister = root.child("Tables").child("Events").child(keyEvent).child("Applicants").child(keyUserId);
+        Query qrefUserRegister = root.child("Tables").child(tableName).child(keyEvent).child("Applicants").child(keyUserId);
         qrefUserRegister.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                if (snapshot == null || snapshot.getValue() == null){
+                if (snapshot == null || snapshot.getValue() == null) {
                     EventThanksnoteText.setText(R.string.Thanks_cancel_note);
-                  //  EventThanksnoteText.setText("You have canceled your registration");
+                    //  EventThanksnoteText.setText("You have canceled your registration");
                     //  Toast.makeText(EventInformationActivity_Firebase.this, "No record found",
                     //          Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     EventThanksnoteText.setText(R.string.Thanks_note);
-                   // EventThanksnoteText.setText("Thank you for your interest in the event, Our representative will contact you as soon as possible.  " +
-                         //   "This registration does not constitute approval of your participation");
+                    // EventThanksnoteText.setText("Thank you for your interest in the event, Our representative will contact you as soon as possible.  " +
+                    //   "This registration does not constitute approval of your participation");
                     // Toast.makeText(EventInformationActivity_Firebase.this, snapshot.getValue().toString(),
                     //         Toast.LENGTH_SHORT).show();
                 }
@@ -63,19 +66,19 @@ public class EventThanksActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "Download failed"+databaseError.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Download failed" + databaseError.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 
     }
 
     public void returntomain(View view) {
-        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
         finish();
 
     }
 
     public void GoToMyEventsFromThanksB(View view) {
-        startActivity(new Intent(getApplicationContext(),MyEvent_Activity.class));
+        startActivity(new Intent(getApplicationContext(), MyEvent_Activity.class));
     }
 }

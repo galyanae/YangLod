@@ -158,6 +158,9 @@
     <string name="adding_new_event">Adding new event</string>
     <string name="creation_failed">Creation failed</string>
     <string name="successfully_created">Successfully created</string>
-
-
+    <string name="my_courses">My courses</string>
+    <string name="log_out">Logout</string>
+    <string name="email_to_manager">Send email to manager</string>
+    <string name="send_message_to_users">send message to users</string>
+    <string name="my_events">My events</string>
 </resources>

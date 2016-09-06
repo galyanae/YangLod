@@ -49,7 +49,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
     private int position;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private String key;
-    String tableName = "Events";
+    String tableName;
     private String timeEvent;
     private String dateEvent = "";
     private CheckBox eventIsNotValid;
@@ -63,7 +63,6 @@ public class EventAddNew_Firebase extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_add_new_firebase);
-
 
 
         progressDialog = new ProgressDialog(this);
@@ -91,9 +90,10 @@ public class EventAddNew_Firebase extends AppCompatActivity {
         if (getIntent().getExtras() != null) {
             Intent intent = getIntent();
             role = intent.getStringExtra("Role");
+            if(role==null) role="user";
             tableName = intent.getStringExtra("tableName");
             key = intent.getStringExtra("Eventkey");
-            if (key==null) key="";
+            if (key == null) key = "";
             position = intent.getIntExtra("position", 0);
 
             // Bundle extras = getIntent().getExtras();
@@ -102,7 +102,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
             // Event event = (Event) intent.getSerializableExtra("Event");
             //   if (key != " ") {
 
-            if (key!=null && !key.equals("")) {
+            if (key != null && !key.equals("")) {
                 AddEventHeadline.setText(EventArraydata.getInstance().getEvents().get(position).getEventName());
                 AddEventdate.setText(EventArraydata.getInstance().getEvents().get(position).getEventDate());
                 AddEventtime.setText(EventArraydata.getInstance().getEvents().get(position).getEventTime());
@@ -271,9 +271,9 @@ public class EventAddNew_Firebase extends AppCompatActivity {
 
                 System.out.println(downloadUrl.getPath());
                 System.out.println(downloadUrl.getLastPathSegment());
-                
+
                 Eventdatabase.child("Tables").child(tableName).child(key).updateChildren(children);
-                finish();
+                //finish();
             }
         });
 
@@ -285,7 +285,8 @@ public class EventAddNew_Firebase extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
 // Always show the chooser (if there are multiple options available)
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);}
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
 
 
     public void CancelAddEventbtn(View view) {
@@ -354,6 +355,8 @@ public class EventAddNew_Firebase extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), R.string.successfully_updated, Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra("Role", role);
+                    intent.putExtra("tableName", tableName);
                     startActivity(intent);
                     finish();
                 }
