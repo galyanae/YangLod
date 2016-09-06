@@ -19,8 +19,18 @@
         android:orderInCategory="4"
         app:showAsAction="never" />
     <item android:id="@+id/send_message_to_users"
-        android:title="Send message to users"
-        android:orderInCategory="5"
+    android:title="Send message to users"
+    android:orderInCategory="5"
+    app:showAsAction="never" />
+
+    <item android:id="@+id/eventsValid"
+        android:title="@string/events_in_valid_date"
+        android:orderInCategory="6"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/coursesValid"
+        android:title="@string/courses_in_valid_date"
+        android:orderInCategory="7"
         app:showAsAction="never" />
 
 

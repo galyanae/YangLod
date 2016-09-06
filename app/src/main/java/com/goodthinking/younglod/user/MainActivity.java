@@ -108,6 +108,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (!"manager".equals(role)) {
             menu.getItem(4).setVisible(false);
+            menu.getItem(5).setVisible(false);
+            menu.getItem(6).setVisible(false);
+
         }
 
         return true;
