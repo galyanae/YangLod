@@ -34,6 +34,7 @@ public class EventThanksActivity extends AppCompatActivity {
         Intent intent = getIntent();
         keyEvent = intent.getStringExtra("eventID");
         role = intent.getStringExtra("Role");
+        if (role == null) role = "user";
         tableName = intent.getStringExtra("TableName");
 
         root = FirebaseDatabase.getInstance().getReference();
@@ -73,12 +74,18 @@ public class EventThanksActivity extends AppCompatActivity {
     }
 
     public void returntomain(View view) {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra("Role",role);
+        intent.putExtra("tableName",tableName);
+        startActivity(intent);
         finish();
 
     }
 
     public void GoToMyEventsFromThanksB(View view) {
-        startActivity(new Intent(getApplicationContext(), MyEvent_Activity.class));
+        Intent intent = new Intent(getApplicationContext(), MyEvent_Activity.class);
+        intent.putExtra("Role",role);
+        intent.putExtra("tableName",tableName);
+        startActivity(intent);
     }
 }

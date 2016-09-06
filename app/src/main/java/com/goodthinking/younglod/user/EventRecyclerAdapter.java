@@ -16,10 +16,12 @@ import com.goodthinking.younglod.user.model.Event;
 public class EventRecyclerAdapter extends RecyclerView.Adapter {
     private Context context;
     String role;
+    String tableName;
 
-    public EventRecyclerAdapter(Context context, String role) {
+    public EventRecyclerAdapter(Context context, String role, String tableName) {
         this.context = context;
         this.role = role;
+        this.tableName = tableName;
     }
 
     @Override
@@ -36,7 +38,9 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter {
         Event event = EventArraydata.getInstance().getEvents().get(position);
         ((SimpleItemViewHolder) holder).ItemEventHeadLine.setText(event.getEventName());
         ((SimpleItemViewHolder) holder).ItemEventSynopsys.setText(event.getEventSynopsys());
-        ((SimpleItemViewHolder) holder).ItemEventDate.setText("ON: " + event.getEventDate() + " AT: " + event.getEventTime());
+        ((SimpleItemViewHolder) holder).ItemEventDate.setText(context.getString(R.string.ondate) + event.getEventDate() +
+                context.getString(R.string.ontime) +
+                event.getEventTime());
 
     }
 

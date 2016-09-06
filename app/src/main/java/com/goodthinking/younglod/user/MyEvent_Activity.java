@@ -26,22 +26,20 @@ public class MyEvent_Activity extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference Eventdatabase, MyEventdatabase;
     ArrayList<String> filter = new ArrayList<>();
-    String tableName = "Events";
     private Boolean EventIsNotValid;
     private FloatingActionButton fab;
 
-String role;
+    String role;
+    String tableName;
     Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_recyclerview_firebase);
-        try {
-            role = getIntent().getExtras().getString("Role");
-            if(role==null) role="user";
-        } catch (Exception e) {
-            role = "user";
-        }
+
+        role = getIntent().getExtras().getString("Role");
+        if(role==null) role="user";
+        tableName = getIntent().getExtras().getString("TableName");
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.INVISIBLE);
@@ -49,7 +47,7 @@ String role;
         EventRecyclerView = (RecyclerView) findViewById(R.id.EventRecyclerview);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         EventRecyclerView.setLayoutManager(linearLayoutManager);
-        EventRecyclerAdapter = new EventRecyclerAdapter(getApplicationContext(),role);
+        EventRecyclerAdapter = new EventRecyclerAdapter(getApplicationContext(),role, tableName);
         EventRecyclerView.setAdapter(EventRecyclerAdapter);
         EventRecyclerAdapter.notifyDataSetChanged();
 
@@ -85,8 +83,6 @@ String role;
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Event event = dataSnapshot.getValue(Event.class);
                             event.setKey(dataSnapshot.getKey());
-                            //String CheckEventKey = event.getKey();
-                            //System.out.println("CheckEventkey" + CheckEventKey);
                             EventIsNotValid = event.getEventIsNotValid();
                             if (EventIsNotValid == false) {
                                 EventArraydata.getInstance().getEvents().add(event);
@@ -118,7 +114,6 @@ String role;
     @Override
     protected void onResume() {
         super.onResume();
-        //EventArraydata.getInstance().getEvents().clear();
     }
 
 

@@ -57,25 +57,12 @@ public class MainActivity extends AppCompatActivity {
                 if (adapterOne.getItems().get(position).getName().equals("news")) {
                     intent = new Intent(MainActivity.this, NewsActivity.class);
                 } else if (adapterOne.getItems().get(position).getName().equals("events")) {
-                    SharedPreferences sharedPrefT = getApplicationContext().getSharedPreferences("TableName",
-                            getApplicationContext().MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPrefT.edit();
-                    editor.putString("TableName", "Events");
                     tableName = "Events";
-                    editor.commit();
                     intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
 
                 } else if (adapterOne.getItems().get(position).getName().equals("courses")) {
-                    SharedPreferences sharedPrefT = getApplicationContext().getSharedPreferences("TableName",
-                            getApplicationContext().MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPrefT.edit();
-                    editor.putString("TableName", "Courses");
-                    System.out.println("Course written");
-                    editor.commit();
                     tableName = "Courses";
-
                     intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
-
 
                 } else if (adapterOne.getItems().get(position).getName().equals("business")) {
                     intent = new Intent(MainActivity.this, EventAddNew_Firebase.class);
@@ -90,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
 
     }
 

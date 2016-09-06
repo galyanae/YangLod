@@ -163,4 +163,6 @@
     <string name="email_to_manager">Send email to manager</string>
     <string name="send_message_to_users">send message to users</string>
     <string name="my_events">My events</string>
+    <string name="ondate">"ON: "</string>
+    <string name="ontime">" AT: "</string>
 </resources>

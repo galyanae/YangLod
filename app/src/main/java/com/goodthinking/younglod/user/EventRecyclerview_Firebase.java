@@ -58,7 +58,7 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
         EventRecyclerView = (RecyclerView) findViewById(R.id.EventRecyclerview);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         EventRecyclerView.setLayoutManager(linearLayoutManager);
-        EventRecyclerAdapter = new EventRecyclerAdapter(getApplicationContext(), role);
+        EventRecyclerAdapter = new EventRecyclerAdapter(getApplicationContext(), role, tableName);
         EventRecyclerView.setAdapter(EventRecyclerAdapter);
         EventRecyclerAdapter.notifyDataSetChanged();
         fab = (FloatingActionButton) findViewById(R.id.fab);
