@@ -39,14 +39,15 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
         Intent intent = getIntent();
 
         role = intent.getStringExtra("Role");
+        if (role==null) role = "user";
         tableName = intent.getStringExtra("tableName");
 
         vTypeEv = intent.getStringExtra("typeEvents");
         if (vTypeEv == null || vTypeEv.length()==0) vTypeEv="Valid";
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         if (role.equals("manager")) {
             isManager = true;
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setVisibility(View.VISIBLE);
         }
         else fab.setVisibility(View.GONE);
