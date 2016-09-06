@@ -20,19 +20,6 @@
             android:orientation="horizontal"
             android:padding="8dp">
 
-            <ImageView
-                android:id="@+id/ivYedia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:adjustViewBounds="true"
-                android:maxHeight="1500dp"
-                android:maxWidth="150dp"
-                android:scaleType="fitCenter"
-                tools:ignore="contentDescription" />
-
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -80,13 +67,25 @@
         </LinearLayout>
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/ivYedia"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:adjustViewBounds="true"
+        android:maxHeight="1500dp"
+        android:maxWidth="150dp"
+        android:scaleType="fitCenter"
+        tools:ignore="contentDescription"
+        android:layout_above="@+id/scroll"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
     <LinearLayout
         android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/koteret"
         android:layout_above="@+id/bottom"
         android:orientation="horizontal">
 
