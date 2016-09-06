@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.menu_user_list) {
             //goToMyEventPage();
+            startActivity(new Intent(getApplicationContext(),MyEvent_Activity.class));
             return true;
         } else if (id == R.id.menu_profile) {
             //goToUserProfilePage();
