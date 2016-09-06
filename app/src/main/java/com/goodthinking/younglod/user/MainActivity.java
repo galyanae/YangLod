@@ -130,8 +130,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.coursesValid) {
 
-            tableName = "Courses";
-
             intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
             intent.putExtra("typeEvents", "noValid");
             intent.putExtra("Role", role);
