@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
             intent.putExtra("typeEvents", "noValid");
             intent.putExtra("Role", role);
-            intent.putExtra("TableName", tableName);
+            intent.putExtra("TableName", "Events");
             startActivity(intent);
             return true;
         } else if (id == R.id.coursesValid) {
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
             intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
             intent.putExtra("typeEvents", "noValid");
             intent.putExtra("Role", role);
-            intent.putExtra("TableName", tableName);
+            intent.putExtra("TableName", "Courses");
             startActivity(intent);
             return true;
         }
