@@ -267,7 +267,11 @@ public class EventAddNew_Firebase extends AppCompatActivity {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 Map<String, Object> children = new HashMap<String, Object>();
-                children.put("image", downloadUrl.getPath());
+                children.put("image", downloadUrl.getLastPathSegment());
+
+                System.out.println(downloadUrl.getPath());
+                System.out.println(downloadUrl.getLastPathSegment());
+                
                 Eventdatabase.child("Tables").child(tableName).child(key).updateChildren(children);
                 finish();
             }

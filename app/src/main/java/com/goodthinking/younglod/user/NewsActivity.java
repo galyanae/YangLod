@@ -355,7 +355,6 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 Map<String, Object> children = new HashMap<String, Object>();
                 children.put("iName", downloadUrl.getLastPathSegment());
-                //children.put("image", downloadUrl.getPath());
                 System.out.println(downloadUrl.getPath());
                 System.out.println(downloadUrl.getLastPathSegment());
                 newsRef.child(key).updateChildren(children);
