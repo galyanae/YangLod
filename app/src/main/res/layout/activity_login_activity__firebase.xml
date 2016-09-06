@@ -8,21 +8,24 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.goodthinking.younglod.user.LoginActivity_Firebase">
+    <ImageView
+        android:id="@+id/Amuta_logo"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/logo_crop"
+        android:scaleType="centerCrop"
+        />
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_below="@id/Amuta_logo"
         android:layout_height="wrap_content"
         android:id="@+id/Loginlayout"
         android:orientation="vertical"
-        android:gravity="center"
-        android:background="@drawable/logo"
+
         android:layout_marginTop="8dp"
-        >
-        <ImageView
-            android:id="@+id/Amuta_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:scaleType="centerCrop"
-            />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
