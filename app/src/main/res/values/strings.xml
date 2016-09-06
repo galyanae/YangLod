@@ -166,6 +166,6 @@
     <string name="ondate">"ON: "</string>
     <string name="ontime">" AT: "</string>
     <string name="events_in_valid_date">Draft events</string>
-    <string name="courses_in_valid_dat">Draft courses</string>
+    <string name="courses_in_valid_date">Draft courses</string>
 
 </resources>
