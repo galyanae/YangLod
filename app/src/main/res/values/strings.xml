@@ -162,8 +162,13 @@
     <string name="delete_course_message">Delete course</string>
     <string name="update_register_course_btn">Update registration</string>
     <string name="cancel_my_registration">Cancel my registration</string>
-    <string name="events_in_valid_date">Events in valid date</string>
-    <string name="courses_in_valid_date">Courses in valid date</string>
+    <string name="events_in_valid_date">Draft Events</string>
+    <string name="courses_in_valid_date">Draft Courses</string>
+    <string name="my_events">My Events</string>
+    <string name="my_courses">My Courses</string>
+    <string name="log_out">Log Out</string>
+    <string name="email_to_manager">Email to manager</string>
+    <string name="send_message_to_users">Send message to users</string>
 
 
 </resources>

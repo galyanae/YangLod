@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.goodthinking.younglod.user.model.Event;
@@ -43,6 +44,8 @@ String role;
         }
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setVisibility(View.INVISIBLE);
+
         EventRecyclerView = (RecyclerView) findViewById(R.id.EventRecyclerview);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         EventRecyclerView.setLayoutManager(linearLayoutManager);

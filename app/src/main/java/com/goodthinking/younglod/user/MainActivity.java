@@ -137,6 +137,37 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
+     else if (id == R.id.eventsValid) {
+            SharedPreferences sharedPrefT = getApplicationContext().getSharedPreferences("TableName",
+                    getApplicationContext().MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPrefT.edit();
+            editor.putString("TableName", "Events");
+            tableName="Events";
+            editor.commit();
+            intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
+            intent.putExtra("typeEvents", "noValid");
+            intent.putExtra("Role", role);
+            intent.putExtra("tableName", tableName);
+            startActivity(intent);
+        return true;
+    }
+ else if (id == R.id.coursesValid) {
+            SharedPreferences sharedPrefT = getApplicationContext().getSharedPreferences("TableName",
+                    getApplicationContext().MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPrefT.edit();
+            editor.putString("TableName", "Courses");
+            System.out.println("Course written");
+            editor.commit();
+            tableName="Courses";
+
+            intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
+            intent.putExtra("typeEvents", "noValid");
+            intent.putExtra("Role", role);
+            intent.putExtra("tableName", tableName);
+            startActivity(intent);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

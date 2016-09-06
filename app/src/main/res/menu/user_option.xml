@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/menu_user_list"
-        android:title="User List"
+        android:title="@string/my_events"
         android:orderInCategory="1"
         app:showAsAction="never" />
     <item android:id="@+id/menu_profile"
-        android:title="My Profile"
+        android:title="@string/my_courses"
         android:orderInCategory="2"
         app:showAsAction="never" />
     <item android:id="@+id/menu_logout"
-        android:title="Log Out"
+        android:title="@string/log_out"
         android:orderInCategory="3"
         app:showAsAction="never" />
     <item android:id="@+id/send_email_to_manager"
-        android:title="Email to manager"
+        android:title="@string/email_to_manager"
         android:orderInCategory="4"
         app:showAsAction="never" />
     <item android:id="@+id/send_message_to_users"
-    android:title="Send message to users"
+    android:title="@string/send_message_to_users"
     android:orderInCategory="5"
     app:showAsAction="never" />
 
