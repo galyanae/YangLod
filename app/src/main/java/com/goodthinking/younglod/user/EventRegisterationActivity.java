@@ -90,6 +90,7 @@ public class EventRegisterationActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.Registration_toEvent_message, Toast.LENGTH_LONG).show();
                 registerbtn.setEnabled(false);
                 cancelRegisterbtn.setEnabled(false);
+                cancelRegisterbtn.setVisibility(View.INVISIBLE);
             }
         } else {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -134,6 +135,7 @@ public class EventRegisterationActivity extends AppCompatActivity {
                     Rgviewmessage.setText(R.string.Registration_headline);
                     //registerbtn.setText(R.string.confirm);
                     cancelRegisterbtn.setEnabled(false);
+                    cancelRegisterbtn.setVisibility(View.INVISIBLE);
                     loadUser(UserID);
                     //  Toast.makeText(EventInformationActivity_Firebase.this, "No record found",
                     //          Toast.LENGTH_SHORT).show();
@@ -141,7 +143,10 @@ public class EventRegisterationActivity extends AppCompatActivity {
                     //Rgviewmessage.setText(R.string.Registration_update_headline);
                     Rgviewmessage.setTextSize(14);
                     registerbtn.setText(R.string.update);
+                    registerbtn.setTextSize(10);
                     cancelRegisterbtn.setText(R.string.cancel_my_registration);
+                    cancelRegisterbtn.setTextSize(10);
+
                     // Toast.makeText(EventInformationActivity_Firebase.this, snapshot.getValue().toString(),
                     //         Toast.LENGTH_SHORT).show();
                     User newUser = snapshot.getValue(User.class);
