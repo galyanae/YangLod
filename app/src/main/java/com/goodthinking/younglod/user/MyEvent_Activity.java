@@ -70,7 +70,6 @@ public class MyEvent_Activity extends AppCompatActivity {
                 filter.clear();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     String key = data.getKey();
-                    //System.out.println("MyEvent" + key);
                     filter.add(key);
                 }
                 //EventArraydata.getInstance().getEvents().clear();
