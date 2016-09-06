@@ -2,6 +2,7 @@ package com.goodthinking.younglod.user;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +27,8 @@ public class MyEvent_Activity extends AppCompatActivity {
     ArrayList<String> filter = new ArrayList<>();
     String tableName = "Events";
     private Boolean EventIsNotValid;
+    private FloatingActionButton fab;
+
 String role;
     Intent intent;
     @Override
@@ -38,6 +41,8 @@ String role;
         } catch (Exception e) {
             role = "user";
         }
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         EventRecyclerView = (RecyclerView) findViewById(R.id.EventRecyclerview);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         EventRecyclerView.setLayoutManager(linearLayoutManager);

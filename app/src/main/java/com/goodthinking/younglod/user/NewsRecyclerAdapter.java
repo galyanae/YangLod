@@ -333,12 +333,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
                 Time.setText(str.substring(0, 2) + ":" + str.substring(2) + " ");
                 tvHead.setText(newsItem.getHeadline());
                 tvYedia.setText(newsItem.getInfo());
-/*
-            if (newsItem.getImage() != null && newsItem.getImage().length() > 0) {
-                tvImg.setVisibility(View.VISIBLE);
-                tvImg.setImageBitmap(newsItem.getImg());
-            } else tvImg.setVisibility(View.GONE);
-*/
+
 
                 if (newPosition == 0)
                     ivBackward.setVisibility(View.INVISIBLE);
@@ -352,6 +347,40 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter {
 
                 currentPosition = newPosition;
             }
+            System.out.println("iName="+newsItem.getiName());
+
+            if (newsItem.getiName() != null && newsItem.getiName().length()>0 && !newsItem.getiName().equals("nada"))
+            {
+                System.out.println("go display my image");
+                //there is picture go get it
+                tvImg.setVisibility(View.VISIBLE);
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+                // https://firebase.google.com/docs/storage/android/create-reference
+                // Create a storage reference from our app
+                StorageReference storageRef = storage.getReference();
+
+                // Create a reference to "mountains.jpg"
+/*
+ */
+                storageRef.child(newsItem.getiName()).getBytes(Long.MAX_VALUE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        Bitmap bmpNew;
+                        ByteArrayOutputStream baoStream = new ByteArrayOutputStream();
+                        bmpNew = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+                        tvImg.setImageBitmap(bmpNew);
+                        // Use the bytes to display the image
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle any errors
+                    }
+                });
+
+                // tvImg.setImageBitmap();
+            } else tvImg.setVisibility(View.GONE);
             show.setView(v);
         }
     }

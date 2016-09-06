@@ -89,6 +89,7 @@ public class EventRegisterationActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(getApplicationContext(), R.string.Registration_toEvent_message, Toast.LENGTH_LONG).show();
                 registerbtn.setEnabled(false);
+                registerbtn.setVisibility(View.INVISIBLE);
                 cancelRegisterbtn.setEnabled(false);
                 cancelRegisterbtn.setVisibility(View.INVISIBLE);
             }
@@ -146,7 +147,6 @@ public class EventRegisterationActivity extends AppCompatActivity {
                     registerbtn.setTextSize(10);
                     cancelRegisterbtn.setText(R.string.cancel_my_registration);
                     cancelRegisterbtn.setTextSize(10);
-
                     // Toast.makeText(EventInformationActivity_Firebase.this, snapshot.getValue().toString(),
                     //         Toast.LENGTH_SHORT).show();
                     User newUser = snapshot.getValue(User.class);
