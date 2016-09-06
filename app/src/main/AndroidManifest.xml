@@ -35,14 +35,7 @@
         <activity android:name=".EventRegisterationActivity" />
         <activity android:name=".EventRecyclerview_Firebase" />
         <activity android:name=".EventAddNew_Firebase" />
-     <activity android:name=".CourseAddNew_Firebase"></activity>
-        <activity android:name=".CourseInformationActivity_Firebase"></activity>
-        <activity android:name=".CourseRecyclerview_Firebase"></activity>
-        <activity android:name=".CourseRegistrationActivity"></activity>
-        <activity android:name=".CourseThanksActivity"></activity>
-        <activity android:name=".MyCourse_Activity"></activity>
-
-
+  
 
         <activity android:name=".Applicant_list"></activity>
         <!--
