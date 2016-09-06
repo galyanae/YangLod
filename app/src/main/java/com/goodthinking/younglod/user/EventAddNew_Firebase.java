@@ -91,16 +91,10 @@ public class EventAddNew_Firebase extends AppCompatActivity {
             Intent intent = getIntent();
             role = intent.getStringExtra("Role");
             if(role==null) role="user";
-            tableName = intent.getStringExtra("tableName");
+            tableName = intent.getStringExtra("TableName");
             key = intent.getStringExtra("Eventkey");
             if (key == null) key = "";
             position = intent.getIntExtra("position", 0);
-
-            // Bundle extras = getIntent().getExtras();
-            // Event event=(Event)extras.get(
-
-            // Event event = (Event) intent.getSerializableExtra("Event");
-            //   if (key != " ") {
 
             if (key != null && !key.equals("")) {
                 AddEventHeadline.setText(EventArraydata.getInstance().getEvents().get(position).getEventName());
@@ -292,6 +286,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
     public void CancelAddEventbtn(View view) {
         Intent intent = new Intent(getApplicationContext(), EventRecyclerview_Firebase.class);
         intent.putExtra("Role", role);
+        intent.putExtra("TableName", tableName);
         startActivity(intent);
         finish();
     }
@@ -356,7 +351,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), R.string.successfully_updated, Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("Role", role);
-                    intent.putExtra("tableName", tableName);
+                    intent.putExtra("TableName", tableName);
                     startActivity(intent);
                     finish();
                 }

@@ -71,6 +71,7 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter {
             System.out.println(getAdapterPosition());
             intent.putExtra("position", position);
             intent.putExtra("Role", role);
+            intent.putExtra("TableName", tableName);
             context.startActivity(intent);
 
         }

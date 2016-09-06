@@ -1,7 +1,6 @@
 package com.goodthinking.younglod.user;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -29,8 +28,8 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
     boolean isManager = false;
     String role = "user";
     private Query queryRef;
-    private String vTypeEv="Valid";
-    String tableName = "Events";
+    private String vTypeEv = "Valid";
+    String tableName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,18 +38,17 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
         Intent intent = getIntent();
 
         role = intent.getStringExtra("Role");
-        if (role==null) role = "user";
-        tableName = intent.getStringExtra("tableName");
+        if (role == null) role = "user";
+        tableName = intent.getStringExtra("TableName");
 
         vTypeEv = intent.getStringExtra("typeEvents");
-        if (vTypeEv == null || vTypeEv.length()==0) vTypeEv="Valid";
+        if (vTypeEv == null || vTypeEv.length() == 0) vTypeEv = "Valid";
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         if (role.equals("manager")) {
             isManager = true;
             fab.setVisibility(View.VISIBLE);
-        }
-        else fab.setVisibility(View.GONE);
+        } else fab.setVisibility(View.GONE);
 
 
         System.out.println("Am I a manager? " + isManager);
@@ -66,9 +64,9 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Intent intent = new Intent(getApplicationContext(), EventAddNew_Firebase.class);
+                Intent intent = new Intent(getApplicationContext(), EventAddNew_Firebase.class);
                 intent.putExtra("Role", role);
-                intent.putExtra("tableName", tableName);
+                intent.putExtra("TableName", tableName);
                 startActivity(intent);
             }
         });
@@ -119,7 +117,7 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
     public void addNewEvent(View view) {
         Intent intent = new Intent(EventRecyclerview_Firebase.this, EventAddNew_Firebase.class);
         intent.putExtra("Role", role);
-        intent.putExtra("tableName", tableName);
+        intent.putExtra("TableName", tableName);
         startActivity(intent);
 
     }

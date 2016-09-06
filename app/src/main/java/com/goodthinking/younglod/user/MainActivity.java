@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     intent = new Intent(MainActivity.this, ComingSoon.class);
                 }
                 intent.putExtra("Role", role);
-                intent.putExtra("tableName", tableName);
+                intent.putExtra("TableName", tableName);
                 startActivity(intent);
             }
         });
@@ -100,7 +100,10 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.menu_user_list) {
             //goToMyEventPage();
-            startActivity(new Intent(getApplicationContext(), MyEvent_Activity.class));
+            Intent intent = new Intent(getApplicationContext(), MyEvent_Activity.class);
+            intent.putExtra("Role",role);
+            intent.putExtra("TableName",tableName);
+            startActivity(intent);
             return true;
         } else if (id == R.id.menu_profile) {
             //goToUserProfilePage();
@@ -113,34 +116,26 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.send_message_to_users) {
             intent = new Intent(MainActivity.this, NewMessageToUsers.class);
+            intent.putExtra("Role",role);
+            intent.putExtra("TableName",tableName);
             startActivity(intent);
             return true;
         } else if (id == R.id.eventsValid) {
-            SharedPreferences sharedPrefT = getApplicationContext().getSharedPreferences("TableName",
-                    getApplicationContext().MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPrefT.edit();
-            editor.putString("TableName", "Events");
-            tableName = "Events";
-            editor.commit();
+
             intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
             intent.putExtra("typeEvents", "noValid");
             intent.putExtra("Role", role);
-            intent.putExtra("tableName", tableName);
+            intent.putExtra("TableName", tableName);
             startActivity(intent);
             return true;
         } else if (id == R.id.coursesValid) {
-            SharedPreferences sharedPrefT = getApplicationContext().getSharedPreferences("TableName",
-                    getApplicationContext().MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPrefT.edit();
-            editor.putString("TableName", "Courses");
-            System.out.println("Course written");
-            editor.commit();
+
             tableName = "Courses";
 
             intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
             intent.putExtra("typeEvents", "noValid");
             intent.putExtra("Role", role);
-            intent.putExtra("tableName", tableName);
+            intent.putExtra("TableName", tableName);
             startActivity(intent);
             return true;
         }
@@ -157,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "You Logout successfully", Toast.LENGTH_LONG).show();
     }
 
-
     public void sendEmailToManager() {
 
         Intent intent = new Intent(Intent.ACTION_SEND);
@@ -168,6 +162,4 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(Intent.createChooser(intent, "Send Email"));
     }
-
-
 }

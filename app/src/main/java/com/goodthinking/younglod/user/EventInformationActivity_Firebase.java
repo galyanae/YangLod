@@ -61,7 +61,6 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
         role = getIntent().getExtras().getString("Role");
         if (role == null) role = "user";
         tableName = getIntent().getExtras().getString("TableName");
-        if (role == null) role = "user";
         if (getIntent().getExtras() != null) {
             Intent intent = getIntent();
             key = intent.getStringExtra("Eventkey");

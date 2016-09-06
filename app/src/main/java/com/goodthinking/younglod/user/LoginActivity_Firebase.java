@@ -57,7 +57,7 @@ public class LoginActivity_Firebase extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        String role="user", name="Anonymous";
+                        String role = "user", name = "Anonymous";
                         if (dataSnapshot.getChildrenCount() > 0) {
                             System.out.println("children=" + dataSnapshot.getChildrenCount());
                             User newUser = dataSnapshot.getValue(User.class);
@@ -134,10 +134,14 @@ public class LoginActivity_Firebase extends AppCompatActivity {
 
     public void gotomainmenu(View view) {
         auth.signInAnonymously();
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra("Role", "user");
+        startActivity(intent);
     }
 
     public void gotoregisteration(View view) {
-        startActivity(new Intent(getApplicationContext(), SignUpActivity_Firebase.class));
+        Intent intent = new Intent(getApplicationContext(), SignUpActivity_Firebase.class);
+        intent.putExtra("Role", "user");
+        startActivity(intent);
     }
 }

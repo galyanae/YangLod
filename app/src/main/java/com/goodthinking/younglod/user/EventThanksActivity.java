@@ -76,7 +76,7 @@ public class EventThanksActivity extends AppCompatActivity {
     public void returntomain(View view) {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra("Role",role);
-        intent.putExtra("tableName",tableName);
+        intent.putExtra("TableName",tableName);
         startActivity(intent);
         finish();
 
@@ -85,7 +85,7 @@ public class EventThanksActivity extends AppCompatActivity {
     public void GoToMyEventsFromThanksB(View view) {
         Intent intent = new Intent(getApplicationContext(), MyEvent_Activity.class);
         intent.putExtra("Role",role);
-        intent.putExtra("tableName",tableName);
+        intent.putExtra("TableName",tableName);
         startActivity(intent);
     }
 }
