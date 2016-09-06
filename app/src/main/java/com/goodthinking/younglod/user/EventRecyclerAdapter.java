@@ -15,9 +15,11 @@ import com.goodthinking.younglod.user.model.Event;
  */
 public class EventRecyclerAdapter extends RecyclerView.Adapter {
     private Context context;
+    String role;
 
-    public EventRecyclerAdapter(Context context) {
+    public EventRecyclerAdapter(Context context, String role) {
         this.context = context;
+        this.role = role;
     }
 
     @Override
@@ -34,7 +36,7 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter {
         Event event = EventArraydata.getInstance().getEvents().get(position);
         ((SimpleItemViewHolder) holder).ItemEventHeadLine.setText(event.getEventName());
         ((SimpleItemViewHolder) holder).ItemEventSynopsys.setText(event.getEventSynopsys());
-        ((SimpleItemViewHolder) holder).ItemEventDate.setText("ON: " + event.getEventDate()+ " AT: "+event.getEventTime());
+        ((SimpleItemViewHolder) holder).ItemEventDate.setText("ON: " + event.getEventDate() + " AT: " + event.getEventTime());
 
     }
 
@@ -59,9 +61,12 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter {
 
         @Override
         public void onClick(View v) {
-            Intent intent=new Intent(context,EventInformationActivity_Firebase.class);
-            intent.putExtra("Eventkey",EventArraydata.getInstance().getEvents().get(position).getKey());
-            intent.putExtra("position",position );
+            Intent intent = new Intent(context, EventInformationActivity_Firebase.class);
+            System.out.println("position=" + position + " key=" + EventArraydata.getInstance().getEvents().get(position).getKey());
+            intent.putExtra("Eventkey", EventArraydata.getInstance().getEvents().get(position).getKey());
+            System.out.println(getAdapterPosition());
+            intent.putExtra("position", position);
+            intent.putExtra("Role", role);
             context.startActivity(intent);
 
         }

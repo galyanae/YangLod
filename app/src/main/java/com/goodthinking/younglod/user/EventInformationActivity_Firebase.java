@@ -23,7 +23,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -56,11 +55,28 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
         root = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
-        Register=(Button)findViewById(R.id.fbviewregtoeventtbtn);
+        Register = (Button) findViewById(R.id.fbviewregtoeventtbtn);
+        try {
+            role = getIntent().getExtras().getString("Role");
+            if(role==null) role="user";
+        } catch (Exception e) {
+            role = "user";
+        }
+        if (role==null) role="user";
         if (getIntent().getExtras() != null) {
             Intent intent = getIntent();
             key = intent.getStringExtra("Eventkey");
-            position = intent.getIntExtra("position", 0);
+            position = intent.getIntExtra("position",0);
+
+            if (role==null || !role.equals("manager")) {
+                Button users = (Button) findViewById(R.id.fbviewlistofusersbtn);
+                Button delete = (Button) findViewById(R.id.fbDeleteEventbtn);
+                Button edit = (Button) findViewById(R.id.fbviewEditEventbtn);
+                edit.setVisibility(View.INVISIBLE);
+                delete.setVisibility(View.INVISIBLE);
+                users.setVisibility(View.INVISIBLE);
+            }
+            System.out.println(role);
             //Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_LONG).show();
 
             ViewEventHeadline = (TextView) findViewById(R.id.fbviewEventHeadlineview);
@@ -131,10 +147,11 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
     }
 
     private void checkRegistration() {
-        if (mAuth.getCurrentUser() != null) {
+        if (mAuth.getCurrentUser() != null && !mAuth.getCurrentUser().isAnonymous()) {
             keyUserId = mAuth.getCurrentUser().getUid();
-            Query qrefUserRegister = root.child("Tables").child("Events").child(key).child("Applicants").child(keyUserId);
-            qrefUserRegister.addListenerForSingleValueEvent(new ValueEventListener() {
+            System.out.println("keyUserId   "+keyUserId+" key="+key);
+            //Query qrefUserRegister = root.child("Tables").child("Events").child(key).child("Applicants").child(keyUserId);
+            root.child("Tables").child("Events").child(key).child("Applicants").child(keyUserId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
                     if (snapshot == null || snapshot.getValue() == null) {
