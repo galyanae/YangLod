@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             menu.getItem(6).setVisible(true);
 
         }
-        if ((auth != null && auth.getCurrentUser().isAnonymous()) || auth == null) {
+        if ((auth == null || auth.getCurrentUser() == null || auth.getCurrentUser().isAnonymous())) {
             menu.getItem(0).setVisible(false);  // no my events
             menu.getItem(1).setVisible(false); // no my courses
 
