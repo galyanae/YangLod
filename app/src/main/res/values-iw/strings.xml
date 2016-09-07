@@ -98,7 +98,7 @@
     <string name="go_to_my_courses">מעבר אל הקורסים שלי</string>
     <string name="from">מ:</string>
     <string name="Till">עד:</string>
-    <string name="Registration_User_participators_no_course">יש להכניס את מספר משתתפי הקורס</string>
+    <string name="Registration_User_participators_no_course">מספר משתתפים</string>
     <string name="Thanks_note_course">תודה על הבעת התעניינותך בקורס! נציג מטעמנו ייצור איתך קשר בהקדם. ההרשמה אינה מהווה אישור להשתתפות בקורס</string>
     <string name="hogimTitle">קורסים</string>
     <string name="enterHogName">שם הקורס</string>

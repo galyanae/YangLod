@@ -60,7 +60,7 @@
     <string name="update_register_event_btn">Update Registration</string>
     <string name="Thanks_cancel_note">Your registration is cancelled</string>
     <string name="user_profile_return_btn">Return</string>
-    <string name="Registration_Userparticipators_no">Please fill in Number of participators for the event</string>
+    <string name="Registration_Userparticipators_no">Fill in Number of participators</string>
     <string name="Event_user_list_btn">List of users registered to event</string>
     <string name="applicant_name">Applicant Name</string>
     <string name="applicant_phone">Applicant Phone</string>
