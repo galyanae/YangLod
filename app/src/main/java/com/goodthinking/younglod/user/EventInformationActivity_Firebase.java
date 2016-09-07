@@ -211,7 +211,7 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
 
                         Map<String, Object> childUpdates = new HashMap<>();
 
-                        childUpdates.put("/"+tableName+"/" + key, null);
+                        childUpdates.put("/" + tableName + "/" + key, null);
 
                         newD.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
                             @Override
