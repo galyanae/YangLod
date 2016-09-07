@@ -82,7 +82,7 @@ public class EventRegisterationActivity extends AppCompatActivity {
                 Eventtime.setText(EventArraydata.getInstance().getEvents().get(position).getEventTime());
                 EventSynopsys.setText(EventArraydata.getInstance().getEvents().get(position).getEventSynopsys());
             }
-            if (auth.getCurrentUser() != null) {
+            if (auth.getCurrentUser() != null && !auth.getCurrentUser().isAnonymous()) {
                 loginbtn.setEnabled(false);
                 signupbtn.setEnabled(false);
                 //get user from firebase
@@ -113,13 +113,19 @@ public class EventRegisterationActivity extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getChildrenCount()==0)
+                        {
+                            Toast.makeText(getApplicationContext(), "LoadUser failed", Toast.LENGTH_LONG).show();
+                            Usernamestr="Anonymous";
+                            return;
+                        }
                         User newUser = dataSnapshot.getValue(User.class);
                         if (newUser != null && dataSnapshot.getChildrenCount() > 0) {
                             Usernamestr = newUser.getUserName();
                             UserPhonestr = newUser.getUserPhone();
                             UserEmailstr = newUser.getUserEmail();
                         } else
-                            System.out.println(getClass().getName() + " loaduser unfortunatly user empty");
+                            System.out.println(getClass().getName() + " loaduser unfortunately user empty");
                         System.out.println("XXXXXX UserEmailstr=" + UserEmailstr);
                         UserName.setText(Usernamestr);
                         Userphone.setText(UserPhonestr);
@@ -128,7 +134,7 @@ public class EventRegisterationActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        Toast.makeText(getApplicationContext(), "Download failed" + databaseError.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "LoadUser failed" + databaseError.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
     }

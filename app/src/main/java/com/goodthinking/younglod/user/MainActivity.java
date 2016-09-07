@@ -1,7 +1,6 @@
 package com.goodthinking.younglod.user;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -31,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private TreeMap<String, newsItem> newsArray = new TreeMap();
     private String role;
     private String tableName;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,42 +40,58 @@ public class MainActivity extends AppCompatActivity {
 
         role = getIntent().getExtras().getString("Role");
         if (role == null || role.length() == 0) role = "user";
+        auth = FirebaseAuth.getInstance();
+
         if ("manager".equals(role)) {
             isManager = true;
             FirebaseMessaging.getInstance().subscribeToTopic("/topics/manager");
         }
-        FirebaseMessaging.getInstance().subscribeToTopic("/topics/all");
+
+        FirebaseMessaging.getInstance().
+
+                subscribeToTopic("/topics/all");
 
         System.out.println("Am I a manager? " + isManager);
-        gridView = (GridView) findViewById(R.id.tableLayout);
-        adapterOne = new AdapterOne(getApplicationContext());
+        gridView = (GridView)
+
+                findViewById(R.id.tableLayout);
+
+        adapterOne = new
+
+                AdapterOne(getApplicationContext()
+
+        );
         gridView.setAdapter(adapterOne);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener()
 
-                if (adapterOne.getItems().get(position).getName().equals("news")) {
-                    intent = new Intent(MainActivity.this, NewsActivity.class);
-                } else if (adapterOne.getItems().get(position).getName().equals("events")) {
-                    tableName = "Events";
-                    intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
+                                        {
+                                            @Override
+                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                } else if (adapterOne.getItems().get(position).getName().equals("courses")) {
-                    tableName = "Courses";
-                    intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
+                                                if (adapterOne.getItems().get(position).getName().equals("news")) {
+                                                    intent = new Intent(MainActivity.this, NewsActivity.class);
+                                                } else if (adapterOne.getItems().get(position).getName().equals("events")) {
+                                                    tableName = "Events";
+                                                    intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
 
-                } else if (adapterOne.getItems().get(position).getName().equals("business")) {
-                    intent = new Intent(MainActivity.this, EventAddNew_Firebase.class);
-                } else if (adapterOne.getItems().get(position).getName().equals("contacts")) {
-                    intent = new Intent(MainActivity.this, AboutUsActivity.class);
-                } else {
-                    intent = new Intent(MainActivity.this, ComingSoon.class);
-                }
-                intent.putExtra("Role", role);
-                intent.putExtra("TableName", tableName);
-                startActivity(intent);
-            }
-        });
+                                                } else if (adapterOne.getItems().get(position).getName().equals("courses")) {
+                                                    tableName = "Courses";
+                                                    intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
+
+                                                } else if (adapterOne.getItems().get(position).getName().equals("business")) {
+                                                    intent = new Intent(MainActivity.this, EventAddNew_Firebase.class);
+                                                } else if (adapterOne.getItems().get(position).getName().equals("contacts")) {
+                                                    intent = new Intent(MainActivity.this, AboutUsActivity.class);
+                                                } else {
+                                                    intent = new Intent(MainActivity.this, ComingSoon.class);
+                                                }
+                                                intent.putExtra("Role", role);
+                                                intent.putExtra("TableName", tableName);
+                                                startActivity(intent);
+                                            }
+                                        }
+
+        );
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     }
@@ -89,9 +105,20 @@ public class MainActivity extends AppCompatActivity {
             menu.getItem(4).setVisible(false);
             menu.getItem(5).setVisible(false);
             menu.getItem(6).setVisible(false);
+        } else {
+            menu.getItem(4).setVisible(true);
+            menu.getItem(5).setVisible(true);
+            menu.getItem(6).setVisible(true);
 
         }
+        if (auth != null && auth.getCurrentUser().isAnonymous()) {
+            menu.getItem(1).setVisible(false);  // no my events
+            menu.getItem(2).setVisible(false); // no my courses
 
+        } else {
+            menu.getItem(1).setVisible(true);  // no my events
+            menu.getItem(2).setVisible(true); // no my courses
+        }
         return true;
     }
 
@@ -101,8 +128,8 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.menu_user_list) {
             //goToMyEventPage();
             Intent intent = new Intent(getApplicationContext(), MyEvent_Activity.class);
-            intent.putExtra("Role",role);
-            intent.putExtra("TableName",tableName);
+            intent.putExtra("Role", role);
+            intent.putExtra("TableName", tableName);
             startActivity(intent);
             return true;
         } else if (id == R.id.menu_profile) {
@@ -116,8 +143,8 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.send_message_to_users) {
             intent = new Intent(MainActivity.this, NewMessageToUsers.class);
-            intent.putExtra("Role",role);
-            intent.putExtra("TableName",tableName);
+            intent.putExtra("Role", role);
+            intent.putExtra("TableName", tableName);
             startActivity(intent);
             return true;
         } else if (id == R.id.eventsValid) {
