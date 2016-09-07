@@ -111,13 +111,13 @@ public class MainActivity extends AppCompatActivity {
             menu.getItem(6).setVisible(true);
 
         }
-        if (auth != null && auth.getCurrentUser().isAnonymous()) {
-            menu.getItem(1).setVisible(false);  // no my events
-            menu.getItem(2).setVisible(false); // no my courses
+        if (auth != null && auth.getCurrentUser().isAnonymous() || auth == null) {
+            menu.getItem(0).setVisible(false);  // no my events
+            menu.getItem(1).setVisible(false); // no my courses
 
         } else {
-            menu.getItem(1).setVisible(true);  // no my events
-            menu.getItem(2).setVisible(true); // no my courses
+            menu.getItem(0).setVisible(true);  // no my events
+            menu.getItem(1).setVisible(true); // no my courses
         }
         return true;
     }

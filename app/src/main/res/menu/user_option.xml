@@ -2,35 +2,42 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/menu_user_list"
-        android:title="@string/my_events"
+    <item
+        android:id="@+id/menu_user_list"
         android:orderInCategory="1"
+        android:title="@string/my_events"
         app:showAsAction="never" />
-    <item android:id="@+id/menu_profile"
-        android:title="@string/my_courses"
+    <item
+        android:id="@+id/menu_profile"
         android:orderInCategory="2"
+        android:title="@string/my_courses"
         app:showAsAction="never" />
-    <item android:id="@+id/menu_logout"
-        android:title="@string/log_out"
+    <item
+        android:id="@+id/menu_logout"
         android:orderInCategory="3"
+        android:title="@string/log_out"
         app:showAsAction="never" />
-    <item android:id="@+id/send_email_to_manager"
-        android:title="@string/email_to_manager"
+    <item
+        android:id="@+id/send_email_to_manager"
         android:orderInCategory="4"
+        android:title="@string/email_to_manager"
         app:showAsAction="never" />
-    <item android:id="@+id/send_message_to_users"
-    android:title="@string/send_message_to_users"
-    android:orderInCategory="5"
-    app:showAsAction="never" />
+    <item
+        android:id="@+id/send_message_to_users"
+        android:orderInCategory="5"
+        android:title="@string/send_message_to_users"
+        app:showAsAction="never" />
 
-    <item android:id="@+id/eventsValid"
-        android:title="@string/events_in_valid_date"
+    <item
+        android:id="@+id/eventsValid"
         android:orderInCategory="6"
+        android:title="@string/events_in_valid_date"
         app:showAsAction="never" />
 
-    <item android:id="@+id/coursesValid"
-        android:title="@string/courses_in_valid_date"
+    <item
+        android:id="@+id/coursesValid"
         android:orderInCategory="7"
+        android:title="@string/courses_in_valid_date"
         app:showAsAction="never" />
 
 
