@@ -65,7 +65,7 @@
     <string name="applicant_name">Applicant Name</string>
     <string name="applicant_phone">Applicant Phone</string>
     <string name="applicant_mail">Applicant Email</string>
-    <string name="applicat_participtors_num">There is no participators</string>
+    <string name="applicat_participtors_num">Participants</string>
     <string name="event_is_not_valid">Event is not valid</string>
     <string name="registration_is_closed">Registration is closed</string>
     <string name="confirm">Confirm</string>
