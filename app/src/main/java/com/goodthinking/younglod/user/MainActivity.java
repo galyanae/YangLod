@@ -129,13 +129,18 @@ public class MainActivity extends AppCompatActivity {
             //goToMyEventPage();
             Intent intent = new Intent(getApplicationContext(), MyEvent_Activity.class);
             intent.putExtra("Role", role);
-            intent.putExtra("TableName", tableName);
+            intent.putExtra("TableName", "Events");
             startActivity(intent);
             return true;
         } else if (id == R.id.menu_profile) {
-            //goToUserProfilePage();
+            //goToMyEventPage();
+            Intent intent = new Intent(getApplicationContext(), MyEvent_Activity.class);
+            intent.putExtra("Role", role);
+            intent.putExtra("TableName", "Courses");
+            startActivity(intent);
             return true;
-        } else if (id == R.id.menu_logout) {
+        }
+        else if (id == R.id.menu_logout) {
             logout();
             return true;
         } else if (id == R.id.send_email_to_manager) {

@@ -32,13 +32,14 @@ public class MyEvent_Activity extends AppCompatActivity {
     String role;
     String tableName;
     Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_recyclerview_firebase);
 
         role = getIntent().getExtras().getString("Role");
-        if(role==null) role="user";
+        if (role == null) role = "user";
         tableName = getIntent().getExtras().getString("TableName");
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -47,7 +48,7 @@ public class MyEvent_Activity extends AppCompatActivity {
         EventRecyclerView = (RecyclerView) findViewById(R.id.EventRecyclerview);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         EventRecyclerView.setLayoutManager(linearLayoutManager);
-        EventRecyclerAdapter = new EventRecyclerAdapter(getApplicationContext(),role, tableName);
+        EventRecyclerAdapter = new EventRecyclerAdapter(getApplicationContext(), role, tableName);
         EventRecyclerView.setAdapter(EventRecyclerAdapter);
         EventRecyclerAdapter.notifyDataSetChanged();
 
@@ -77,6 +78,7 @@ public class MyEvent_Activity extends AppCompatActivity {
                     final String Eventkey = filter.get(i);
                     System.out.println("key is" + Eventkey);
                     Eventdatabase = FirebaseDatabase.getInstance().getReference();
+                    System.out.println(getClass().getName() + " tableName=" + tableName);
                     Eventdatabase.child("Tables").child(tableName).child(Eventkey).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -106,8 +108,6 @@ public class MyEvent_Activity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Download failed" + databaseError.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
-//
     }
 
     @Override
