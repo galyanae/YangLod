@@ -44,7 +44,7 @@
     <string name="Forget_password">Please fill in your mail</string>
     <string name="Registration_toEvent_message">"You need to register or login first."</string>
     <string name="Registration_headline">You are going to be registered to the following Event, Please review registration details before approving</string>
-    <string name="Thanks_note">Thank you for your interest in the event. Our representative will contact you as soon as possible. This registration does not constitute approval of your participation</string>
+    <string name="Thanks_note">Thank you for your interest in the activity. Our representative will contact you as soon as possible. This registration does not constitute approval of your participation</string>
     <string name="InstructionsToResetPassword">We have sent you instructions to reset your password!</string>
     <string name="ReSendEMail">Failed to send reset Email!</string>
     <string name="action_settings">Settings</string>
