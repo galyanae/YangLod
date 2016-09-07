@@ -28,7 +28,7 @@
     <string name="register_faild_message">Registration was failed</string>
     <string name="login_faild_message">Login failed</string>
     <string name="Registration_successful">Registration Successfully</string>
-    <string name="already_registered_btn">I am already a registered user</string>
+    <string name="already_registered_btn">User already registered</string>
     <string name="Login_btn">Login</string>
     <string name="register_from_login_btn">Not registered yet? Come join us!</string>
     <string name="register_event_btn">Register</string>
@@ -164,7 +164,7 @@
     <string name="send_message_to_users">send message to users</string>
     <string name="my_events">My events</string>
     <string name="ondate">"ON: "</string>
-    <string name="ontime">" AT: "</string>
+    <string name="ontime">" "</string>
     <string name="events_in_valid_date">Draft events</string>
     <string name="courses_in_valid_date">Draft courses</string>
 

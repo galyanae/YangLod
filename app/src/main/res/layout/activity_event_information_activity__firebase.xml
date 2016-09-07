@@ -195,6 +195,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:enabled="true"
+                android:onClick="EditEventbtn"
                 android:background="@drawable/edit" />
 
         </LinearLayout>

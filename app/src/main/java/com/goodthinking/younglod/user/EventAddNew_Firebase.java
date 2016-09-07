@@ -90,7 +90,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
         if (getIntent().getExtras() != null) {
             Intent intent = getIntent();
             role = intent.getStringExtra("Role");
-            if(role==null) role="user";
+            if (role == null) role = "user";
             tableName = intent.getStringExtra("TableName");
             key = intent.getStringExtra("Eventkey");
             if (key == null) key = "";

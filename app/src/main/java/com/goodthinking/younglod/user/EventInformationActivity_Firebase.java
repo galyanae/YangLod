@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -46,7 +45,7 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
     private FirebaseStorage storage;
     String role;
     String tableName;
-
+    Button users, edit, delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +60,9 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
         role = getIntent().getExtras().getString("Role");
         if (role == null) role = "user";
         tableName = getIntent().getExtras().getString("TableName");
+        users = (Button) findViewById(R.id.fbviewlistofusersbtn);
+        delete = (Button) findViewById(R.id.fbDeleteEventbtn);
+        edit = (Button) findViewById(R.id.fbviewEditEventbtn);
         if (getIntent().getExtras() != null) {
             Intent intent = getIntent();
             key = intent.getStringExtra("Eventkey");
@@ -69,12 +71,13 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
             System.out.println(" " + position + "   " + key);
 
             if (role == null || !role.equals("manager")) {
-                Button users = (Button) findViewById(R.id.fbviewlistofusersbtn);
-                Button delete = (Button) findViewById(R.id.fbDeleteEventbtn);
-                Button edit = (Button) findViewById(R.id.fbviewEditEventbtn);
                 edit.setVisibility(View.INVISIBLE);
                 delete.setVisibility(View.INVISIBLE);
                 users.setVisibility(View.INVISIBLE);
+            } else {
+                edit.setVisibility(View.VISIBLE);
+                delete.setVisibility(View.VISIBLE);
+                users.setVisibility(View.VISIBLE);
             }
             System.out.println(role);
 
@@ -162,8 +165,10 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
 
     public void EditEventbtn(View view) {
         Intent intent = new Intent(getApplicationContext(), EventAddNew_Firebase.class);
-        intent_putExtra(intent);
-
+        intent.putExtra("Role", role);
+        intent.putExtra("TableName", tableName);
+        startActivity(intent);
+        finish();
     }
 
     public void CancelAddEventbtn(View view) {
@@ -178,31 +183,24 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), EventRegisterationActivity.class);
         intent.putExtra("Role", role);
         intent.putExtra("TableName", tableName);
-        intent_putExtra(intent);
+        startActivity(intent);
+        finish();
     }
 
     public void Listofuserstbtn(View view) {
         Intent intent = new Intent(getApplicationContext(), Applicant_list.class);
         intent.putExtra("Role", role);
         intent.putExtra("TableName", tableName);
-        intent_putExtra(intent);
-    }
-
-
-    private void intent_putExtra(Intent intent) {
-        intent.putExtra("Eventkey", EventArraydata.getInstance().getEvents().get(position).getKey());
-        intent.putExtra("position", position);
-        intent.putExtra("Role", role);
-        intent.putExtra("TableName", tableName);
         startActivity(intent);
         finish();
     }
 
+
     public void DeleteEventB(View view) {
         new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Delete Event")
-                .setMessage("Are you sure you want to delete event?")
+                .setTitle("Delete Activity")
+                .setMessage("Are you sure you want to delete Activity?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
