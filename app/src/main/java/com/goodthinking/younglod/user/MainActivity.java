@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.user_option, menu);
+        auth = FirebaseAuth.getInstance();
 
         if (!"manager".equals(role)) {
             menu.getItem(4).setVisible(false);
@@ -102,13 +103,13 @@ public class MainActivity extends AppCompatActivity {
             menu.getItem(6).setVisible(true);
 
         }
-        if (auth != null && auth.getCurrentUser().isAnonymous() || auth == null) {
+        if ((auth != null && auth.getCurrentUser().isAnonymous()) || auth == null) {
             menu.getItem(0).setVisible(false);  // no my events
             menu.getItem(1).setVisible(false); // no my courses
 
         } else {
-            menu.getItem(0).setVisible(true);  // no my events
-            menu.getItem(1).setVisible(true); // no my courses
+            menu.getItem(0).setVisible(true);
+            menu.getItem(1).setVisible(true);
         }
         return true;
     }
@@ -167,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(getApplicationContext(), LoginActivity_Firebase.class));
-        finish();
 
         Toast.makeText(getApplicationContext(), "You Logout successfully", Toast.LENGTH_LONG).show();
     }
