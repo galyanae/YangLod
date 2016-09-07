@@ -110,10 +110,13 @@ public class EventAddNew_Firebase extends AppCompatActivity {
 
                 AddEventbtn.setEnabled(false);
                 EditEventbtn.setEnabled(true);
+                AddEventbtn.setVisibility(View.INVISIBLE);
+                EditEventbtn.setVisibility(View.VISIBLE);
             } else {
-                EditEventbtn.setEnabled(true);
                 AddEventbtn.setEnabled(true);
-
+                EditEventbtn.setEnabled(false);
+                AddEventbtn.setVisibility(View.VISIBLE);
+                EditEventbtn.setVisibility(View.INVISIBLE);
             }
 
         }

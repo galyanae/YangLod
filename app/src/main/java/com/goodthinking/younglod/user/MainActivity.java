@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                                                     intent = new Intent(MainActivity.this, EventRecyclerview_Firebase.class);
 
                                                 } else if (adapterOne.getItems().get(position).getName().equals("business")) {
-                                                    intent = new Intent(MainActivity.this, EventAddNew_Firebase.class);
+                                                    intent = new Intent(MainActivity.this, ComingSoon.class);
                                                 } else if (adapterOne.getItems().get(position).getName().equals("contacts")) {
                                                     intent = new Intent(MainActivity.this, AboutUsActivity.class);
                                                 } else {

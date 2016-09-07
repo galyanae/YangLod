@@ -137,8 +137,7 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
         if (mAuth.getCurrentUser() != null && !mAuth.getCurrentUser().isAnonymous()) {
             keyUserId = mAuth.getCurrentUser().getUid();
             System.out.println("keyUserId   " + keyUserId + " key=" + key);
-            //Query qrefUserRegister = root.child("Tables").child("Events").child(key).child("Applicants").child(keyUserId);
-            root.child("Tables").child("Events").child(key).child("Applicants").child(keyUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+            root.child("Tables").child(tableName).child(key).child("Applicants").child(keyUserId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
                     if (snapshot == null || snapshot.getValue() == null) {
@@ -165,6 +164,7 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
 
     public void EditEventbtn(View view) {
         Intent intent = new Intent(getApplicationContext(), EventAddNew_Firebase.class);
+        intent.putExtra("Eventkey", key);
         intent.putExtra("Role", role);
         intent.putExtra("TableName", tableName);
         startActivity(intent);
@@ -183,6 +183,9 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), EventRegisterationActivity.class);
         intent.putExtra("Role", role);
         intent.putExtra("TableName", tableName);
+        intent.putExtra("Eventkey", key);
+        intent.putExtra("position", position);
+
         startActivity(intent);
         finish();
     }
@@ -208,7 +211,7 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
 
                         Map<String, Object> childUpdates = new HashMap<>();
 
-                        childUpdates.put("/Events/" + key, null);
+                        childUpdates.put("/"+tableName+"/" + key, null);
 
                         newD.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
                             @Override
@@ -220,6 +223,8 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
                                     Intent intent = new Intent(getApplicationContext(), EventRegisterationActivity.class);
                                     intent.putExtra("Role", role);
                                     intent.putExtra("TableName", tableName);
+                                    intent.putExtra("Eventkey", key);
+                                    intent.putExtra("position", position);
                                     startActivity(intent);
                                     finish();
                                 }

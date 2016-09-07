@@ -71,18 +71,19 @@ public class EventRegisterationActivity extends AppCompatActivity {
         role = getIntent().getStringExtra("Role");
         if (role == null) role = "user";
         tableName = getIntent().getStringExtra("TableName");
-        if (getIntent().getExtras() != null) {
-            Intent intent = getIntent();
-            key = intent.getStringExtra("Eventkey");
-            position = intent.getIntExtra("position", 0);
+        System.out.println("event registration tableName=" + tableName);
+        //if (getIntent().getExtras() != null) {
+        Intent intent = getIntent();
+        key = intent.getStringExtra("Eventkey");
+        position = intent.getIntExtra("position", 0);
 
-            if (!key.equals("")) {
-                EventHeadline.setText(EventArraydata.getInstance().getEvents().get(position).getEventName());
-                Eventdate.setText(EventArraydata.getInstance().getEvents().get(position).getEventDate());
-                Eventtime.setText(EventArraydata.getInstance().getEvents().get(position).getEventTime());
-                EventSynopsys.setText(EventArraydata.getInstance().getEvents().get(position).getEventSynopsys());
-            }
-            if (auth.getCurrentUser() != null && !auth.getCurrentUser().isAnonymous()) {
+        if (key != null && !key.equals("") && EventArraydata.getInstance().getEvents().size() > 0) {
+            EventHeadline.setText(EventArraydata.getInstance().getEvents().get(position).getEventName());
+            Eventdate.setText(EventArraydata.getInstance().getEvents().get(position).getEventDate());
+            Eventtime.setText(EventArraydata.getInstance().getEvents().get(position).getEventTime());
+            EventSynopsys.setText(EventArraydata.getInstance().getEvents().get(position).getEventSynopsys());
+            //  }
+            if (auth != null && auth.getCurrentUser() != null && !auth.getCurrentUser().isAnonymous()) {
                 loginbtn.setEnabled(false);
                 signupbtn.setEnabled(false);
                 //get user from firebase
@@ -97,7 +98,7 @@ public class EventRegisterationActivity extends AppCompatActivity {
                 cancelRegisterbtn.setVisibility(View.INVISIBLE);
             }
         } else {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent = new Intent(getApplicationContext(), MainActivity.class);
             intent.putExtra("Role", role);
             intent.putExtra("TableName", tableName);
             startActivity(intent);
@@ -113,10 +114,9 @@ public class EventRegisterationActivity extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.getChildrenCount()==0)
-                        {
+                        if (dataSnapshot.getChildrenCount() == 0) {
                             Toast.makeText(getApplicationContext(), "LoadUser failed", Toast.LENGTH_LONG).show();
-                            Usernamestr="Anonymous";
+                            Usernamestr = "Anonymous";
                             return;
                         }
                         User newUser = dataSnapshot.getValue(User.class);
@@ -140,6 +140,7 @@ public class EventRegisterationActivity extends AppCompatActivity {
     }
 
     private void checkRegistration(String userID) {
+        System.out.println("tableName=" + tableName + " key=" + key);
         Query qrefUserRegister = Userdatabase.child("Tables").child(tableName).child(key).child("Applicants").child(userID);
         qrefUserRegister.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -281,6 +282,8 @@ public class EventRegisterationActivity extends AppCompatActivity {
                                 } else {
                                     Toast.makeText(getApplicationContext(), getString(R.string.Registration_cancel_successful), Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(getApplicationContext(), EventRegisterationActivity.class);
+
+                                    intent.putExtra("Eventkey", key);
                                     intent.putExtra("Role", role);
                                     intent.putExtra("TableName", tableName);
                                     startActivity(intent);

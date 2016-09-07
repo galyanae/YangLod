@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">שם העמותה</string>
+    <string name="app_name">התחנה מרכז הצעירים בלוד</string>
     <string name="hint_event_name">כותרת האירוע</string>
     <string name="date_text">תאריך האירוע</string>
     <string name="date_format">DD/MM/YY</string>

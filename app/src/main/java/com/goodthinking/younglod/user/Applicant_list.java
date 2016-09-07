@@ -23,7 +23,7 @@ public class Applicant_list extends AppCompatActivity {
     private String key;
     private String Usernamestr, UserPhonestr, UserEmailstr,NoOfParticipators;
     private int amountOfApplicants;
-
+String tableName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +41,7 @@ public class Applicant_list extends AppCompatActivity {
 
         if (getIntent().getExtras() != null) {
             Intent intent = getIntent();
+            tableName=intent.getStringExtra("TableName");
             key = intent.getStringExtra("Eventkey");
             position = intent.getIntExtra("position", 0);
             if (!key.equals("")) {
@@ -53,7 +54,7 @@ public class Applicant_list extends AppCompatActivity {
         amountOfApplicants = 0;
         super.onResume();
         applicantsdatabase= FirebaseDatabase.getInstance().getReference();
-        DatabaseReference databaseReference=applicantsdatabase.child("Tables").child("Events").child(key).child("Applicants");
+        DatabaseReference databaseReference=applicantsdatabase.child("Tables").child(tableName).child(key).child("Applicants");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

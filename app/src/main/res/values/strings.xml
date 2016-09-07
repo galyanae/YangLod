@@ -1,18 +1,18 @@
 <resources>
-    <string name="app_name">YangLod</string>
-    <string name="hint_event_name">Event Headline</string>
-    <string name="date_text">Event Date</string>
+    <string name="app_name">התחנה מרכז הצעירים בלוד</string>
+    <string name="hint_event_name">Activity Headline</string>
+    <string name="date_text">Activity Date</string>
     <string name="date_format">DD/MM/YY</string>
-    <string name="time_text">Event Time</string>
+    <string name="time_text">Activity Time</string>
     <string name="time_format">HH:YY</string>
-    <string name="hint_event_synopsis">Event Synopsis</string>
-    <string name="event_information_text">Event Information</string>
-    <string name="max_participators_no">Max Participators no.:</string>
+    <string name="hint_event_synopsis">Activity Synopsis</string>
+    <string name="event_information_text">Activity Information</string>
+    <string name="max_participators_no">Max Participants no.:</string>
     <string name="host_name">Event Host name</string>
     <string name="Cancel_btn">Cancel</string>
     <string name="add_event_btn">Add Event</string>
-    <string name="edit_event_btn">Edit Event</string>
-    <string name="Add_more_events_btn">Add more events</string>
+    <string name="edit_event_btn">Edit Activity</string>
+    <string name="Add_more_events_btn">Add more activities</string>
     <string name="for_listview_layout">more info...</string>
     <string name="to_list_no_firebase">To List Without Firebase</string>
     <string name="email_field">Email</string>
@@ -22,18 +22,18 @@
     <string name="skip_btn">Skip and go to main menu</string>
     <string name="Signup_message_fill_fields">Please fill in all fields</string>
     <string name="Message_invalid_password">Invalid password</string>
-    <string name="errorset_password">Password must be less than 6 chars</string>
+    <string name="errorset_password">Password must be more than 6 chars</string>
     <string name="Message_invalid_Email">Invalid Email</string>
     <string name="errorset_email">This is not a valid Email format</string>
     <string name="register_faild_message">Registration was failed</string>
     <string name="login_faild_message">Login failed</string>
-    <string name="Registration_successful">Registration Successfully</string>
+    <string name="Registration_successful">Successful Registration</string>
     <string name="already_registered_btn">User already registered</string>
     <string name="Login_btn">Login</string>
     <string name="register_from_login_btn">Not registered yet? Come join us!</string>
     <string name="register_event_btn">Register</string>
-    <string name="to_recycler_no_firebase">To Recycler With Firebase</string>
-    <string name="to_list_with_firebase">To List With Firebase</string>
+    <string name="to_recycler_no_firebase">To Recycler</string>
+    <string name="to_list_with_firebase">To List</string>
     <string name="to_login_btn">To Login</string>
     <string name="to_singup_btn">To Sign up</string>
     <string name="User_name">Name</string>
@@ -43,9 +43,9 @@
     <string name="Progress_Dialog_Register">Registering. Please Wait...</string>
     <string name="Forget_password">Please fill in your mail</string>
     <string name="Registration_toEvent_message">"You need to register or login first."</string>
-    <string name="Registration_headline">You are going to be registered to the following Event, Please review registration details before approving</string>
+    <string name="Registration_headline">You are going to be registered to the following Activity, Please review registration details before approving</string>
     <string name="Thanks_note">Thank you for your interest in the activity. Our representative will contact you as soon as possible. This registration does not constitute approval of your participation</string>
-    <string name="InstructionsToResetPassword">We have sent you instructions to reset your password!</string>
+    <string name="InstructionsToResetPassword">We have send you instructions to reset your password!</string>
     <string name="ReSendEMail">Failed to send reset Email!</string>
     <string name="action_settings">Settings</string>
     <string name="web_application">131738938985-096jeise66faf64ls34cp0d4v541oip9.apps.googleusercontent.com</string>
@@ -60,20 +60,20 @@
     <string name="update_register_event_btn">Update Registration</string>
     <string name="Thanks_cancel_note">Your registration is cancelled</string>
     <string name="user_profile_return_btn">Return</string>
-    <string name="Registration_Userparticipators_no">Fill in Number of participators</string>
-    <string name="Event_user_list_btn">List of users registered to event</string>
+    <string name="Registration_Userparticipators_no">Fill in Number of participants</string>
+    <string name="Event_user_list_btn">List of users registered to Activity</string>
     <string name="applicant_name">Applicant Name</string>
     <string name="applicant_phone">Applicant Phone</string>
     <string name="applicant_mail">Applicant Email</string>
     <string name="applicat_participtors_num">Participants</string>
-    <string name="event_is_not_valid">Event is not valid</string>
-    <string name="registration_is_closed">Registration is closed</string>
+    <string name="event_is_not_valid">Draft Activity</string>
+    <string name="registration_is_closed">Closed activity</string>
     <string name="confirm">Confirm</string>
     <string name="update">Update</string>
     <string name="return_to_main">Return to Main</string>
     <string name="cancel_registration">Cancel Registration</string>
-    <string name="go_to_my_events">Go to My Events</string>
-    <string name="add_new_event">Add New Event</string>
+    <string name="go_to_my_events">Go to My Activities</string>
+    <string name="add_new_event">Add New Activity</string>
     <string name="sent_instructions">Please Confirm Subscription. We have sent to your Email some instructions to reset your password.</string>
     <string name="failed_send_reset_email">Failed to send reset email</string>
     <string name="Registration_update_headline">Update Registration </string>
@@ -81,7 +81,7 @@
     <string name="hint_email">Email</string>
     <string name="sign_in">Sign In</string>>
     <string name="hint_password">Password</string>>
-    <string name="Registration_toCourse_message">You need to register or login first.</string>
+    <string name="Registration_toCourse_message">You need to register or login first</string>
     <string name="hint_course_name">Course HeadLine </string>
     <string name="edit_course_btn">Edit Course</string>
     <string name="add_course_btn">Add A New Course </string>
@@ -94,7 +94,7 @@
     <string name="course_host_name">Course Host Name</string>
     <string name="go_to_my_courses">To My Courses</string>
     <string name="from">From:</string>
-    <string name="Till">Till:</string>
+    <string name="Till">until:</string>
     <string name="Registration_User_participators_no_course">Please enter a number of course participants</string>
     <string name="Thanks_note_course">Thank you for your interest in the course! Our representative will contact you as soon as possible. This registration does not constitute approval of your participation </string>
     <string name="hogimTitle">Courses</string>
@@ -105,7 +105,7 @@
     <string name="DateTitle">Course Date</string>
     <string name="DateHint">dd/mm/yyyy</string>
     <string name="lecturerNameHint">Lecturer</string>
-    <string name="nirshamimMaxNumber">מMax Amount of Participants</string>
+    <string name="nirshamimMaxNumber">Capacity</string>
     <string name="languageTitle">Language</string>
     <string name="languageHint">Hebrew/English/Arabic</string>
     <string name="audienceTitle">Target Audience</string>
@@ -115,9 +115,9 @@
     <string name="saveBtn">Save</string>
     <string name="editBtn">Edit</string>
     <string name="deleteBtn">Delete</string>
-    <string name="viewNirshamimBtn">View Register</string>
+    <string name="viewNirshamimBtn">View Registers</string>
     <string name="startDateTitle">Start Date</string>
-    <string name="endDateTitle">Ending Date</string>
+    <string name="endDateTitle">End Date</string>
     <string-array name="languages_array">
         <item>Hebrew</item>
         <item>Arabic</item>
@@ -129,7 +129,7 @@
     <string-array name="populations_array">
         <item>Youth</item>
         <item>Adults</item>
-        <item>Third Age</item>
+        <item>Senior Citizens</item>
 
     </string-array>
     <string name="title_activity_fab">fab</string>
@@ -137,14 +137,14 @@
     <string name="upload">upload</string>
     <string name="getit">get it</string>
     <string name="fromdate">"FROM: "</string>
-    <string name="todate">"TILL: "</string>
+    <string name="todate">"UNTIL: "</string>
     <string name="must_headline">Headline requested</string>
-    <string name="delete_failed_message">delete is failed</string>
-    <string name="delete_event_message">Event was deleted sucssesfully</string>
-    <string name="no_events_to_show">No events to show</string>
+    <string name="delete_failed_message">delete failed</string>
+    <string name="delete_event_message">activity deleted successfully</string>
+    <string name="no_events_to_show">No activities to show</string>
     <string name="delete">Delete</string>
-    <string name="valid_events">Event is valid</string>
-    <string name="no_valid_events">Event is no valid</string>
+    <string name="valid_events">active Activities</string>
+    <string name="no_valid_events">Activity is draft</string>
     <string name="taking_pictures">Taking picture</string>
     <string name="Course_user_list_btn">Users list</string>
     <string name="delete_course_message">Delete course</string>
@@ -155,17 +155,17 @@
     <string name="editing_event">Editing activity</string>
     <string name="successfully_updated">Successfully updated</string>
     <string name="select_time">Select time</string>
-    <string name="adding_new_event">Adding new event</string>
+    <string name="adding_new_event">Adding new activity</string>
     <string name="creation_failed">Creation failed</string>
     <string name="successfully_created">Successfully created</string>
     <string name="my_courses">My courses</string>
     <string name="log_out">Logout</string>
     <string name="email_to_manager">Send email to manager</string>
     <string name="send_message_to_users">send message to users</string>
-    <string name="my_events">My events</string>
+    <string name="my_events">My activities</string>
     <string name="ondate">"ON: "</string>
     <string name="ontime">" "</string>
-    <string name="events_in_valid_date">Draft events</string>
+    <string name="events_in_valid_date">Draft activitys</string>
     <string name="courses_in_valid_date">Draft courses</string>
 
 </resources>
