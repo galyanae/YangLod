@@ -69,37 +69,41 @@ public class MyEvent_Activity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 filter.clear();
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    String key = data.getKey();
-                    filter.add(key);
-                }
-                //EventArraydata.getInstance().getEvents().clear();
-                for (int i = 0; i < filter.size(); i++) {
-                    final String Eventkey = filter.get(i);
-                    System.out.println("key is" + Eventkey);
-                    Eventdatabase = FirebaseDatabase.getInstance().getReference();
-                    System.out.println(getClass().getName() + " tableName=" + tableName);
-                    Eventdatabase.child("Tables").child(tableName).child(Eventkey).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            Event event = dataSnapshot.getValue(Event.class);
-                            event.setKey(dataSnapshot.getKey());
-                            EventIsNotValid = event.getEventIsNotValid();
-                            if (EventIsNotValid == false) {
-                                EventArraydata.getInstance().getEvents().add(event);
+                if(dataSnapshot.getChildrenCount()>0) {
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+                        String key = data.getKey();
+                        filter.add(key);
+                    }
+                    //EventArraydata.getInstance().getEvents().clear();
+                    for (int i = 0; i < filter.size(); i++) {
+                        final String Eventkey = filter.get(i);
+                        System.out.println("key is" + Eventkey);
+                        Eventdatabase = FirebaseDatabase.getInstance().getReference();
+                        System.out.println(getClass().getName() + " tableName=" + tableName);
+                        Eventdatabase.child("Tables").child(tableName).child(Eventkey).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                Event event = dataSnapshot.getValue(Event.class);
+                                event.setKey(dataSnapshot.getKey());
+                                EventIsNotValid = event.getEventIsNotValid();
+                                if (EventIsNotValid == false) {
+                                    EventArraydata.getInstance().getEvents().add(event);
+                                }
+                                EventRecyclerAdapter.notifyDataSetChanged();
                             }
-                            EventRecyclerAdapter.notifyDataSetChanged();
-                        }
 
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            Toast.makeText(getApplicationContext(), "Download failed" + databaseError.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    });
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Toast.makeText(getApplicationContext(), "Download failed" + databaseError.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
 
 //
+                    }
                 }
+                else EventRecyclerAdapter.notifyDataSetChanged();
+
             }
 
 

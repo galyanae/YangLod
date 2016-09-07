@@ -47,20 +47,11 @@ public class MainActivity extends AppCompatActivity {
             FirebaseMessaging.getInstance().subscribeToTopic("/topics/manager");
         }
 
-        FirebaseMessaging.getInstance().
-
-                subscribeToTopic("/topics/all");
+        FirebaseMessaging.getInstance().subscribeToTopic("/topics/all");
 
         System.out.println("Am I a manager? " + isManager);
-        gridView = (GridView)
-
-                findViewById(R.id.tableLayout);
-
-        adapterOne = new
-
-                AdapterOne(getApplicationContext()
-
-        );
+        gridView = (GridView) findViewById(R.id.tableLayout);
+        adapterOne = new AdapterOne(getApplicationContext());
         gridView.setAdapter(adapterOne);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener()
 
@@ -139,8 +130,7 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("TableName", "Courses");
             startActivity(intent);
             return true;
-        }
-        else if (id == R.id.menu_logout) {
+        } else if (id == R.id.menu_logout) {
             logout();
             return true;
         } else if (id == R.id.send_email_to_manager) {

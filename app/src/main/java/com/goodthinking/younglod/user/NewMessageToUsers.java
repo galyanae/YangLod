@@ -41,7 +41,7 @@ public class NewMessageToUsers extends AppCompatActivity {
 
 
     //TODO: This API key is wrong, need to get another from 'Manage -> Cloud Messaging'
-    private static final String API_KEY = "AIzaSyApaL01LVo4ozBZgIvuAKpWMu3e-qSYa88";
+    private static final String API_KEY = "AIzaSyB7ajsBlHR8vSzuR3shPCA4g9sFzxnqw6k";
     private Map<String, String> events = null;
     private Context ctx;
 
@@ -104,7 +104,7 @@ public class NewMessageToUsers extends AppCompatActivity {
     }
 
     private void success() {
-        Toast.makeText(ctx, "Message was sended sucsessfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(ctx, "Message sent successfully", Toast.LENGTH_SHORT).show();
         finish();
     }
 
