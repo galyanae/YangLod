@@ -69,7 +69,7 @@ public class MyEvent_Activity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 filter.clear();
-                if(dataSnapshot.getChildrenCount()>0) {
+                if (dataSnapshot.getChildrenCount() > 0) {
                     for (DataSnapshot data : dataSnapshot.getChildren()) {
                         String key = data.getKey();
                         filter.add(key);
@@ -83,13 +83,15 @@ public class MyEvent_Activity extends AppCompatActivity {
                         Eventdatabase.child("Tables").child(tableName).child(Eventkey).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                Event event = dataSnapshot.getValue(Event.class);
-                                event.setKey(dataSnapshot.getKey());
-                                EventIsNotValid = event.getEventIsNotValid();
-                                if (EventIsNotValid == false) {
-                                    EventArraydata.getInstance().getEvents().add(event);
+                                if (dataSnapshot.getChildrenCount() > 0) {
+                                    Event event = dataSnapshot.getValue(Event.class);
+                                    event.setKey(dataSnapshot.getKey());
+                                    EventIsNotValid = event.getEventIsNotValid();
+                                    if (EventIsNotValid == false) {
+                                        EventArraydata.getInstance().getEvents().add(event);
+                                    }
+                                    EventRecyclerAdapter.notifyDataSetChanged();
                                 }
-                                EventRecyclerAdapter.notifyDataSetChanged();
                             }
 
 
@@ -101,8 +103,7 @@ public class MyEvent_Activity extends AppCompatActivity {
 
 //
                     }
-                }
-                else EventRecyclerAdapter.notifyDataSetChanged();
+                } else EventRecyclerAdapter.notifyDataSetChanged();
 
             }
 
