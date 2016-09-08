@@ -47,12 +47,20 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:794886644873:android:b297abd70e628404",
+        "mobilesdk_app_id": "1:794886644873:android:8702c0c887d8c407",
         "android_client_info": {
-          "package_name": "com.goodthinking.younglod.user"
+          "package_name": "com.goodthinking.youngloduser"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "794886644873-mmo9g1hd3vavknnk0k4nllpvg7tdeis8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.goodthinking.youngloduser",
+            "certificate_hash": "8ADA0E1F63A32AC87E5175F69CB5122C49A0A45C"
+          }
+        },
         {
           "client_id": "794886644873-6qhjgiohgn8csqqs6tm98e9hscmu8sdg.apps.googleusercontent.com",
           "client_type": 3
@@ -68,8 +76,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "794886644873-6qhjgiohgn8csqqs6tm98e9hscmu8sdg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

@@ -6,6 +6,7 @@
     <string name="date_format">DD/MM/YY</string>
     <string name="time_text">שעת האירוע</string>
     <string name="time_format">HH:YY</string>
+    <string name="fromdate">"מתאריך: "</string>
     <string name="hint_event_synopsis">תקציר האירוע</string>
     <string name="event_information_text">מידע על האירוע</string>
     <string name="max_participators_no">מספר מקסימלי של משתתפים</string>
@@ -155,6 +156,21 @@
     <string name="adding_new_event">הוספת אירוע חדש</string>
     <string name="creation_failed">היצירה נכשלה</string>
     <string name="successfully_created">נוצר בהצלחה</string>
+    <string name="todate">"עד תאריך: "</string>
+    <string name="must_headline">דרושה כותרת</string>
+    <string name="delete_failed_message">המחיקה נכשלה</string>
+    <string name="delete_event_message">הפעילות נמחקה בהצלחה</string>
+    <string name="no_events_to_show">אין פעילויות להצגה</string>
+    <string name="delete">מחיקה</string>
+    <string name="valid_events">פעילויות בתוקף</string>
+    <string name="no_valid_events">פעילויות שטרם אושרו</string>
+    <string name="my_courses">My courses</string>
+    <string name="log_out">יציאה</string>
+    <string name="email_to_manager">שלח הודעה למנהל</string>
+    <string name="send_message_to_users">שלח הודעה למשתמשים</string>
+    <string name="my_events">הפעילויות שלי</string>
+    <string name="ondate">"במועד: "</string>
+    <string name="ontime">" "</string>
 
 
 

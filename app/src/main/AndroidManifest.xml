@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.goodthinking.younglod.user">
+    package="com.goodthinking.youngloduser.user">
 
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <!-- To auto-complete the email text field in the login form with the youngloduser's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -17,7 +17,7 @@
         android:name="android.support.multidex.MultiDexApplication"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity_Firebase"
+            android:name="com.goodthinking.youngloduser.LoginActivity_Firebase"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,20 +25,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Upload_activity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ComingSoon" />
-        <activity android:name=".SignUpActivity_Firebase" />
-        <activity android:name=".NewsActivity" />
-        <activity android:name=".EventInformationActivity_Firebase" />
-        <activity android:name=".EventThanksActivity" />
-        <activity android:name=".MyEvent_Activity" />
-        <activity android:name=".EventRegisterationActivity" />
-        <activity android:name=".EventRecyclerview_Firebase" />
-        <activity android:name=".EventAddNew_Firebase" />
+        <activity android:name="com.goodthinking.youngloduser.Upload_activity" />
+        <activity android:name="com.goodthinking.youngloduser.MainActivity" />
+        <activity android:name="com.goodthinking.youngloduser.ComingSoon" />
+        <activity android:name="com.goodthinking.youngloduser.SignUpActivity_Firebase" />
+        <activity android:name="com.goodthinking.youngloduser.NewsActivity" />
+        <activity android:name="com.goodthinking.youngloduser.EventInformationActivity_Firebase" />
+        <activity android:name="com.goodthinking.youngloduser.EventThanksActivity" />
+        <activity android:name="com.goodthinking.youngloduser.MyEvent_Activity" />
+        <activity android:name="com.goodthinking.youngloduser.EventRegisterationActivity" />
+        <activity android:name="com.goodthinking.youngloduser.EventRecyclerview_Firebase" />
+        <activity android:name="com.goodthinking.youngloduser.EventAddNew_Firebase" />
   
 
-        <activity android:name=".Applicant_list"></activity>
+        <activity android:name="com.goodthinking.youngloduser.Applicant_list"></activity>
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -48,16 +48,16 @@
             android:value="@integer/google_play_services_version" />
 
 
-        <activity android:name=".AboutUsActivity" />
+        <activity android:name="com.goodthinking.youngloduser.AboutUsActivity" />
 
 
-        <service android:name=".MyService">
+        <service android:name="com.goodthinking.youngloduser.MyService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <activity android:name=".NewMessageToUsers"></activity>
+        <activity android:name="com.goodthinking.youngloduser.NewMessageToUsers"></activity>
     </application>
 
 </manifest>
