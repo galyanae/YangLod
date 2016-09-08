@@ -202,8 +202,9 @@ public class NewMessageToUsers extends AppCompatActivity {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             String selectedItem = parent.getItemAtPosition(position).toString();
-
+            System.out.println("selectedItemId="+selectedItemId);
             selectedItemId = events.get(selectedItem);
+            System.out.println("selectedItemId="+selectedItemId);
         }
 
         @Override

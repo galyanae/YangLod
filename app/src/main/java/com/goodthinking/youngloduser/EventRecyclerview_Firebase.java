@@ -27,7 +27,7 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
     private String flag_to_myEvents;
     FloatingActionButton fab;
     boolean isManager = false;
-    String role = "youngloduser";
+    String role = "user";
     private Query queryRef;
     private String vTypeEv = "Valid";
     String tableName;
@@ -39,7 +39,7 @@ public class EventRecyclerview_Firebase extends AppCompatActivity {
         Intent intent = getIntent();
 
         role = intent.getStringExtra("Role");
-        if (role == null) role = "youngloduser";
+        if (role == null) role = "user";
         tableName = intent.getStringExtra("TableName");
 
         vTypeEv = intent.getStringExtra("typeEvents");

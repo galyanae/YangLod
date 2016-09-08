@@ -35,7 +35,7 @@ public class EventThanksActivity extends AppCompatActivity {
         Intent intent = getIntent();
         keyEvent = intent.getStringExtra("eventID");
         role = intent.getStringExtra("Role");
-        if (role == null) role = "youngloduser";
+        if (role == null) role = "user";
         tableName = intent.getStringExtra("TableName");
 
         root = FirebaseDatabase.getInstance().getReference();

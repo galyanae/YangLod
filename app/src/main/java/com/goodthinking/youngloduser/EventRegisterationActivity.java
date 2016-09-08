@@ -70,7 +70,7 @@ public class EventRegisterationActivity extends AppCompatActivity {
         cancelRegisterbtn = (Button) findViewById(R.id.rgCancelRegisterbtn);
         Rgviewmessage = (TextView) findViewById(R.id.rgviewmessage);
         role = getIntent().getStringExtra("Role");
-        if (role == null) role = "youngloduser";
+        if (role == null) role = "user";
         tableName = getIntent().getStringExtra("TableName");
         System.out.println("event registration tableName=" + tableName);
         //if (getIntent().getExtras() != null) {

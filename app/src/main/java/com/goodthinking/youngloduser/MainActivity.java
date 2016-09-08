@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         role = getIntent().getExtras().getString("Role");
-        if (role == null || role.length() == 0) role = "youngloduser";
+        if (role == null || role.length() == 0) role = "user";
         auth = FirebaseAuth.getInstance();
 
         if ("manager".equals(role)) {

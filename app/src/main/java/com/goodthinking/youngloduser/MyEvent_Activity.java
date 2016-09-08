@@ -40,7 +40,7 @@ public class MyEvent_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_event_recyclerview_firebase);
 
         role = getIntent().getExtras().getString("Role");
-        if (role == null) role = "youngloduser";
+        if (role == null) role = "user";
         tableName = getIntent().getExtras().getString("TableName");
 
         fab = (FloatingActionButton) findViewById(R.id.fab);

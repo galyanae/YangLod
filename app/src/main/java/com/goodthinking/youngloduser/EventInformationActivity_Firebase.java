@@ -31,7 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EventInformationActivity_Firebase extends AppCompatActivity {
-    private static final String IMAGES_BUCKET = "gs://hadashot-9bbf1.appspot.com";
+    private String IMAGES_BUCKET;
     private TextView ViewEventHeadline, ViewEventdate, ViewEventtime,
             ViewEventSynopsys, ViewEventInfo, ViewEventParticipatorsno, ViewEventHostName, RegistrationIsClosed;
     private DatabaseReference Eventdatabase, MyEventdatabase;
@@ -52,6 +52,7 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_information_activity__firebase);
+        IMAGES_BUCKET = getString(R.string.images_bucket);
 
         root = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
@@ -59,7 +60,7 @@ public class EventInformationActivity_Firebase extends AppCompatActivity {
         Register = (Button) findViewById(R.id.fbviewregtoeventtbtn);
 
         role = getIntent().getExtras().getString("Role");
-        if (role == null) role = "youngloduser";
+        if (role == null) role = "user";
         tableName = getIntent().getExtras().getString("TableName");
         users = (Button) findViewById(R.id.fbviewlistofusersbtn);
         delete = (Button) findViewById(R.id.fbDeleteEventbtn);

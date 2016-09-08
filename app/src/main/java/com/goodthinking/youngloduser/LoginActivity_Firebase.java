@@ -42,7 +42,7 @@ public class LoginActivity_Firebase extends AppCompatActivity {
             if (auth.getCurrentUser().isAnonymous()) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("UserName", "Anonymous");
-                intent.putExtra("Role", "youngloduser");
+                intent.putExtra("Role", "user");
                 startActivity(intent);
                 finish();
             } else loadUser(UserID);
@@ -58,14 +58,14 @@ public class LoginActivity_Firebase extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        String role = "youngloduser", name = "Anonymous";
+                        String role = "user", name = "Anonymous";
                         if (dataSnapshot.getChildrenCount() > 0) {
                             System.out.println("children=" + dataSnapshot.getChildrenCount());
                             User newUser = dataSnapshot.getValue(User.class);
                             name = newUser.getUserName();
                             role = newUser.getRole();
                             if (role == null || role.length() == 0 || !role.equals("manager"))
-                                role = "youngloduser";
+                                role = "user";
                         }
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.putExtra("UserName", name);
@@ -136,13 +136,13 @@ public class LoginActivity_Firebase extends AppCompatActivity {
     public void gotomainmenu(View view) {
         auth.signInAnonymously();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.putExtra("Role", "youngloduser");
+        intent.putExtra("Role", "user");
         startActivity(intent);
     }
 
     public void gotoregisteration(View view) {
         Intent intent = new Intent(getApplicationContext(), SignUpActivity_Firebase.class);
-        intent.putExtra("Role", "youngloduser");
+        intent.putExtra("Role", "user");
         startActivity(intent);
     }
 }

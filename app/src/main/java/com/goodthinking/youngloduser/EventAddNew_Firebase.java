@@ -20,8 +20,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.goodthinking.youngloduser.user.R;
 import com.goodthinking.youngloduser.model.Event;
+import com.goodthinking.youngloduser.user.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseError;
@@ -40,7 +40,7 @@ import java.util.Map;
 public class EventAddNew_Firebase extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
-    private static final String IMAGES_BUCKET = "gs://hadashot-9bbf1.appspot.com";
+    private String IMAGES_BUCKET;
     private EditText AddEventHeadline, AddEventSynopsys,
             AddEventInfo, AddEventParticipatorsno, AddEventHostName;
     private TextView AddEventdate, AddEventtime;
@@ -64,7 +64,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_add_new_firebase);
-
+        IMAGES_BUCKET = getString(R.string.images_bucket);
 
         progressDialog = new ProgressDialog(this);
 
@@ -91,7 +91,7 @@ public class EventAddNew_Firebase extends AppCompatActivity {
         if (getIntent().getExtras() != null) {
             Intent intent = getIntent();
             role = intent.getStringExtra("Role");
-            if (role == null) role = "youngloduser";
+            if (role == null) role = "user";
             tableName = intent.getStringExtra("TableName");
             key = intent.getStringExtra("Eventkey");
             if (key == null) key = "";

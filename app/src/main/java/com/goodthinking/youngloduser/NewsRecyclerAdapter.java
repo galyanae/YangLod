@@ -29,7 +29,6 @@ import java.io.ByteArrayOutputStream;
 import java.util.TreeMap;
 
 public class NewsRecyclerAdapter extends RecyclerView.Adapter {
-    private static final String IMAGES_BUCKET = "gs://hadashot-9bbf1.appspot.com";
     private TreeMap<String, com.goodthinking.youngloduser.model.newsItem> newsArray;
     private Context context;
     private final Handler handler = new Handler();

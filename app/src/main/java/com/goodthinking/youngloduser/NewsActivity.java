@@ -55,7 +55,7 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
     private String imageName;
     private Bitmap bitmap;
     private static final int PICK_IMAGE_REQUEST = 1;
-    private static final String IMAGES_BUCKET = "gs://hadashot-9bbf1.appspot.com";
+    private String IMAGES_BUCKET;
     FloatingActionButton fab;
     AlertDialog show;
     private DatabaseReference root;
@@ -64,7 +64,7 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
     protected RecyclerView NewsRecyclerView;
     protected NewsRecyclerAdapter newsRecyclerAdapter;
     LinearLayoutManager linearLayoutManager;
-    String role = "youngloduser";
+    String role = "user";
     boolean isManager = false;
     String key;
     ImageView ivCancel;
@@ -79,12 +79,14 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
+        IMAGES_BUCKET = getString(R.string.images_bucket);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         try {
             role = getIntent().getExtras().getString("Role");
         } catch (Exception e) {
-            role = "youngloduser";
+            role = "user";
         }
         if (role.equals("manager")) {
             isManager = true;
@@ -361,8 +363,8 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
                 newsRef.child(key).updateChildren(children);
                 // signal new image ready
                 //now look for the right entry in arrayData and update it.
-                System.out.println("keyid="+keyid);
-                String DBkey="";
+                System.out.println("keyid=" + keyid);
+                String DBkey = "";
                 for (TreeMap.Entry<String, newsItem> entry : newsArray.entrySet()) {
                     DBkey = entry.getKey();
                     if (keyid.equals(DBkey.substring(12))) {
@@ -375,7 +377,7 @@ public class NewsActivity extends AppCompatActivity implements NewsRecyclerAdapt
                     }
 
                 }
-                System.out.println("DBkey"+DBkey+ "keyid="+keyid);
+                System.out.println("DBkey" + DBkey + "keyid=" + keyid);
                 //////////
             }
         });

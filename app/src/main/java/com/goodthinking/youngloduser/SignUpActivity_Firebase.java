@@ -91,7 +91,7 @@ public class SignUpActivity_Firebase extends AppCompatActivity {
                             creatNewUser();
                             Intent intent=new Intent(getApplicationContext(),MainActivity.class);
                             intent.putExtra("UserName", UserNamestr);
-                            intent.putExtra("Role", "youngloduser");
+                            intent.putExtra("Role", "user");
                             startActivity(intent);
                             finish();
                         }
